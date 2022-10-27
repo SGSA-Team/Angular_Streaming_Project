@@ -12,7 +12,15 @@ import { SeriesComponent } from './series/series.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, MoviesComponent, SeriesComponent, PagenotfoundComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    MoviesComponent,
+    SeriesComponent,
+    PagenotfoundComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
