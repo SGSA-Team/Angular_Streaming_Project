@@ -13,6 +13,7 @@ import { SeriesComponent } from './series/series.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    CommonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: TokenInterceptor },
