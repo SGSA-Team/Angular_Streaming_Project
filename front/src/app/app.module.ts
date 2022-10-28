@@ -8,12 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './home/home/home.component';
-import { MoviesComponent } from './movies/movies.component';
-import { SeriesComponent } from './series/series.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CommonModule } from '@angular/common';
+import { CatalogsComponent } from './catalogs/catalogs.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +20,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    MoviesComponent,
-    SeriesComponent,
     PagenotfoundComponent,
+    CatalogsComponent,
   ],
   imports: [
     BrowserModule,
