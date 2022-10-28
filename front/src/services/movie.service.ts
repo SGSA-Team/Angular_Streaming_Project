@@ -1,9 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { ApiMovie } from 'src/interfaces/interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieService {
+  public apiBaseUrl: string = environment.baseUrl;
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getMoviesFromId(id: string): Observable<ApiMovie> {
+    return this.http.get<ApiMovie>(`${this.apiBaseUrl}/movie/${id}`, {
+      params: {
+        language: 'fr-FR',
+      },
+    });
+  }
 }
