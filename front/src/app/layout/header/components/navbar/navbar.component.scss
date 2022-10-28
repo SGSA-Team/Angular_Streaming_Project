@@ -1,0 +1,61 @@
+.navbar{
+    height: 10vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 50;
+    
+    &__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        color: white;
+        width: 80%;
+        height: 100%;
+    }
+    
+    &__left-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap:20px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    &__logo{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+
+    &__right-content{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+
+.imgt {
+    height: 100%;
+    width: 100px;
+}
+
+.search-icon{
+    height:35px;
+    width: 35px;
+}
+
+.flx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tt {
+    width: 20px;
+}
