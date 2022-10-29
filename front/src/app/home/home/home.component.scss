@@ -1,0 +1,64 @@
+section {
+  overflow: hidden;
+  height: 80vh;
+  background-color: #0e0e0e;
+}
+
+img.demo-bg {
+    filter: blur(4px);
+    min-height: 800px;
+    object-fit: cover;
+}
+
+.demo-wrap {
+  position: relative;
+  height: 100%;
+}
+
+.demo-bg {
+  opacity: 0.2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+
+.bg-content {
+    top: 100px;
+    color: white;
+
+}
+
+.movie-list {
+  display: flex;
+    width: 100%;
+    height: 325px;
+    overflow: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+   
+}
+
+.movie {
+  box-shadow: 2px 5px 20px 0px rgb(28 28 28 / 19%);
+  transition: all 0.2s ease-in-out;
+  will-change: transform;
+  flex : 1 1 0;
+  height: 95%;
+  min-width: 206px;
+  overflow: hidden;
+  border-radius: 20px;
+  &:nth-child(1){
+    margin-left: 6px;
+  }
+  &:nth-last-of-type(1){
+    margin-right: 6px;
+  }
+  img {
+    border-radius: inherit;
+  }
+}
+
+

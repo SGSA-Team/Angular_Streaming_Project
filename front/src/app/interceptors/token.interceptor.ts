@@ -18,11 +18,19 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = environment.apiKey;
-    const req = this.addToken(request, token);
+    let req = request;
+    req = this.addToken(request, token);
+    req = this.addLanguages(req);
     return next.handle(req);
   }
 
   addToken(req: HttpRequest<unknown>, token: string) {
     return req.clone({ params: req.params.append('api_key', token) });
+  }
+
+  addLanguages(req: HttpRequest<unknown>) {
+    return req.clone({
+      params: req.params.append('language', environment.defaultLanguage),
+    });
   }
 }
