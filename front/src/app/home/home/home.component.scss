@@ -8,6 +8,7 @@ img.demo-bg {
     filter: blur(4px);
     min-height: 800px;
     object-fit: cover;
+    height: 100%;
 }
 
 .demo-wrap {
@@ -24,8 +25,21 @@ img.demo-bg {
   height: auto;
 }
 
+#main-content {
+  height: 100%;
+  position: relative;
+
+  div.container {
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+
+  }
+}
+
 .bg-content {
-    top: 100px;
     color: white;
 
 }
