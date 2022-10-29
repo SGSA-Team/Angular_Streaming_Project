@@ -24,3 +24,16 @@ export interface Genre {
   id: number;
   name: string;
 }
+
+export interface ApiMovieList {
+  dates: ApiDates;
+  page: number;
+  results: ApiMovie[];
+  total_results: number;
+  total_pages: number;
+}
+
+export interface ApiDates {
+  maximum: string;
+  minimum: string;
+}
