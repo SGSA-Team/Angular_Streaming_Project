@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  hoverOnMovies=false;
+  hoverOnSeries=false;
+
   constructor() { }
 
   ngOnInit(): void {

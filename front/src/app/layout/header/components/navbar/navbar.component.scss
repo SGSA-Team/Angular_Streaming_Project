@@ -2,6 +2,7 @@
     height: 10vh;
     background-color: black;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     position: sticky;
@@ -9,53 +10,34 @@
     z-index: 50;
     
     &__container {
+        position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr;
         color: white;
-        width: 80%;
+        width: 75%;
         height: 100%;
     }
-    
-    &__left-content{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap:20px;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    &__logo{
-        display: flex;
-        justify-content: center;
-        align-items: center; 
-    }
-
-    &__right-content{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+   
+    &__categories{
+        position: absolute;
+        bottom: -100%;
+        display: grid;
+        height: 100%;
+        width: 100%;
+        background-color: black;
     }
 }
 
-.imgt {
-    height: 100%;
-    width: 100px;
-}
-
-.search-icon{
-    height:35px;
-    width: 35px;
-}
-
-.flx {
+.navbar-logo{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
+    align-items: center; 
+    font-weight: bold;
 
-.tt {
-    width: 20px;
+    &__img{
+        height: 30px;
+        width: 30px;
+    }
 }

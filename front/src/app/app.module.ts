@@ -14,6 +14,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CommonModule } from '@angular/common';
 import { CatalogsComponent } from './catalogs/catalogs.component';
 import { NavbarComponent } from './layout/header/components/navbar/navbar.component';
+import { LinksListComponent } from './layout/header/components/navbar/components/links-list/links-list.component';
+import { GlobalSearchBarComponent } from './layout/header/components/navbar/components/global-search-bar/global-search-bar.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { NavbarComponent } from './layout/header/components/navbar/navbar.compon
     PagenotfoundComponent,
     CatalogsComponent,
     NavbarComponent,
+    LinksListComponent,
+    GlobalSearchBarComponent,
   ],
   imports: [
     BrowserModule,
