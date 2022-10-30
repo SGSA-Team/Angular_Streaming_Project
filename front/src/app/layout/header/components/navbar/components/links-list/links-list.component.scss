@@ -3,12 +3,28 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap:20px;
+    gap:30px;
     text-transform: uppercase;
     font-weight: bold;
     height: 100%;
+    text-decoration: none;
+
+    &__title:hover{
+        text-decoration: underline;
+    }
 }
 
-.arrow-down-icon {
+
+.arrow-icon {
+    display: flex;
+    align-items: center;
     width: 20px;
+
+    &--up{
+        transform: rotate(180deg);
+    }
+
+    &--down{
+    // animation on rotation ?
+    }
 }

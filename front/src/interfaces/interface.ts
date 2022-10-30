@@ -1,3 +1,6 @@
+export interface ApiCategories {
+  genres: Genre[];
+}
 export interface ApiMovie {
   adult: boolean;
   backdrop_path: string;

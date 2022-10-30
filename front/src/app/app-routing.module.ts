@@ -6,16 +6,10 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'catalogs', children: [
-      {
-        path: 'movies', // child route path
-        component: CatalogsComponent, // child route component that the router renders
-      },
-      {
-        path: 'series',
-        component: CatalogsComponent, // another child route component that the router renders
-      },
-    ], redirectTo: ''},
+  { path: 'catalogs/movies', pathMatch: 'full',component: CatalogsComponent },
+  { path: 'catalogs/movies/:id', pathMatch: 'full',component: PagenotfoundComponent },
+  { path: 'catalogs/series', pathMatch: 'full',component: CatalogsComponent },
+  { path: 'catalogs/series/:id', pathMatch: 'full',component: PagenotfoundComponent },
   { path: '**', pathMatch: 'full', component: PagenotfoundComponent },
 ];
 

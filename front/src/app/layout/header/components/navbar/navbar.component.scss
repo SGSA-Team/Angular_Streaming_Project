@@ -2,10 +2,10 @@
     height: 10vh;
     background-color: black;
     display: flex;
-    position: relative;
     justify-content: center;
     align-items: center;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0px;
     z-index: 50;
     
@@ -18,15 +18,34 @@
         width: 75%;
         height: 100%;
     }
-   
-    &__categories{
-        position: absolute;
-        bottom: -100%;
-        display: grid;
-        height: 100%;
-        width: 100%;
-        background-color: black;
+}
+
+.navbar-categories{
+    position: absolute;
+    top: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 15vh;
+    width: 75%;
+    background-color: black;
+    gap: 20px;
+    padding: 25px;
+
+    &__genre{
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+        text-decoration: none;
     }
+    &__genre:hover{
+        color: black;
+        background-color: white;
+    }
+
 }
 
 .navbar-logo{

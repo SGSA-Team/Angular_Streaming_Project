@@ -1,21 +1,41 @@
 <nav class="navbar">
     <div class="navbar__container">
         <!--Options Lists-->
-        <app-links-list [(hoverOnMovies)]="hoverOnMovies" [(hoverOnSeries)]="hoverOnSeries"></app-links-list>
+        <app-links-list [(clickOnMovies)]="clickOnMovies" [(clickOnSeries)]="clickOnSeries"></app-links-list>
         <!--LOGO-->
-        <div class="navbar-logo">
-            <img class="navbar-logo__img" src="https://empire-streaming.co/build/images/Logo-E.ad4141e1.png" />
-            <span>STREAMING</span>
-        </div>
+        <a class="flex justify-center align-center" routerLink="/" (click)="closeCategories('close')">
+            <div class="navbar-logo">
+                <img class="navbar-logo__img" src="https://empire-streaming.co/build/images/Logo-E.ad4141e1.png" />
+                <span>STREAMING</span>
+            </div>
+        </a>
         <!--Search Bar-->
         <app-global-search-bar></app-global-search-bar>
-        <!--Movies Categories Box -->
-        <div *ngIf="hoverOnMovies" class="navbar__categories">
-            Movies
-        </div>
-        <!--Series Categories Box -->
-        <div *ngIf="hoverOnSeries" class="navbar__categories">
-            Series
-        </div>
+    </div>
+    <!--Movies Categories Box -->
+    <div *ngIf="clickOnMovies && moviesGenres" class="navbar-categories">
+        <ng-container *ngIf="moviesGenres && moviesGenres.length > 0">
+            <div *ngFor="let genre of moviesGenres">
+                <a [routerLink]="'catalogs/movies'+'/'+genre.name" routerLinkActive="active"
+                    (click)="closeCategories('movies')">
+                    <span class="navbar-categories__genre">
+                        {{genre.name}}
+                    </span>
+                </a>
+            </div>
+        </ng-container>
+    </div>
+    <!--Series Categories Box -->
+    <div *ngIf="clickOnSeries && seriesGenres" class="navbar-categories">
+        <ng-container *ngIf="seriesGenres && seriesGenres.length > 0">
+            <div *ngFor="let genre of seriesGenres">
+                <a [routerLink]="'catalogs/series'+'/'+genre.name" routerLinkActive="active"
+                    (click)="closeCategories('series')">
+                    <span class="navbar-categories__genre">
+                        {{genre.name}}
+                    </span>
+                </a>
+            </div>
+        </ng-container>
     </div>
 </nav>
