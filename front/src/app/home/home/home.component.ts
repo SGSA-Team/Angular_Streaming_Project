@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   MatDialog,
@@ -5,6 +6,9 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+=======
+import { Component, OnInit } from '@angular/core';
+>>>>>>> 0f79deb ([SDS-32] add top rated movies)
 import { take, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
@@ -17,6 +21,7 @@ import { SeriesService } from 'src/services/series.service';
 })
 export class HomeComponent implements OnInit {
   nowPlayingMovies: ApiMovie[] | null = null;
+<<<<<<< HEAD
   mostViewedMovies: ApiMovie[] | null = null;
   mostViewedSeries: ApiSerie[] | null = null;
 
@@ -38,6 +43,19 @@ export class HomeComponent implements OnInit {
       this.mostViewedSeries = mostSerie;
 
       console.log(playing, mostSerie);
+=======
+  topRatedMovies: ApiMovie[] | null = null;
+  posterPath: string = environment.apiImageUrl;
+
+  constructor(private movieService: MovieService) {
+    forkJoin([
+      this.movieService.getPlayingMovies(),
+      this.movieService.getTopRated(),
+    ]).subscribe(([playing, rated]) => {
+      this.nowPlayingMovies = playing;
+      this.topRatedMovies = rated;
+      console.log(playing);
+>>>>>>> 0f79deb ([SDS-32] add top rated movies)
     });
   }
   ngOnInit(): void {}
