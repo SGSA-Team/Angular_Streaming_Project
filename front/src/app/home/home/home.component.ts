@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs';
+import { take, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiMovie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
@@ -10,12 +10,17 @@ import { MovieService } from 'src/services/movie.service';
 })
 export class HomeComponent implements OnInit {
   nowPlayingMovies: ApiMovie[] | null = null;
+  topRatedMovies: ApiMovie[] | null = null;
   posterPath: string = environment.apiImageUrl;
 
   constructor(private movieService: MovieService) {
-    this.movieService.getPlayingMovies().subscribe((movies) => {
-      this.nowPlayingMovies = movies;
-      console.log(movies);
+    forkJoin([
+      this.movieService.getPlayingMovies(),
+      this.movieService.getTopRated(),
+    ]).subscribe(([playing, rated]) => {
+      this.nowPlayingMovies = playing;
+      this.topRatedMovies = rated;
+      console.log(playing);
     });
   }
 

@@ -4,8 +4,13 @@ section {
   background-color: #0e0e0e;
 }
 
+section#content {
+  height: auto;
+  background-color: #0e0e0e;
+  overflow: hidden;
+}
+
 img.demo-bg {
-    filter: blur(4px);
     min-height: 800px;
     object-fit: cover;
     height: 100%;
@@ -73,6 +78,10 @@ img.demo-bg {
   img {
     border-radius: inherit;
   }
+}
+
+.container-poster {
+  margin : 1em 0 8em 0;
 }
 
 

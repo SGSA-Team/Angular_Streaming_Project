@@ -41,4 +41,18 @@ export class MovieService {
       },
     });
   }
+  getTopRated = (): Observable<ApiMovie[]> => {
+    return this.http
+      .get<ApiMovieList>(`${this.apiBaseUrl}/movie/top_rated`, {
+        params: {
+          page: 1,
+          region: 'FR',
+        },
+      })
+      .pipe(
+        map((movies) => {
+          return movies.results.slice(0, 15);
+        })
+      );
+  };
 }
