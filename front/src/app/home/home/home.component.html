@@ -22,11 +22,7 @@
 <section id="content">
   <main class="text-white mx-auto my-0 container p-6">
     <div class="container-poster">
-<<<<<<< HEAD
       <h2 class="text-2xl uppercase font-extrabold mb-8">A l'affiche</h2>
-=======
-      <h2 class="text-2xl uppercase font-bold mb-8">A l'affiche</h2>
->>>>>>> 0f79deb ([SDS-32] add top rated movies)
       <div *ngIf="nowPlayingMovies; else skeleton" class="movie-list">
         <!-- en faire un composant -->
 
@@ -43,7 +39,6 @@
       </div>
     </div>
     <div class="container-poster">
-<<<<<<< HEAD
       <h2 class="text-2xl uppercase font-extrabold mb-8">
         Films
         <span class="text-base text-neutral-400 tracking-wider"
@@ -135,22 +130,6 @@
             </div>
           </article>
         </div>
-=======
-      <h2 class="text-2xl uppercase font-bold mb-8">
-        Films <span class="">Les plus vus</span>
-      </h2>
-      <div *ngIf="topRatedMovies; else skeleton" class="movie-list">
-        <!-- en faire un composant -->
-        <article
-          *ngFor="let movie of topRatedMovies"
-          class="movie hover:scale-105 top-rated"
-        >
-          <img
-            src="{{ posterPath + movie.poster_path }}"
-            alt="img movie card"
-          />
-        </article>
->>>>>>> 0f79deb ([SDS-32] add top rated movies)
       </div>
     </div>
     <div class="container-poster">
@@ -262,10 +241,7 @@
     "
   >
     <div
-<<<<<<< HEAD
       *ngFor="let i of [0, 1, 2, 3]"
-=======
->>>>>>> 0f79deb ([SDS-32] add top rated movies)
       class="
         flex
         justify-center
@@ -289,8 +265,7 @@
         />
       </svg>
     </div>
-<<<<<<< HEAD
-=======
+    <<<<<<< HEAD =======
     <div
       class="
         flex
@@ -365,7 +340,7 @@
     </div>
 
     <span class="sr-only">Loading...</span>
->>>>>>> 0f79deb ([SDS-32] add top rated movies)
+    >>>>>>> 0f79deb ([SDS-32] add top rated movies)
   </div>
 </ng-template>
 <ng-template #imgNotFound>
