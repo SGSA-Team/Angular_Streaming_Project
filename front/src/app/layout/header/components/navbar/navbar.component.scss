@@ -6,8 +6,7 @@
     align-items: center;
     position: fixed;
     width: 100%;
-    top: 0px;
-    z-index: 50;
+    z-index: 9999;
     
     &__container {
         position: relative;
