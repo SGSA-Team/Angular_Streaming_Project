@@ -6,7 +6,7 @@ import {
   ApiMovie,
   ApiCategories,
   Genre,
-  ApiMovieList,
+  ApiList,
 } from 'src/interfaces/interface';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class MovieService {
 
   getPlayingMovies = (): Observable<ApiMovie[]> => {
     return this.http
-      .get<ApiMovieList>(`${this.apiBaseUrl}/movie/now_playing`, {
+      .get<ApiList>(`${this.apiBaseUrl}/movie/now_playing`, {
         params: {
           page: 1,
         },
@@ -41,9 +41,9 @@ export class MovieService {
       },
     });
   }
-  getTopRated = (): Observable<ApiMovie[]> => {
+  getPopular = (): Observable<ApiMovie[]> => {
     return this.http
-      .get<ApiMovieList>(`${this.apiBaseUrl}/movie/top_rated`, {
+      .get<ApiList>(`${this.apiBaseUrl}/trending/movie/week`, {
         params: {
           page: 1,
           region: 'FR',
