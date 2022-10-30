@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ApiMovie } from 'src/interfaces/interface';
+import { ApiMovie, ApiCategories, Genre } from 'src/interfaces/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,4 +18,13 @@ export class MovieService {
       },
     });
   }
+
+ getMoviesCategories(): Observable<ApiCategories> {
+    return this.http.get<ApiCategories>(`${this.apiBaseUrl}/genre/movie/list`, {
+      params: {
+        language: 'fr-FR',
+      },
+    });
+  }
+
 }

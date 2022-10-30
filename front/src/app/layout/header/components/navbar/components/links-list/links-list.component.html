@@ -1,0 +1,26 @@
+<ul class="link-list">
+    <li class="flex justify-center align-center cursor-pointer gap-2">
+        <a class="flex link-list__title" routerLink="catalogs/movies" (click)="onClickCategory('close')">
+            Movies
+        </a>
+        <span (click)='onClickCategory("movies")' class="arrow-icon arrow-icon--down"
+            [ngClass]="clickOnMovies ? 'arrow-icon--down' : 'arrow-icon--up'">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </span>
+    </li>
+    <li class="flex justify-center align-center cursor-pointer gap-2">
+        <a class="flex link-list__title" routerLink="catalogs/series" (click)="onClickCategory('close')">
+            Series
+        </a>
+        <span (click)='onClickCategory("series")' class="arrow-icon arrow-icon--down"
+            [ngClass]="clickOnSeries ? 'arrow-icon--down' : 'arrow-icon--up'">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </span>
+    </li>
+</ul>

@@ -1,0 +1,11 @@
+.global-search-bar{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+
+    &__icon{
+       height:35px;
+        width: 35px; 
+    }
+}
