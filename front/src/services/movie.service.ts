@@ -42,4 +42,14 @@ export class MovieService {
     
     return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=release_date.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
   };
+
+  getPopularMovies= (type:string="desc", page:number = 1): Observable<ApiMovies> => {
+    const newDate = new Date();
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=popularity.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
+  };
+
+  getRatedMovies= (type:string="desc", page:number = 1): Observable<ApiMovies> => {
+    const newDate = new Date();
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
+  };
 }

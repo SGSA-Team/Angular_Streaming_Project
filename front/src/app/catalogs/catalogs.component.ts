@@ -7,8 +7,7 @@ import { SeriesService } from 'src/services/series.service';
 
 interface CatalogsFilters {
     dateCreatdAt: boolean,
-    createdAt:boolean,
-    title: boolean,
+    popularity:boolean,
     note: boolean,
 }
 @Component({
@@ -19,10 +18,9 @@ interface CatalogsFilters {
 export class CatalogsComponent implements OnInit {
 
   filterSelected:CatalogsFilters={
-    dateCreatdAt: true,
-    createdAt:false,
-    title:false,
+    popularity:true,
     note: false,
+    dateCreatdAt:false,
   };
 
   movies: Partial<ApiMovies> = {};
@@ -31,14 +29,25 @@ export class CatalogsComponent implements OnInit {
   options = {
     movies :{
       isSelected: false,
-      title: "Films"
+      title: "Films",
+      filters: {
+        popularity: this.movieService.getPopularMovies("desc"),
+        note:this.movieService.getRatedMovies("desc"),
+        dateCreatdAt:this.movieService.getLatestMovies("desc"),
+      }
     },
     series:{
       isSelected: false,
-      title: "Series"
+      title: "Series",
+      filters: {
+        popularity: this.seriesService.getPopularSeries("desc"),
+        note:this.seriesService.getRatedSeries("desc"),
+        dateCreatdAt:this.seriesService.getLatestSeries("desc"),
+      }
     }
   }
   title=""
+  filterOn:string = "popularity" as string
 
   constructor(private router: Router,private movieService:MovieService, private seriesService:SeriesService) { 
         this.router.events.pipe(
@@ -66,32 +75,43 @@ export class CatalogsComponent implements OnInit {
         })
   }
 
-  async ngOnInit(): Promise<void> {
-    if(this.options.movies.isSelected){
-      this.movieService.getLatestMovies("desc").subscribe((data) => {
-        console.log("movies data: ",data)
-        this.movies = data;
-      });
-    }else if(this.options.series.isSelected){
-       this.seriesService.getLatestSeries("desc").subscribe((result) => {
-        console.log("series data: ", result)
-        this.series = result;
-      });
+  async fetchData(){
+    console.log("filterOn",this.filterOn)
+
+    if(this.options.movies.isSelected && this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters]){
+    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters].subscribe((data) => {
+      console.log("movies data: ",data)
+      this.movies = data;
+    });
+    }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
+    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters].subscribe((data) => {
+      console.log("series data: ",data)
+      this.series = data;
+    });
     }
   }
 
-  updateFilter(filter:string){
+  async ngOnInit(): Promise<void> {
+    this.fetchData();
+  }
+
+  async updateFilter(filter:string){
     const newFiltersOptions =  Object
     .keys(this.filterSelected) 
     .reduce((result, k) =>{
       return { ...result, [k] : filter === k}
     }, {
     dateCreatdAt: false,
-    createdAt:false,
-    title:false,
+    popularity:false,
     note: false
   })
-    console.log(newFiltersOptions)
     this.filterSelected=newFiltersOptions; 
+    Object.entries(this.filterSelected).find(([key, value]) => {
+      if(value){
+        this.filterOn = key;
+      }
+      return false;
+    })
+    this.fetchData();
   }
 }
