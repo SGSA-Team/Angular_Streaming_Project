@@ -96,3 +96,47 @@
     -ms-transform: scale(1.2); /* IE 9 */ 
     transform: scale(1.2);
 }
+
+.pagination-container{
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+    margin: 10px 0;
+}
+
+.pagination{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    color:white;
+
+    &__links{
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__links > div{
+        cursor: pointer;
+        height: 30px;
+        width:30px;
+        padding:2px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__link-active{
+        background-color: white;
+        color: black; 
+    }
+
+    &__links > div:hover{
+        background-color: white;
+        color: black;
+    }
+}
