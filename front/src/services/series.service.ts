@@ -7,6 +7,7 @@ import {
   ApiList,
   ApiMovie,
   ApiSerie,
+  ApiSeries
 } from 'src/interfaces/interface';
 
 @Injectable({
@@ -31,4 +32,9 @@ export class SeriesService {
       })
     );
   };
+
+  getLatestSeries= (type:string="desc", page:number = 1): Observable<ApiSeries> => {
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv?sort_by=first_air_date.${type}&page=${page}&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`);
+  };
+
 }

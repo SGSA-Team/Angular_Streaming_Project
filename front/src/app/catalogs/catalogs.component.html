@@ -1,1 +1,42 @@
-<p>catalogs works!</p>
+<div class="catalogs">
+    <div class="catalogs-header">
+        <span class="catalogs-header__title">{{title}}</span>
+        <ul class="catalogs-header__filters">
+            <li (click)="updateFilter('dateCreatdAt')"
+                [ngClass]="{'catalogs-header__filters-selected': filterSelected.dateCreatdAt}">Date
+                d'ajout</li>
+            <li (click)="updateFilter('createdAt')"
+                [ngClass]="{'catalogs-header__filters-selected': filterSelected.createdAt}">Date de création</li>
+            <li (click)="updateFilter('title')" [ngClass]="{'catalogs-header__filters-selected': filterSelected.title}">
+                A-Z</li>
+            <li (click)="updateFilter('note')" [ngClass]="{'catalogs-header__filters-selected': filterSelected.note}">
+                Par vote</li>
+        </ul>
+    </div>
+    <div class="catalogs-videos">
+        <ng-container *ngIf="options.movies.isSelected && movies && movies.results &&  movies.results.length > 0">
+            <div *ngFor="let movie of movies.results ">
+                <div class="catalogs-videos-card">
+                    <div class="catalogs-videos-card__image"
+                        style="background-image: url('https://image.tmdb.org/t/p/original/{{movie.poster_path}}')">
+                    </div>
+                    <div class="catalogs-videos-card__decorations">
+                        Test
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="options.series.isSelected  && series && series.results &&  series.results.length > 0">
+            <div *ngFor="let serie of series.results ">
+                <div class="catalogs-videos-card">
+                    <div class="catalogs-videos-card__image"
+                        style="background-image: url('https://image.tmdb.org/t/p/original/{{serie.backdrop_path}}')">
+                    </div>
+                    <div class="catalogs-videos-card__decorations">
+                        Test
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
