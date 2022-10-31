@@ -10,6 +10,12 @@ interface CatalogsFilters {
     popularity:boolean,
     note: boolean,
 }
+
+interface PageI{
+  page: number; 
+  value: string; 
+  isActive: boolean; 
+}
 @Component({
   selector: 'app-catalogs',
   templateUrl: './catalogs.component.html',
@@ -31,23 +37,25 @@ export class CatalogsComponent implements OnInit {
       isSelected: false,
       title: "Films",
       filters: {
-        popularity: this.movieService.getPopularMovies("desc"),
-        note:this.movieService.getRatedMovies("desc"),
-        dateCreatdAt:this.movieService.getLatestMovies("desc"),
+        popularity: (page:number=1) => this.movieService.getPopularMovies("desc", page),
+        note: ( page:number=1) => this.movieService.getRatedMovies("desc", page),
+        dateCreatdAt: (page:number=1) => this.movieService.getLatestMovies("desc", page),
       }
     },
     series:{
       isSelected: false,
       title: "Series",
       filters: {
-        popularity: this.seriesService.getPopularSeries("desc"),
-        note:this.seriesService.getRatedSeries("desc"),
-        dateCreatdAt:this.seriesService.getLatestSeries("desc"),
+        popularity: (page:number=1) =>  this.seriesService.getPopularSeries("desc", page),
+        note: (page:number=1) =>  this.seriesService.getRatedSeries("desc", page),
+        dateCreatdAt: (page:number=1) => this.seriesService.getLatestSeries("desc", page),
       }
     }
   }
   title=""
   filterOn:string = "popularity" as string
+  maxPages= 10;
+  pages:PageI[]=[];
 
   constructor(private router: Router,private movieService:MovieService, private seriesService:SeriesService) { 
         this.router.events.pipe(
@@ -75,18 +83,49 @@ export class CatalogsComponent implements OnInit {
         })
   }
 
-  async fetchData(){
-    console.log("filterOn",this.filterOn)
-
+  async fetchData(page:number=1){
+    this.pages = [];
     if(this.options.movies.isSelected && this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters]){
-    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters].subscribe((data) => {
+    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page).subscribe((data) => {
       console.log("movies data: ",data)
       this.movies = data;
+       this.pages.push({
+          page: 1,
+          value: "1",
+          isActive: data.page === 1
+      })
+      for(let i = 1; i <= this.maxPages; i++){
+        if(i !==1){
+          this.pages.push({
+            page: i,
+            value: i === this.maxPages - 1 ? "..." : i.toString(),
+            isActive: i === data.page
+          })
+        }
+      }
+
+      console.log("this.pages: ",this.pages)
+      //page
+      //total_pages
     });
     }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
-    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters].subscribe((data) => {
+    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page).subscribe((data) => {
       console.log("series data: ",data)
       this.series = data;
+      this.pages.push({
+          page: 1,
+          value: "1",
+          isActive: data.page === 1
+      })
+      for(let i = 1; i <= this.maxPages; i++){
+        if(i !==1){
+          this.pages.push({
+            page: i,
+            value: i === this.maxPages - 1 ? "..." : i.toString(),
+            isActive: i === data.page
+          })
+        }
+      }
     });
     }
   }
@@ -113,5 +152,10 @@ export class CatalogsComponent implements OnInit {
       return false;
     })
     this.fetchData();
+  }
+
+  async pageClick(page:number){
+    console.log(page)
+    this.fetchData(page);
   }
 }
