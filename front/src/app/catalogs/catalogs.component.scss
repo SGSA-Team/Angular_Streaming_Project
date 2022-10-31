@@ -1,0 +1,98 @@
+.catalogs{
+    position: relative;
+    top:0;
+    min-height: 100vh;
+    width: 100%;
+    padding-top: 11vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.catalogs-header {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    color: white;
+
+    &__title{
+        text-transform: uppercase;
+        font-size: 25px;
+    }
+
+    &__filters{
+        display: flex;
+        color: #CBCBCB;
+        gap:10px;
+        height: 100%;
+        font-size: 12px;
+        justify-content: center;
+    }
+     &__filters>li{
+        padding: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    &__filters>li:hover{
+        border-bottom: 2px solid;
+        border-color: #E50A13;
+    }
+
+    &__filters-selected{
+        border-bottom: 2px solid;
+        border-color: #E50A13;
+    }
+}
+
+.catalogs-videos{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 20px;
+    width: 85%;
+}
+
+.catalogs-videos-card{
+    width:200px;
+    overflow:hidden;
+    object-fit: cover;
+    position: relative;
+    background-color: antiquewhite;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &__image{
+        width:200px;
+        height:300px;
+        z-index: 1;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        transition: all .5s ease;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &__decorations{
+        position: absolute;
+        top:0;
+        display: flex;
+        justify-content: center;
+        z-index: 100;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.catalogs-videos-card:hover > .catalogs-videos-card__image{
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2); /* IE 9 */ 
+    transform: scale(1.2);
+}

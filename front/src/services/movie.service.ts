@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
+import { compileNgModule } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, take, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ApiMovie, ApiCategories, ApiMovieList } from 'src/interfaces/interface';
+import { ApiMovie, ApiCategories, ApiMovieList, ApiMovies } from 'src/interfaces/interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,5 +35,11 @@ export class MovieService {
           return movies.results.slice(0, 10);
         })
       );
+  };
+
+  getLatestMovies= (type:string="desc", page:number = 1): Observable<ApiMovies> => {
+    const newDate = new Date();
+    
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=release_date.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
   };
 }
