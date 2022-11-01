@@ -29,6 +29,7 @@
         <article
           *ngFor="let movie of nowPlayingMovies"
           class="movie hover:scale-105"
+          routerLink="{{ 'detail/' + movie?.id }}"
         >
           <img
             src="{{ posterPath + movie.poster_path }}"
@@ -41,7 +42,7 @@
       <h2 class="text-2xl uppercase font-extrabold mb-8">
         Films
         <span class="text-base text-neutral-400 tracking-wider"
-          >Les plus vus de la semaine
+          >Les plus populaire de la semaine
         </span>
       </h2>
       <div *ngIf="mostViewedMovies; else skeleton" class="movie-list popular">
@@ -88,7 +89,7 @@
       <h2 class="text-2xl uppercase font-extrabold mb-8">
         Series
         <span class="text-base text-neutral-400 tracking-wider"
-          >Les plus vus de la semaine
+          >Les plus populaire de la semaine
         </span>
       </h2>
       <div *ngIf="mostViewedSeries; else skeleton" class="movie-list popular">
