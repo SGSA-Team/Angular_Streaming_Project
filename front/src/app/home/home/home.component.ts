@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { take, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
@@ -18,7 +24,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private serieService: SeriesService
+    private serieService: SeriesService,
+    private router: Router,
+    private dialog: MatDialog
   ) {
     forkJoin([
       this.movieService.getPlayingMovies(),
@@ -32,6 +40,29 @@ export class HomeComponent implements OnInit {
       console.log(playing, mostSerie);
     });
   }
-
   ngOnInit(): void {}
+
+  openInfo = (movie: ApiMovie | ApiSerie) => {
+    this.dialog.open(DialogInfoComponent, {
+      minWidth: '80%',
+      minHeight: '800px',
+      data: movie,
+    });
+  };
+}
+
+@Component({
+  selector: 'dialog-info',
+  templateUrl: './dialog-info.html',
+  styleUrls: ['./home.component.scss'],
+})
+export class DialogInfoComponent {
+  currentMovie: ApiMovie | ApiSerie | null = null;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ApiMovie | ApiSerie,
+    public dialogRef: MatDialogRef<DialogInfoComponent>
+  ) {
+    this.currentMovie = data;
+    console.log(data);
+  }
 }

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { HomeComponent } from './home/home/home.component';
+import { HomeComponent, DialogInfoComponent } from './home/home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
@@ -52,6 +52,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HomeComponent,
     PagenotfoundComponent,
     CatalogsComponent,
+    DialogInfoComponent,
     NavbarComponent,
     LinksListComponent,
     GlobalSearchBarComponent,

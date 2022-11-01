@@ -1,5 +1,16 @@
 @import "./normalize.scss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Space Grotesk', sans-serif;}
+
+mat-dialog-container,
+mat-card {
+  background-color: rgb(255, 255, 255) !important;
+  mat-card-title, mat-card-content, mat-card-footer {
+    color: rgb(34, 34, 34);
+  }
+}

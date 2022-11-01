@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-title
+    class="uppercase cursor-pointer font-bold text-red-600"
+    (click)="dialogRef.close()"
+    routerLink="{{'detail/' + currentMovie?.id}}"
+    >Détail</mat-card-title
+  >
+  <mat-card-content>
+    <h2 class="text-sm text-black font-bold uppercase mb-1">Description</h2>
+    <p>{{currentMovie?.overview}}</p>
+  </mat-card-content>
+</mat-card>
