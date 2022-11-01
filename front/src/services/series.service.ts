@@ -18,11 +18,7 @@ export class SeriesService {
   constructor(private http: HttpClient) {}
 
   getSeriesCategories(): Observable<ApiCategories> {
-    return this.http.get<ApiCategories>(`${this.apiBaseUrl}/genre/tv/list`, {
-      params: {
-        language: 'fr-FR',
-      },
-    });
+    return this.http.get<ApiCategories>(`${this.apiBaseUrl}/genre/tv/list`);
   }
 
   getPopular = (): Observable<ApiSerie[]> => {
