@@ -8,7 +8,7 @@ section {
 section#content {
   height: auto;
   background-color: #0e0e0e;
-  overflow: hidden;
+  overflow: inherit;
 }
 
 img.demo-bg {
@@ -135,7 +135,13 @@ mat-dialog-container {
 }
 
 .container-poster {
+  
   margin: 1em 0 8em 0;
+
+  &:nth-child(1) {
+    position: relative;
+    transform: translate(0, -50%);
+  }
 }
 
 .gradiant-filter {
