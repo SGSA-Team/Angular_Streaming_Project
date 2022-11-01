@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Genre } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 import { LinksListComponent } from './components/links-list/links-list.component';
@@ -10,32 +11,31 @@ import { LinksListComponent } from './components/links-list/links-list.component
 })
 export class NavbarComponent implements OnInit {
   @ViewChild(LinksListComponent)
-  private linkList: LinksListComponent = new LinksListComponent;
+  private linkList: LinksListComponent = new LinksListComponent();
 
-  options=[
-    "movies",
-    "series"
-  ]
+  options = ['movies', 'series'];
 
-  clickOnMovies=false;
-  clickOnSeries=false;
+  clickOnMovies = false;
+  clickOnSeries = false;
 
-  moviesGenres:any;
-  seriesGenres: any;
+  moviesGenres: Genre[] = [];
+  seriesGenres: Genre[] = [];
 
-  constructor(private movieService:MovieService, private seriesService:SeriesService,) { }
+  constructor(
+    private movieService: MovieService,
+    private seriesService: SeriesService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.movieService.getMoviesCategories().subscribe((result) => {
       this.moviesGenres = result.genres;
     });
-     this.seriesService.getSeriesCategories().subscribe((result) => {
+    this.seriesService.getSeriesCategories().subscribe((result) => {
       this.seriesGenres = result.genres;
     });
   }
 
-  closeCategories(type:string){
-      this.linkList.onClickCategory(type)
+  closeCategories(type: string) {
+    this.linkList.onClickCategory(type);
   }
-
 }
