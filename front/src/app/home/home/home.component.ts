@@ -44,14 +44,9 @@ export class HomeComponent implements OnInit {
         this.latestMovies = latestMovies.results;
         this.latestSeries = latestSeries.results;
 
-<<<<<<< HEAD
         console.log(playing, this.latestMovies, latestMovies);
       }
     );
-=======
-      console.log(playing, mostSerie);
-    });
->>>>>>> 366267a ([SDS-32] add popular & series)
   }
   ngOnInit(): void {}
 
