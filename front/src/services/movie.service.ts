@@ -35,11 +35,7 @@ export class MovieService {
   };
 
   getMoviesCategories(): Observable<ApiCategories> {
-    return this.http.get<ApiCategories>(`${this.apiBaseUrl}/genre/movie/list`, {
-      params: {
-        language: 'fr-FR',
-      },
-    });
+    return this.http.get<ApiCategories>(`${this.apiBaseUrl}/genre/movie/list`);
   }
   getPopular = (): Observable<ApiMovie[]> => {
     return this.http
