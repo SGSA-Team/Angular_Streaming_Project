@@ -22,6 +22,12 @@
         font-size: 25px;
     }
 
+    &__category{
+        text-transform: uppercase;
+        font-size: 25px;
+        color: #CBCBCB;
+    }
+
     &__filters{
         display: flex;
         color: #CBCBCB;

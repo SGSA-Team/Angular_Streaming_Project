@@ -2,7 +2,10 @@
     <!--Carousel-->
     <!--Header-->
     <div class="catalogs-header">
-        <span class="catalogs-header__title">{{title}}</span>
+        <div class="flex gap-2">
+            <span class="catalogs-header__title">{{title}}</span>
+            <span class="catalogs-header__category" *ngIf="isGenre && genre && genre.name">{{genre.name}}</span>
+        </div>
         <ul class="catalogs-header__filters">
             <li (click)="updateFilter('popularity')"
                 [ngClass]="{'catalogs-header__filters-selected': filterSelected.popularity}">Par popularité</li>

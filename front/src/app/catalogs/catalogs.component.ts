@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApiMovies, ApiSeries } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
@@ -11,10 +11,20 @@ interface CatalogsFilters {
     note: boolean,
 }
 
+interface GenreI {
+  id: number;
+  name: string | null;
+}
+
 interface PageI{
   page: number; 
   value: string; 
   isActive: boolean; 
+}
+
+interface fetchDataInterface{
+  page?: number ;
+  genreId?: number;
 }
 @Component({
   selector: 'app-catalogs',
@@ -37,9 +47,9 @@ export class CatalogsComponent implements OnInit {
       isSelected: false,
       title: "Films",
       filters: {
-        popularity: (page:number=1) => this.movieService.getPopularMovies("desc", page),
-        note: ( page:number=1) => this.movieService.getRatedMovies("desc", page),
-        dateCreatdAt: (page:number=1) => this.movieService.getLatestMovies("desc", page),
+        popularity: (page:number=1, genreId:number=0) => this.movieService.getPopularMovies("desc", page, genreId),
+        note: ( page:number=1, genreId:number=0) => this.movieService.getRatedMovies("desc", page, genreId),
+        dateCreatdAt: (page:number=1, genreId:number=0) => this.movieService.getLatestMovies("desc", page, genreId),
       }
     },
     series:{
@@ -56,8 +66,10 @@ export class CatalogsComponent implements OnInit {
   filterOn:string = "popularity" as string
   maxPages= 10;
   pages:PageI[]=[];
+  genre:GenreI | undefined;
+  isGenre=false;
 
-  constructor(private router: Router,private movieService:MovieService, private seriesService:SeriesService) { 
+  constructor(  private route: ActivatedRoute,private router: Router,private movieService:MovieService, private seriesService:SeriesService) { 
         this.router.events.pipe(
           filter((event:any) => event instanceof NavigationEnd)
         ).subscribe((event: any) => {
@@ -80,14 +92,25 @@ export class CatalogsComponent implements OnInit {
             }
             return false;
           });
+          if(this.route.snapshot.queryParamMap.get('id') && this.route.snapshot.queryParamMap.get('name')){
+              this.genre = {
+                id: parseInt(this.route.snapshot.queryParamMap.get('id') as string),
+                name: this.route.snapshot.queryParamMap.get('name')
+              } ;
+              this.isGenre = true;
+          }
+           if(this.genre){
+              this.fetchData({genreId: this.genre.id});
+            }else {
+              this.fetchData();
+            }
         })
   }
 
-  async fetchData(page:number=1){
+  async fetchData({page=1, genreId=0}:fetchDataInterface={}){
     this.pages = [];
     if(this.options.movies.isSelected && this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters]){
-    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page).subscribe((data) => {
-      console.log("movies data: ",data)
+    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page,genreId).subscribe((data) => {
       this.movies = data;
        this.pages.push({
           page: 1,
@@ -131,7 +154,9 @@ export class CatalogsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.fetchData();
+    //Allow to update page everytime params change but set href to "/" for navbar links 
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    //No call required here because it's not dynamic
   }
 
   async updateFilter(filter:string){
@@ -151,11 +176,19 @@ export class CatalogsComponent implements OnInit {
       }
       return false;
     })
-    this.fetchData();
+   if(this.genre && this.genre.id){
+      this.fetchData({genreId: this.genre.id});
+    }else {
+      this.fetchData();
+    }
   }
 
   async pageClick(page:number){
     console.log(page)
-    this.fetchData(page);
+     if(this.genre && this.genre.id){
+      this.fetchData({page, genreId: this.genre.id});
+    }else {
+      this.fetchData({page});
+    }
   }
 }

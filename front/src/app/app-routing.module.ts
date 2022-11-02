@@ -7,9 +7,9 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'catalogs/movies', pathMatch: 'full',component: CatalogsComponent },
-  { path: 'catalogs/movies/:id', pathMatch: 'full',component: PagenotfoundComponent },
+  { path: 'catalogs/movies/:id', pathMatch: 'full',component: CatalogsComponent },
   { path: 'catalogs/series', pathMatch: 'full',component: CatalogsComponent },
-  { path: 'catalogs/series/:id', pathMatch: 'full',component: PagenotfoundComponent },
+  { path: 'catalogs/series/:id', pathMatch: 'full',component: CatalogsComponent },
   { path: '**', redirectTo: '', component: PagenotfoundComponent },
 ];
 
