@@ -21,3 +21,8 @@ export interface Genre {
   id: number;
   name: string;
 }
+
+export interface ApiSearch {id:string,
+  logo_path:string,
+  name:string,
+  origin_country:string}
