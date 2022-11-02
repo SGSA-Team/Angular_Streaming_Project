@@ -18,6 +18,8 @@ import { SeriesService } from 'src/services/series.service';
 export class HomeComponent implements OnInit {
   nowPlayingMovies: ApiMovie[] | null = null;
   mostViewedMovies: ApiMovie[] | null = null;
+  latestMovies: ApiMovie[] | null = null;
+  latestSeries: ApiSerie[] | null = null;
   mostViewedSeries: ApiSerie[] | null = null;
 
   posterPath: string = environment.apiImageUrl;
@@ -32,13 +34,19 @@ export class HomeComponent implements OnInit {
       this.movieService.getPlayingMovies(),
       this.movieService.getPopular(),
       this.serieService.getPopular(),
-    ]).subscribe(([playing, mostMovie, mostSerie]) => {
-      this.nowPlayingMovies = playing;
-      this.mostViewedMovies = mostMovie;
-      this.mostViewedSeries = mostSerie;
+      this.movieService.getLatestMovies(),
+      this.serieService.getLatestSeries(),
+    ]).subscribe(
+      ([playing, mostMovie, mostSerie, latestMovies, latestSeries]) => {
+        this.nowPlayingMovies = playing;
+        this.mostViewedMovies = mostMovie;
+        this.mostViewedSeries = mostSerie;
+        this.latestMovies = latestMovies.results;
+        this.latestSeries = latestSeries.results;
 
-      console.log(playing, mostSerie);
-    });
+        console.log(playing, this.latestMovies, latestMovies);
+      }
+    );
   }
   ngOnInit(): void {}
 
