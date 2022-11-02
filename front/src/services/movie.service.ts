@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { compileNgModule } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, take, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,8 +8,9 @@ import {
   ApiCategories,
   Genre,
   ApiList,
+  //ApiMovieList, 
+  ApiMovies 
 } from 'src/interfaces/interface';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -41,6 +43,7 @@ export class MovieService {
       },
     });
   }
+
   getPopular = (): Observable<ApiMovie[]> => {
     return this.http
       .get<ApiList>(`${this.apiBaseUrl}/trending/movie/week`, {
@@ -54,5 +57,21 @@ export class MovieService {
           return movies.results.slice(0, 15);
         })
       );
+  }
+
+  getLatestMovies= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiMovies> => {
+    const newDate = new Date();
+    
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=release_date.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${genreId!==0 && `with_genres=${genreId}&`}language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
+  };
+
+  getPopularMovies= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiMovies> => {
+    const newDate = new Date();
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=popularity.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${genreId!==0 && `with_genres=${genreId}&`}language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
+};
+
+  getRatedMovies= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiMovies> => {
+    const newDate = new Date();
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${genreId!==0 && `with_genres=${genreId}&`}language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
   };
 }

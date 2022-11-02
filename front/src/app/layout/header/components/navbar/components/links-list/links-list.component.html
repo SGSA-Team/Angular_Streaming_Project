@@ -1,6 +1,6 @@
 <ul class="link-list">
     <li class="flex justify-center align-center cursor-pointer gap-2">
-        <a class="flex link-list__title" routerLink="catalogs/movies" (click)="onClickCategory('close')">
+        <a class="flex link-list__title" [routerLink]="'catalogs/movies'" (click)="onClickCategory('close')">
             Movies
         </a>
         <span (click)='onClickCategory("movies")' class="arrow-icon arrow-icon--down"
@@ -12,7 +12,7 @@
         </span>
     </li>
     <li class="flex justify-center align-center cursor-pointer gap-2">
-        <a class="flex link-list__title" routerLink="catalogs/series" (click)="onClickCategory('close')">
+        <a class="flex link-list__title" [routerLink]="'catalogs/series'" (click)="onClickCategory('close')">
             Series
         </a>
         <span (click)='onClickCategory("series")' class="arrow-icon arrow-icon--down"

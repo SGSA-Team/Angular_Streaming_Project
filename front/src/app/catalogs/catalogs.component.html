@@ -1,1 +1,123 @@
-<p>catalogs works!</p>
+<div class="catalogs">
+    <!--Carousel-->
+    <!--Header-->
+    <div class="catalogs-header">
+        <div class="flex gap-2">
+            <span class="catalogs-header__title">{{title}}</span>
+            <span class="catalogs-header__category" *ngIf="isGenre && genre && genre.name">{{genre.name}}</span>
+        </div>
+        <ul class="catalogs-header__filters">
+            <li (click)="updateFilter('popularity')"
+                [ngClass]="{'catalogs-header__filters-selected': filterSelected.popularity}">Par popularité</li>
+            <li (click)="updateFilter('note')" [ngClass]="{'catalogs-header__filters-selected': filterSelected.note}">
+                Par notes</li>
+            <li (click)="updateFilter('dateCreatdAt')"
+                [ngClass]="{'catalogs-header__filters-selected': filterSelected.dateCreatdAt}">Par date
+                d'ajout</li>
+        </ul>
+    </div>
+    <!--Cards-->
+    <div class="catalogs-videos">
+        <!--Duplicate-->
+        <ng-container *ngIf="options.movies.isSelected && movies && movies.results &&  movies.results.length > 0">
+            <div *ngFor="let movie of movies.results ">
+                <div class="catalogs-videos-card">
+                    <div class="catalogs-videos-card__image"
+                        style="background-image: url('{{movie.poster_path ? getCardImageBg(movie.poster_path) : defaultCardImage}}')">
+                    </div>
+                    <div class="catalogs-videos-card__decorations">
+                        <div class="catalogs-videos-card__decorations-top">
+                            <div class="catalogs-videos-card__decorations-info">
+                                <span class="catalogs-videos-card__decorations-info-icon">
+                                    <p>i</p>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="catalogs-videos-card__decorations-bottom">
+                            <div class="flex gap-1">
+                                <span class="catalogs-videos-card__decorations-type">{{title}}</span>
+                                <span
+                                    class="catalogs-videos-card__decorations-year">{{movie.release_date.split("-")[0]}}</span>
+                            </div>
+                            <span class="catalogs-videos-card__decorations-title">{{movie.title}}</span>
+                            <span class="catalogs-videos-card__decorations-rating">
+                                <span class="flex items-center">{{getRatingFormat(movie.vote_average)}}</span>
+                                <span class="material-icons text-red-600 text-lg">star</span>
+                            </span>
+                            <span class="catalogs-videos-card__decorations-link">
+                                <span
+                                    class="catalogs-videos-card__decorations-link-icon material-icons text-red-600 text-2xl">play_circle_outline</span>
+                                <span class="catalogs-videos-card__decorations-link-title">Regarder</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!--Duplicate-->
+        <ng-container *ngIf="options.series.isSelected && series && series.results &&  series.results.length > 0">
+            <div *ngFor="let serie of series.results ">
+                <div class="catalogs-videos-card">
+                    <div class="catalogs-videos-card__image"
+                        style="background-image: url('{{serie.backdrop_path ? getCardImageBg(serie.backdrop_path) : defaultCardImage}}')">
+                    </div>
+                    <div class="catalogs-videos-card__decorations">
+                        <div class="catalogs-videos-card__decorations-top">
+                            <div class="catalogs-videos-card__decorations-info">
+                                <span class="catalogs-videos-card__decorations-info-icon">
+                                    <p>i</p>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="catalogs-videos-card__decorations-bottom">
+                            <div class="flex gap-1">
+                                <span class="catalogs-videos-card__decorations-type">{{title}}</span>
+                                <span
+                                    class="catalogs-videos-card__decorations-year">{{serie.first_air_date.split("-")[0]}}</span>
+                            </div>
+                            <span class="catalogs-videos-card__decorations-title">{{serie.name}}</span>
+                            <span class="catalogs-videos-card__decorations-rating">
+                                <span class="flex items-center">{{getRatingFormat(serie.vote_average)}}</span>
+                                <span class="material-icons text-red-600 text-lg">star</span>
+                            </span>
+                            <span class="catalogs-videos-card__decorations-link">
+                                <span
+                                    class="catalogs-videos-card__decorations-link-icon material-icons text-red-600 text-2xl">play_circle_outline</span>
+                                <span class="catalogs-videos-card__decorations-link-title">Regarder</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <!--Pagination-->
+    <nav id="pagination-container" class="pagination-container">
+        <div class="pagination">
+            <a>
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                        clip-rule="evenodd" />
+                </svg>
+            </a>
+            <div class="pagination__links">
+                <ng-container *ngIf="pages && pages.length > 0 ">
+                    <div *ngFor="let page of pages" [ngClass]="{'pagination__link-active': page.isActive}"
+                        (click)="pageClick(page.page)">
+                        {{page.value}}
+                    </div>
+                </ng-container>
+            </div>
+            <a>
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                        clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </nav>
+</div>

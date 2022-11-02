@@ -7,6 +7,7 @@ import {
   ApiList,
   ApiMovie,
   ApiSerie,
+  ApiSeries
 } from 'src/interfaces/interface';
 
 @Injectable({
@@ -31,4 +32,19 @@ export class SeriesService {
       })
     );
   };
+
+  getLatestSeries= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiSeries> => {
+            console.log("genreId",genreId)
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv?sort_by=first_air_date.${type}&page=${page}&${genreId!==0 && `with_genres=${genreId}&`}include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`);
+  };
+
+  getPopularSeries= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiSeries> => {
+        console.log("genreId",genreId)
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv?sort_by=popularity.${type}&page=${page}&${genreId!==0 && `with_genres=${genreId}&`}include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`);
+  };
+
+  getRatedSeries= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiSeries> => {
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv?sort_by=vote_average.${type}&page=${page}&${genreId!==0 && `with_genres=${genreId}&`}include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`);
+  };
+
 }
