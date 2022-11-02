@@ -18,11 +18,12 @@
     </div>
     <!--Cards-->
     <div class="catalogs-videos">
+        <!--Duplicate-->
         <ng-container *ngIf="options.movies.isSelected && movies && movies.results &&  movies.results.length > 0">
             <div *ngFor="let movie of movies.results ">
                 <div class="catalogs-videos-card">
                     <div class="catalogs-videos-card__image"
-                        style="background-image: url('https://image.tmdb.org/t/p/original/{{movie.poster_path}}')">
+                        style="background-image: url('{{movie.poster_path ? getCardImageBg(movie.poster_path) : defaultCardImage}}')">
                     </div>
                     <div class="catalogs-videos-card__decorations">
 
@@ -30,11 +31,12 @@
                 </div>
             </div>
         </ng-container>
+        <!--Duplicate-->
         <ng-container *ngIf="options.series.isSelected  && series && series.results &&  series.results.length > 0">
             <div *ngFor="let serie of series.results ">
                 <div class="catalogs-videos-card">
                     <div class="catalogs-videos-card__image"
-                        style="background-image: url('https://image.tmdb.org/t/p/original/{{serie.backdrop_path}}')">
+                        style="background-image: url('{{serie.backdrop_path ? getCardImageBg(serie.backdrop_path) : defaultCardImage}}')">
                     </div>
                     <div class="catalogs-videos-card__decorations">
 

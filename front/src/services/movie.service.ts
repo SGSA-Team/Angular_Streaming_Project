@@ -72,6 +72,6 @@ export class MovieService {
 
   getRatedMovies= (type:string="desc", page:number = 1, genreId:number = 0): Observable<ApiMovies> => {
     const newDate = new Date();
-    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31& ${genreId!==0 && `with_genres=${genreId}&`}language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${genreId!==0 && `with_genres=${genreId}&`}language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`);
   };
 }

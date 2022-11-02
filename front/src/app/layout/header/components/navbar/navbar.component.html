@@ -29,8 +29,8 @@
     <div *ngIf="clickOnSeries && seriesGenres" class="navbar-categories">
         <ng-container *ngIf="seriesGenres && seriesGenres.length > 0">
             <div *ngFor="let genre of seriesGenres">
-                <a [routerLink]="'catalogs/series'+'/'+genre.name" [queryParams]="{id: genre.id}"
-                    routerLinkActive="active" (click)="closeCategories('series')">
+                <a [routerLink]="'catalogs/series'+'/'+genre.name" [queryParams]="{id: genre.id, name:genre.name}"
+                    (click)="closeCategories('series')">
                     <span class="navbar-categories__genre">
                         {{genre.name}}
                     </span>

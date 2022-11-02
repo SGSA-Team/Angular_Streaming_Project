@@ -56,9 +56,9 @@ export class CatalogsComponent implements OnInit {
       isSelected: false,
       title: "Series",
       filters: {
-        popularity: (page:number=1) =>  this.seriesService.getPopularSeries("desc", page),
-        note: (page:number=1) =>  this.seriesService.getRatedSeries("desc", page),
-        dateCreatdAt: (page:number=1) => this.seriesService.getLatestSeries("desc", page),
+        popularity: (page:number=1, genreId:number=0) =>  this.seriesService.getPopularSeries("desc", page, genreId),
+        note: (page:number=1, genreId:number=0) =>  this.seriesService.getRatedSeries("desc", page, genreId),
+        dateCreatdAt: (page:number=1, genreId:number=0) => this.seriesService.getLatestSeries("desc", page, genreId),
       }
     }
   }
@@ -68,6 +68,7 @@ export class CatalogsComponent implements OnInit {
   pages:PageI[]=[];
   genre:GenreI | undefined;
   isGenre=false;
+  defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
 
   constructor(  private route: ActivatedRoute,private router: Router,private movieService:MovieService, private seriesService:SeriesService) { 
         this.router.events.pipe(
@@ -132,7 +133,7 @@ export class CatalogsComponent implements OnInit {
       //total_pages
     });
     }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
-    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page).subscribe((data) => {
+    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page,genreId).subscribe((data) => {
       console.log("series data: ",data)
       this.series = data;
       this.pages.push({
@@ -190,5 +191,9 @@ export class CatalogsComponent implements OnInit {
     }else {
       this.fetchData({page});
     }
+  }
+
+  getCardImageBg(path: string){
+    return 'https://image.tmdb.org/t/p/original/'+path;
   }
 }
