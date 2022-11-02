@@ -196,4 +196,8 @@ export class CatalogsComponent implements OnInit {
   getCardImageBg(path: string){
     return 'https://image.tmdb.org/t/p/original/'+path;
   }
+
+  getRatingFormat(rating: number){
+    return Math.round(rating)
+  }
 }

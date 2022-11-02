@@ -1,11 +1,12 @@
 @import "./normalize.scss";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Heebo','Space Grotesk', sans-serif;
   }
 
 mat-dialog-container,

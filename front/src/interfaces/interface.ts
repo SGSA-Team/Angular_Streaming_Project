@@ -27,9 +27,30 @@ export interface ApiMovie {
   status:string;
   tagline: string;
 }
+
+export interface ApiSerie {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: any;
+  budget: number;
+  genres: Genre[];
+  homepage: string;
+  id: string;
+  overview: string;
+  original_title: string;
+  revenue: number;
+  first_air_date: string;
+  name: string;
+  video: string | boolean | null;
+  vote_average: number;
+  vote_count: number;
+  poster_path: string;
+  status:string;
+  tagline: string;
+}
 export interface ApiSeries {
   page: number;
-  results: ApiMovie[];
+  results: ApiSerie[];
   total_results: number;
   total_pages: number;
 }
