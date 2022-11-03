@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+  language = localStorage.getItem('lang');
   constructor() {}
 
   intercept(
@@ -18,6 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = environment.apiKey;
+
     let req = request;
     req = this.addToken(request, token);
     req = this.addLanguages(req);
@@ -30,7 +32,10 @@ export class TokenInterceptor implements HttpInterceptor {
 
   addLanguages(req: HttpRequest<unknown>) {
     return req.clone({
-      params: req.params.append('language', environment.defaultLanguage),
+      params: req.params.append(
+        'language',
+        this.language || environment.defaultLanguage
+      ),
     });
   }
 }
