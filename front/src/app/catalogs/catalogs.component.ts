@@ -104,12 +104,14 @@ export class CatalogsComponent implements OnInit {
     this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page,genreId).subscribe((data) => {
       this.movies = data;
       this.currentPage = data.page;
-      this.totalPages = data.total_pages;
+      // tested on the api -> receive error over pagination 500
+      this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
     });
     }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
     this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page,genreId).subscribe((data) => {
-      console.log("series data: ",data)
       this.series = data;
+      this.currentPage = data.page;
+      this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
     });
     }
   }
