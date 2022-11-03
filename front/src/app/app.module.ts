@@ -43,6 +43,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { PaginationComponent } from './catalogs/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NavbarComponent,
     LinksListComponent,
     GlobalSearchBarComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
