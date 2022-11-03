@@ -10,18 +10,10 @@ interface CatalogsFilters {
     popularity:boolean,
     note: boolean,
 }
-
 interface GenreI {
   id: number;
   name: string | null;
 }
-
-interface PageI{
-  page: number; 
-  value: string; 
-  isActive: boolean; 
-}
-
 interface fetchDataInterface{
   page?: number ;
   genreId?: number;
@@ -38,7 +30,6 @@ export class CatalogsComponent implements OnInit {
     note: false,
     dateCreatdAt:false,
   };
-
   movies: Partial<ApiMovies> = {};
   series: Partial<ApiSeries> = {};
   currentRoute:string=""
@@ -64,8 +55,8 @@ export class CatalogsComponent implements OnInit {
   }
   title=""
   filterOn:string = "popularity" as string
-  maxPages= 10;
-  pages:PageI[]=[];
+  currentPage:number = 1;
+  totalPages:number = 1;
   genre:GenreI | undefined;
   isGenre=false;
   defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
@@ -109,47 +100,16 @@ export class CatalogsComponent implements OnInit {
   }
 
   async fetchData({page=1, genreId=0}:fetchDataInterface={}){
-    this.pages = [];
     if(this.options.movies.isSelected && this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters]){
     this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page,genreId).subscribe((data) => {
       this.movies = data;
-       this.pages.push({
-          page: 1,
-          value: "1",
-          isActive: data.page === 1
-      })
-      for(let i = 1; i <= this.maxPages; i++){
-        if(i !==1){
-          this.pages.push({
-            page: i,
-            value: i === this.maxPages - 1 ? "..." : i.toString(),
-            isActive: i === data.page
-          })
-        }
-      }
-
-      console.log("this.pages: ",this.pages)
-      //page
-      //total_pages
+      this.currentPage = data.page;
+      this.totalPages = data.total_pages;
     });
     }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
     this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page,genreId).subscribe((data) => {
       console.log("series data: ",data)
       this.series = data;
-      this.pages.push({
-          page: 1,
-          value: "1",
-          isActive: data.page === 1
-      })
-      for(let i = 1; i <= this.maxPages; i++){
-        if(i !==1){
-          this.pages.push({
-            page: i,
-            value: i === this.maxPages - 1 ? "..." : i.toString(),
-            isActive: i === data.page
-          })
-        }
-      }
     });
     }
   }
@@ -184,13 +144,14 @@ export class CatalogsComponent implements OnInit {
     }
   }
 
-  async pageClick(page:number){
+  pageChange(page:number){
     console.log(page)
      if(this.genre && this.genre.id){
       this.fetchData({page, genreId: this.genre.id});
     }else {
       this.fetchData({page});
     }
+    return page;
   }
 
   getCardImageBg(path: string){
