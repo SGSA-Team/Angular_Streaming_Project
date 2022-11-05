@@ -53,7 +53,7 @@
         >
           <span class="num absolute font-semibold z-20">{{ index + 1 }} </span>
           <article class="movie popular">
-            <div (click)="openInfo(movie)" class="absolute info">
+            <div (click)="openInfo(movie, 'movie')" class="absolute info">
               <mat-icon class="material-icons-outlined hover:text-white">
                 info
               </mat-icon>
@@ -100,7 +100,7 @@
         >
           <span class="num absolute font-semibold z-20">{{ index + 1 }}</span>
           <article class="movie popular">
-            <div (click)="openInfo(movie)" class="absolute info">
+            <div (click)="openInfo(movie, 'serie')" class="absolute info">
               <mat-icon class="material-icons-outlined hover:text-white">
                 info
               </mat-icon>
@@ -146,7 +146,7 @@
           class="movie relative"
         >
           <article class="movie popular">
-            <div (click)="openInfo(movie)" class="absolute info">
+            <div (click)="openInfo(movie, 'movie')" class="absolute info">
               <mat-icon class="material-icons-outlined hover:text-white">
                 info
               </mat-icon>
@@ -192,7 +192,7 @@
           class="movie relative"
         >
           <article class="movie popular new-add">
-            <div (click)="openInfo(movie)" class="absolute info">
+            <div (click)="openInfo(movie, 'serie')" class="absolute info">
               <mat-icon class="material-icons-outlined hover:text-white">
                 info
               </mat-icon>

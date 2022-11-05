@@ -174,9 +174,58 @@
           </article>
         </div>
       </div>
+      <div class="mt-16">
+        <h2
+          class="
+            text-3xl
+            uppercase
+            tracking-wider
+            font-extrabold
+            text-red-600
+            mb-8
+          "
+        >
+          Têtes d'affiche
+        </h2>
+        <div class="people-list popular">
+          <article
+            *ngFor="let people of peoples"
+            class="gap-2.5 people popular flex flex-col relative"
+          >
+            <div
+              *ngIf="people.profile_path; else imgNotFound"
+              class="overflow-hidden"
+            >
+              <div class="gradiant-filter peer cursor-pointer"></div>
+              <img
+                class="
+                  peer-hover:scale-110
+                  transition-all
+                  duration-200
+                  ease-in-out
+                "
+                src="{{ apiImageUrl + people.profile_path }}"
+                alt="img people card"
+              />
+            </div>
+
+            <div>{{ people.name }}</div>
+          </article>
+        </div>
+      </div>
     </main>
   </section>
 </div>
+
+<ng-template #imgNotFound>
+  <img
+    class="peer-hover:scale-110 object-cover h-full"
+    src="https://dummyimage.com/220x249/fafafa/000000.png&text=Image+not+found
+
+    "
+    alt="img movie card"
+  />
+</ng-template>
 
 <ng-template #videoNotFound
   >Aucune bande annonce disponible pour ce média

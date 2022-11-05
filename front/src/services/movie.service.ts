@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { compileNgModule } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, take, takeUntil } from 'rxjs';
+import { filter, map, Observable, of, take, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   ApiMovie,
   ApiCategories,
-  Genre,
   ApiList,
-  //ApiMovieList,
   ApiMovies,
   ApiVideos,
+  ApiPeople,
+  ApiCredit,
 } from 'src/interfaces/interface';
 @Injectable({
   providedIn: 'root',
@@ -106,13 +105,24 @@ export class MovieService {
     );
   };
 
-  getVideo  = (id: number): Observable<ApiVideos> => {
-    return this.http.get<ApiVideos>(
-      `${
-        this.apiBaseUrl
-      }/movie/${id}/videos`);
-  }
-  
+  getPeoples = (id: string) => {
+    return this.http
+      .get<ApiCredit>(`${this.apiBaseUrl}/movie/${id}/credits`)
+      .pipe(
+        map((peoples) => {
+          return peoples.cast
+            .filter((people: ApiPeople) => {
+              return people.known_for_department == 'Acting';
+            })
+            .slice(0, 20);
+        })
+      );
+  };
+
+  getVideo = (id: number): Observable<ApiVideos> => {
+    return this.http.get<ApiVideos>(`${this.apiBaseUrl}/movie/${id}/videos`);
+  };
+
   getMoviesBySearchQuery = (query: string): Observable<ApiMovies> => {
     return this.http.get<ApiMovies>(
       `${this.apiBaseUrl}/search/movie?query=${query}`

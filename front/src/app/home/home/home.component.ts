@@ -6,7 +6,10 @@ import {
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { take, forkJoin } from 'rxjs';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import {
+  ModalComponent,
+  MediaType,
+} from 'src/app/components/modal/modal.component';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
@@ -51,7 +54,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  openInfo = (movie: ApiMovie | ApiSerie) => {
+  openInfo = (movie: ApiMovie | ApiSerie, type: MediaType) => {
     this.dialog.open(ModalComponent, {
       minWidth: '50vw',
       maxWidth: '50vw',
@@ -59,7 +62,7 @@ export class HomeComponent implements OnInit {
       maxHeight: '75vh',
       data: {
         data: movie,
-        type: 'movie',
+        type: type,
       },
     });
   };
