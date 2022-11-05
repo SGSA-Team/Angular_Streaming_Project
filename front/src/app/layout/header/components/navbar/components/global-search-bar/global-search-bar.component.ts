@@ -38,9 +38,9 @@ export class GlobalSearchBarComponent implements OnInit {
     this.focusOnSearch = !this.focusOnSearch;
   }
   async searchData (){
-
     this.loadingData = true; 
-    
+    this.data = [];
+    this.displayedData = [];
     this.movieService.getMoviesBySearchQuery(this.value).subscribe((data)=> {
       if(data && data.results && data.results.length > 0){
         data.results.forEach(el => {
@@ -111,6 +111,13 @@ export class GlobalSearchBarComponent implements OnInit {
         //
         break;
       }
+    }
+  }
+
+  trackInputChange(){
+    if(this.value === ""){
+      this.data = [];
+      this.displayedData = [];
     }
   }
 
