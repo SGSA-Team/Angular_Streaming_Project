@@ -1,6 +1,9 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ApiMovie, ApiSerie, ApiVideo } from 'src/interfaces/interface';
+import { MovieService } from 'src/services/movie.service';
+import { SeriesService } from 'src/services/series.service';
 
 @Component({
   selector: 'app-modal',
@@ -9,12 +12,50 @@ import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 })
 export class ModalComponent {
   @Input() currentMovie: ApiMovie | ApiSerie | null = null;
+  ytb_key:string | null = null;
+  ytb_link: SafeResourceUrl | null = null;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ApiMovie | ApiSerie,
-    public dialogRef: MatDialogRef<ModalComponent>
+    @Inject(MAT_DIALOG_DATA) public data: {
+      data: ApiMovie | ApiSerie,
+      type: string
+    },
+    @Inject(MAT_DIALOG_DATA) public type: string,
+    public dialogRef: MatDialogRef<ModalComponent>,
+    private movieService:MovieService, 
+    private seriesService:SeriesService,
+    public sanitizer: DomSanitizer
+
   ) {
-    this.currentMovie = data;
+    this.currentMovie = data.data;
+    this.fetchData(this.currentMovie.id, data.type)
   }
 
+  getYoutubeLink(key:string){
+    return `https://www.youtube.com/embed/${key}?playlist=${key}&loop=1`
+  }
+
+  async fetchData(id:number, type: string){
+    let ref:MovieService | SeriesService= this.movieService;
+    switch(type.toLowerCase()){
+      case "movie": {
+        ref = this.movieService;
+        break;
+      }
+      case "serie": {
+        ref = this.seriesService;
+        break;
+      }
+      default: {
+        ref = this.movieService;
+      }
+    }
+    ref.getVideo(id).subscribe((data)=> {
+      const ytb_link = data.results.filter((f:ApiVideo) => f.site.toLowerCase() === "youtube")[0]
+      if(ytb_link && ytb_link.key){
+        this.ytb_key = ytb_link.key;
+        this.ytb_link = this.sanitizer.bypassSecurityTrustResourceUrl(this.getYoutubeLink(ytb_link.key))
+      }
+    })
+  }
 }

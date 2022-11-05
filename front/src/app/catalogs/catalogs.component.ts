@@ -169,13 +169,16 @@ export class CatalogsComponent implements OnInit {
     return Math.round(rating)
   }
 
-  openInfo = (movie: ApiMovie | ApiSerie) => {
+  openInfo = (movie: ApiMovie | ApiSerie, type:string) => {
     this.dialog.open(ModalComponent, {
       minWidth: '50vw',
       maxWidth: '50vw',
       minHeight: '75vh',
       maxHeight: '75vh',
-      data: movie,
+      data: {
+        data: movie,
+        type: type
+      }
     });
   };
 }

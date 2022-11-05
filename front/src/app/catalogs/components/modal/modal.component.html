@@ -1,7 +1,6 @@
 <div class="dialog">
-    <article>
-        <!--Update this with the link of the movie or serie-->
-        <iframe width="100%" height="300px" src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY&loop=1">
+    <article *ngIf="ytb_key && ytb_link">
+        <iframe width="100%" height="300px" [src]="ytb_link">
         </iframe>
     </article>
     <div *ngIf="currentMovie && dialogRef" class="dialog-content">

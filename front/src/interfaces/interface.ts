@@ -14,7 +14,7 @@ export interface ApiMovie {
   budget: number;
   genres: Genre[];
   homepage: string;
-  id: string;
+  id: number;
   overview: string;
   original_title: string;
   revenue: number;
@@ -27,7 +27,6 @@ export interface ApiMovie {
   status:string;
   tagline: string;
 }
-
 export interface ApiSerie {
   adult: boolean;
   backdrop_path: string;
@@ -35,7 +34,7 @@ export interface ApiSerie {
   budget: number;
   genres: Genre[];
   homepage: string;
-  id: string;
+  id: number;
   overview: string;
   original_title: string;
   revenue: number;
@@ -77,7 +76,7 @@ export interface ApiSerie {
   belongs_to_collection: any;
   genres: Genre[];
   homepage: string;
-  id: string;
+  id: number;
   media_type: string;
   overview: string;
   original_title: string;
@@ -106,4 +105,21 @@ export interface ApiList {
 export interface ApiDates {
   maximum: string;
   minimum: string;
+}
+
+export interface ApiVideo {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+}
+export interface ApiVideos {
+  id: number;
+  results: ApiVideo[] | any;
 }
