@@ -14,12 +14,14 @@ export class ModalComponent {
   @Input() currentMovie: ApiMovie | ApiSerie | null = null;
   ytb_key: string | null = null;
   ytb_link: string | null = null;
+  detailPageLink: string = ""
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
       data: ApiMovie | ApiSerie;
       type: MediaType;
+      link: string;
     },
     @Inject(MAT_DIALOG_DATA) public type: string,
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -27,6 +29,7 @@ export class ModalComponent {
     private seriesService: SeriesService,
     public sanitizer: DomSanitizer
   ) {
+    this.detailPageLink = data.link;
     this.currentMovie = data.data;
     this.fetchData(this.currentMovie.id, data.type);
   }

@@ -1,11 +1,11 @@
-import { Component, OnInit,Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApiMovie, ApiMovies, ApiSerie, ApiSeries } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 interface CatalogsFilters {
     dateCreatdAt: boolean,
@@ -39,6 +39,7 @@ export class CatalogsComponent implements OnInit {
     movies :{
       isSelected: false,
       title: "Films",
+      type: "movie",
       filters: {
         popularity: (page:number=1, genreId:number=0) => this.movieService.getPopularMovies("desc", page, genreId),
         note: ( page:number=1, genreId:number=0) => this.movieService.getRatedMovies("desc", page, genreId),
@@ -48,6 +49,7 @@ export class CatalogsComponent implements OnInit {
     series:{
       isSelected: false,
       title: "Series",
+      type: "serie",
       filters: {
         popularity: (page:number=1, genreId:number=0) =>  this.seriesService.getPopularSeries("desc", page, genreId),
         note: (page:number=1, genreId:number=0) =>  this.seriesService.getRatedSeries("desc", page, genreId),
@@ -56,6 +58,7 @@ export class CatalogsComponent implements OnInit {
     }
   }
   title=""
+  type=""
   filterOn:string = "popularity" as string
   currentPage:number = 1;
   totalPages:number = 1;
@@ -85,6 +88,7 @@ export class CatalogsComponent implements OnInit {
           Object.entries(this.options).find(([key, value]) => {
             if (value.isSelected) {
               this.title = value.title;
+              this.type = value.type;
               return true;
             }
             return false;

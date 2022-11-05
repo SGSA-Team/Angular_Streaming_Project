@@ -7,9 +7,9 @@ import {
 import { Router } from '@angular/router';
 import { take, forkJoin } from 'rxjs';
 import {
-  MediaType,
   ModalComponent,
-} from 'src/app/catalogs/components/modal/modal.component';
+  MediaType,
+} from 'src/app/components/modal/modal.component';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
@@ -66,20 +66,4 @@ export class HomeComponent implements OnInit {
       },
     });
   };
-}
-
-@Component({
-  selector: 'dialog-info',
-  templateUrl: './dialog-info.html',
-  styleUrls: ['./home.component.scss'],
-})
-export class DialogInfoComponent {
-  currentMovie: ApiMovie | ApiSerie | null = null;
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ApiMovie | ApiSerie,
-    public dialogRef: MatDialogRef<DialogInfoComponent>
-  ) {
-    this.currentMovie = data;
-    console.log(data);
-  }
 }
