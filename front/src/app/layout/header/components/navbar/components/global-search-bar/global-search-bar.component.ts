@@ -124,5 +124,4 @@ export class GlobalSearchBarComponent implements OnInit {
   resetValue(){
     this.value= ""
   }
-
 }
