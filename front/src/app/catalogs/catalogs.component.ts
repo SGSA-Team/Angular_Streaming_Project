@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ApiMovies, ApiSeries } from 'src/interfaces/interface';
+import { ApiMovie, ApiMovies, ApiSerie, ApiSeries } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
+import { ModalComponent } from './components/modal/modal.component';
 
 interface CatalogsFilters {
     dateCreatdAt: boolean,
@@ -61,7 +63,10 @@ export class CatalogsComponent implements OnInit {
   isGenre=false;
   defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
 
-  constructor(  private route: ActivatedRoute,private router: Router,private movieService:MovieService, private seriesService:SeriesService) { 
+  constructor(
+    private route: ActivatedRoute,private router: Router,
+    private movieService:MovieService, private seriesService:SeriesService,
+    private dialog: MatDialog) { 
         this.router.events.pipe(
           filter((event:any) => event instanceof NavigationEnd)
         ).subscribe((event: any) => {
@@ -163,4 +168,15 @@ export class CatalogsComponent implements OnInit {
   getRatingFormat(rating: number){
     return Math.round(rating)
   }
+
+  openInfo = (movie: ApiMovie | ApiSerie) => {
+    this.dialog.open(ModalComponent, {
+      minWidth: '50vw',
+      maxWidth: '50vw',
+      minHeight: '75vh',
+      maxHeight: '75vh',
+      data: movie,
+    });
+  };
 }
+

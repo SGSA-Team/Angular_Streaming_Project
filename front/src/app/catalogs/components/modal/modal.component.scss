@@ -1,0 +1,34 @@
+.dialog{
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.dialog-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__link{
+        color:red;
+        font-weight: 900;
+        font-size: 20px;
+        border-color: transparent;
+    }
+    &__link:hover{
+       text-decoration: underline;
+    }
+
+    &__title{
+        color: black;
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    &__description{
+        color: #151618;
+        font-weight: 700;
+        font-size: 14px;
+    }
+}
