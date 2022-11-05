@@ -18,6 +18,10 @@ export class SeriesService {
   public apiBaseUrl: string = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
+  getSerieFromId = (id: string): Observable<ApiSerie> => {
+    return this.http.get<ApiSerie>(`${this.apiBaseUrl}/tv/${id}`);
+  };
+
   getSeriesCategories(): Observable<ApiCategories> {
     return this.http.get<ApiCategories>(`${this.apiBaseUrl}/genre/tv/list`);
   }
@@ -28,6 +32,10 @@ export class SeriesService {
         return movies.results.slice(0, 15);
       })
     );
+  };
+
+  getVideos = (id: string) => {
+    return this.http.get(`${this.apiBaseUrl}/tv/${id}/videos`);
   };
 
   getLatestSeries = (

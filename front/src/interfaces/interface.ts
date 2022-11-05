@@ -4,8 +4,8 @@ export interface ApiCategories {
 export interface ApiMovies {
   page: number;
   results: ApiMovie[];
-  total_pages:number;
-  total_results:number;
+  total_pages: number;
+  total_results: number;
 }
 export interface ApiMovie {
   adult: boolean;
@@ -17,18 +17,21 @@ export interface ApiMovie {
   id: number;
   overview: string;
   original_title: string;
+  original_name: string;
   revenue: number;
+  first_air_date: string;
   release_date: string;
   title: string;
   video: string | boolean | null;
   vote_average: number;
   vote_count: number;
   poster_path: string;
-  status:string;
+  status: string;
   tagline: string;
 }
 export interface ApiSerie {
   adult: boolean;
+  release_date: string;
   backdrop_path: string;
   belongs_to_collection: any;
   budget: number;
@@ -37,6 +40,8 @@ export interface ApiSerie {
   id: number;
   overview: string;
   original_title: string;
+  original_name: string;
+  title: string;
   revenue: number;
   first_air_date: string;
   name: string;
@@ -44,7 +49,7 @@ export interface ApiSerie {
   vote_average: number;
   vote_count: number;
   poster_path: string;
-  status:string;
+  status: string;
   tagline: string;
 }
 export interface ApiSeries {
@@ -58,7 +63,7 @@ export interface ApiSeriesResult {
   poster_path: string | null;
   popularity: number;
   id: number;
-  backdrop_path:string | null;
+  backdrop_path: string | null;
   vote_average: number;
   overview: string;
   first_air_date: string;

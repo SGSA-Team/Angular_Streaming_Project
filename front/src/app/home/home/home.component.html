@@ -29,7 +29,7 @@
         <article
           *ngFor="let movie of nowPlayingMovies"
           class="movie hover:scale-105"
-          routerLink="{{ 'detail/' + movie?.id }}"
+          routerLink="{{ 'detail/movie/' + movie?.id }}"
         >
           <img
             src="{{ posterPath + movie.poster_path }}"
@@ -59,7 +59,7 @@
               </mat-icon>
             </div>
             <div
-              routerLink="{{ 'detail/' + movie?.id }}"
+              routerLink="{{ 'detail/movie/' + movie?.id }}"
               class="gradiant-filter peer"
             ></div>
             <img
@@ -106,7 +106,7 @@
               </mat-icon>
             </div>
             <div
-              routerLink="{{ 'detail/' + movie?.id }}"
+              routerLink="{{ 'detail/serie/' + movie?.id }}"
               class="gradiant-filter peer"
             ></div>
             <img
@@ -152,7 +152,7 @@
               </mat-icon>
             </div>
             <div
-              routerLink="{{ 'detail/' + movie?.id }}"
+              routerLink="{{ 'detail/movie/' + movie?.id }}"
               class="gradiant-filter peer"
             ></div>
             <img
@@ -198,7 +198,7 @@
               </mat-icon>
             </div>
             <div
-              routerLink="{{ 'detail/' + movie?.id }}"
+              routerLink="{{ 'detail/serie/' + movie?.id }}"
               class="gradiant-filter peer"
             ></div>
             <img

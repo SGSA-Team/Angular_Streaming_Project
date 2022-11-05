@@ -47,6 +47,8 @@ import { PaginationComponent } from './catalogs/components/pagination/pagination
 import { ModalComponent } from './catalogs/components/modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { DetailsComponent } from './details/details.component';
+import { SafePipe } from './pipe/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { FormsModule } from '@angular/forms';
     LinksListComponent,
     GlobalSearchBarComponent,
     PaginationComponent,
+    DetailsComponent,
+    SafePipe,
   ],
   imports: [
     FormsModule,
