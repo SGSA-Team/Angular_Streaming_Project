@@ -45,6 +45,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginationComponent } from './catalogs/components/pagination/pagination.component';
 import { ModalComponent } from './catalogs/components/modal/modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -60,9 +62,9 @@ import { ModalComponent } from './catalogs/components/modal/modal.component';
     LinksListComponent,
     GlobalSearchBarComponent,
     PaginationComponent,
-    ModalComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -98,6 +100,7 @@ import { ModalComponent } from './catalogs/components/modal/modal.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    FontAwesomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: TokenInterceptor },

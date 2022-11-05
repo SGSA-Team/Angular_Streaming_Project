@@ -106,7 +106,12 @@ export class MovieService {
     return this.http.get<ApiVideos>(
       `${
         this.apiBaseUrl
-      }/movie/${id}/videos`
+      }/movie/${id}/videos`);
+  }
+  
+  getMoviesBySearchQuery = (query: string): Observable<ApiMovies> => {
+    return this.http.get<ApiMovies>(
+      `${this.apiBaseUrl}/search/movie?query=${query}`
     );
   };
 }
