@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { DateHelper } from '../helpers/dateHelper';
+import { DateHelper } from '../utils/utils';
 import { DialogInfoComponent } from '../home/home/home.component';
 
 @Component({

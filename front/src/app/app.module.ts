@@ -43,13 +43,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { PaginationComponent } from './catalogs/components/pagination/pagination.component';
-import { ModalComponent } from './catalogs/components/modal/modal.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { SafePipe } from './pipe/safe.pipe';
-import { CustomCardComponent } from './catalogs/components/custom-card/custom-card.component';
+import { CustomCardComponent } from './components/custom-card/custom-card.component';
 
 @NgModule({
   declarations: [

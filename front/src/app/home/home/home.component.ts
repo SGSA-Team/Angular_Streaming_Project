@@ -6,7 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { take, forkJoin } from 'rxjs';
-import { ModalComponent } from 'src/app/catalogs/components/modal/modal.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';

@@ -1,11 +1,11 @@
-import { Component, OnInit,Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { ApiMovie, ApiMovies, ApiSerie, ApiSeries } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 interface CatalogsFilters {
     dateCreatdAt: boolean,
