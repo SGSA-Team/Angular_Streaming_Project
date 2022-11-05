@@ -21,83 +21,17 @@
         <!--Duplicate-->
         <ng-container *ngIf="options.movies.isSelected && movies && movies.results &&  movies.results.length > 0">
             <div *ngFor="let movie of movies.results ">
-                <div class="catalogs-videos-card">
-                    <div class="catalogs-videos-card__image"
-                        style="background-image: url('{{movie.poster_path ? getCardImageBg(movie.poster_path) : defaultCardImage}}')">
-                    </div>
-                    <div class="catalogs-videos-card__decorations">
-                        <div class="catalogs-videos-card__decorations-top">
-                            <a style="height: 100%;" [routerLink]="'/detail/' + type + '/' + movie.id">
-                            </a>
-                            <div class="catalogs-videos-card__decorations-info">
-                                <span class="catalogs-videos-card__decorations-info-icon"
-                                    (click)="openInfo(movie,'movie')">
-                                    <p>i</p>
-                                </span>
-                            </div>
-                        </div>
-                        <a [routerLink]="'/detail/' + type + '/' + movie.id">
-                            <div class="catalogs-videos-card__decorations-bottom">
-                                <div class="flex gap-1">
-                                    <span class="catalogs-videos-card__decorations-type">{{title}}</span>
-                                    <span
-                                        class="catalogs-videos-card__decorations-year">{{movie.release_date.split("-")[0]}}</span>
-                                </div>
-                                <span class="catalogs-videos-card__decorations-title">{{movie.title}}</span>
-                                <span class="catalogs-videos-card__decorations-rating">
-                                    <span class="flex items-center">{{getRatingFormat(movie.vote_average)}}</span>
-                                    <span class="material-icons text-red-600 text-lg">star</span>
-                                </span>
-                                <span class="catalogs-videos-card__decorations-link">
-                                    <span
-                                        class="catalogs-videos-card__decorations-link-icon material-icons text-red-600 text-2xl">play_circle_outline</span>
-                                    <span class="catalogs-videos-card__decorations-link-title">Regarder</span>
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <app-custom-card [img]="movie.poster_path" [type]="type" [release_date]="movie.release_date"
+                    [title]="movie.title" [displayeType]="title" [element]="movie">
+                </app-custom-card>
             </div>
         </ng-container>
         <!--Duplicate-->
         <ng-container *ngIf="options.series.isSelected && series && series.results &&  series.results.length > 0">
             <div *ngFor="let serie of series.results ">
-                <div class="catalogs-videos-card">
-                    <div class="catalogs-videos-card__image"
-                        style="background-image: url('{{serie.backdrop_path ? getCardImageBg(serie.backdrop_path) : defaultCardImage}}')">
-                    </div>
-                    <div class="catalogs-videos-card__decorations">
-                        <div class="catalogs-videos-card__decorations-top">
-                            <a style="height: 100%;" [routerLink]="'/detail/' + type + '/' + serie.id">
-                            </a>
-                            <div class="catalogs-videos-card__decorations-info">
-                                <span class="catalogs-videos-card__decorations-info-icon"
-                                    (click)="openInfo(serie, 'serie')">
-                                    <p>i</p>
-                                </span>
-                            </div>
-                        </div>
-                        <a [routerLink]="'/detail/' + type + '/' + serie.id">
-                            <div class="catalogs-videos-card__decorations-bottom">
-                                <div class="flex gap-1">
-                                    <span class="catalogs-videos-card__decorations-type">{{title}}</span>
-                                    <span
-                                        class="catalogs-videos-card__decorations-year">{{serie.first_air_date.split("-")[0]}}</span>
-                                </div>
-                                <span class="catalogs-videos-card__decorations-title">{{serie.name}}</span>
-                                <span class="catalogs-videos-card__decorations-rating">
-                                    <span class="flex items-center">{{getRatingFormat(serie.vote_average)}}</span>
-                                    <span class="material-icons text-red-600 text-lg">star</span>
-                                </span>
-                                <span class="catalogs-videos-card__decorations-link">
-                                    <span
-                                        class="catalogs-videos-card__decorations-link-icon material-icons text-red-600 text-2xl">play_circle_outline</span>
-                                    <span class="catalogs-videos-card__decorations-link-title">Regarder</span>
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <app-custom-card [img]="serie.backdrop_path" [type]="type" [release_date]="serie.first_air_date"
+                    [title]="serie.name" [displayeType]="title" [element]="serie">
+                </app-custom-card>
             </div>
         </ng-container>
     </div>

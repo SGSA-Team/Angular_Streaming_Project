@@ -49,6 +49,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { SafePipe } from './pipe/safe.pipe';
+import { CustomCardComponent } from './catalogs/components/custom-card/custom-card.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { SafePipe } from './pipe/safe.pipe';
     PaginationComponent,
     DetailsComponent,
     SafePipe,
+    CustomCardComponent,
   ],
   imports: [
     FormsModule,
