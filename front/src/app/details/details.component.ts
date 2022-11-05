@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
+import { ModalComponent } from '../catalogs/components/modal/modal.component';
 import { DateHelper } from '../helpers/dateHelper';
 import { DialogInfoComponent } from '../home/home/home.component';
 
@@ -90,10 +91,15 @@ export class DetailsComponent implements OnInit {
   };
 
   openMoreDetails = (media: ApiMovie | ApiSerie) => {
-    this.dialog.open(DialogInfoComponent, {
-      minWidth: '80%',
-      minHeight: '800px',
-      data: media,
+    this.dialog.open(ModalComponent, {
+      minWidth: '50vw',
+      maxWidth: '50vw',
+      minHeight: '75vh',
+      maxHeight: '75vh',
+      data: {
+        data: this.media,
+        type: this.mediaType,
+      },
     });
   };
 

@@ -62,4 +62,4 @@ export class ModalComponent {
   }
 }
 
-export type MediaType = 'movie | serie';
+export type MediaType = 'movie' | 'serie';
