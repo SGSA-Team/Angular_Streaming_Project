@@ -128,3 +128,23 @@ export interface ApiVideos {
   id: number;
   results: ApiVideo[] | any;
 }
+
+export interface ApiPeople {
+  adult: boolean;
+  character: string;
+  credit_id: number;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  order: number;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+}
+
+export interface ApiCredit {
+  crew: any;
+  cast: ApiPeople[];
+  id: number;
+}

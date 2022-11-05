@@ -20,6 +20,8 @@ export class DetailsComponent implements OnInit {
   posterPath: string = environment.apiImageUrl;
   currentVideoUrl: string = '';
   media?: ApiMovie | ApiSerie;
+  apiImageUrl: string = environment.apiImageUrl;
+  peoples: any;
   mediaType: string = '';
   video: any;
   note: number = 0;
@@ -34,6 +36,8 @@ export class DetailsComponent implements OnInit {
 
     let observer: Observable<ApiMovie | ApiSerie>;
     let videoObservser: Observable<any>;
+    let peopleObsever: Observable<any>;
+
     this.route.url.subscribe((url) => {
       const id = url[2].path;
       this.mediaType = url[1].path;
@@ -41,10 +45,11 @@ export class DetailsComponent implements OnInit {
         case 'serie': {
           observer = this.serieService.getSerieFromId(id);
           videoObservser = this.serieService.getVideos(id);
-
+          peopleObsever = this.serieService.getPeoples(id);
           break;
         }
         case 'movie': {
+          peopleObsever = this.movieService.getPeoples(id);
           videoObservser = this.movieService.getVideos(id);
           observer = this.movieService.getMovieFromId(id);
           break;
@@ -53,17 +58,18 @@ export class DetailsComponent implements OnInit {
           new Error('pas bon');
         }
       }
-      forkJoin([observer, videoObservser]).subscribe(([media, videos]) => {
-        console.log(media);
-        this.media = media;
-        this.video = videos.results.find((v: any) => {
-          return v.site === 'YouTube' && v?.key;
-        });
-        this.note = Math.round(media.vote_average / 2);
-        console.log(this.note);
-
-        this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
-      });
+      forkJoin([observer, videoObservser, peopleObsever]).subscribe(
+        ([media, videos, peoples]) => {
+          console.log(media, peoples);
+          this.media = media;
+          this.peoples = peoples;
+          this.video = videos.results.find((v: any) => {
+            return v.site === 'YouTube' && v?.key;
+          });
+          this.note = Math.round(media.vote_average / 2);
+          this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
+        }
+      );
     });
   }
 
@@ -97,7 +103,7 @@ export class DetailsComponent implements OnInit {
       maxHeight: '75vh',
       data: {
         data: media,
-        type: this.mediaType
+        type: this.mediaType,
       },
     });
   };
