@@ -8,6 +8,7 @@ import {
   ApiMovie,
   ApiSerie,
   ApiSeries,
+  ApiVideos,
 } from 'src/interfaces/interface';
 
 @Injectable({
@@ -68,6 +69,14 @@ export class SeriesService {
       }/discover/tv?sort_by=vote_average.${type}&page=${page}&${
         genreId !== 0 && `with_genres=${genreId}&`
       }include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`
+    );
+  };
+
+  getVideo  = (id: number): Observable<ApiVideos> => {
+    return this.http.get<ApiVideos>(
+      `${
+        this.apiBaseUrl
+      }/tv/${id}/videos`
     );
   };
 }

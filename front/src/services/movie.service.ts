@@ -10,6 +10,7 @@ import {
   ApiList,
   //ApiMovieList,
   ApiMovies,
+  ApiVideos,
 } from 'src/interfaces/interface';
 @Injectable({
   providedIn: 'root',
@@ -98,6 +99,14 @@ export class MovieService {
       }/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${
         genreId !== 0 && `with_genres=${genreId}&`
       }language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`
+    );
+  };
+
+  getVideo  = (id: number): Observable<ApiVideos> => {
+    return this.http.get<ApiVideos>(
+      `${
+        this.apiBaseUrl
+      }/movie/${id}/videos`
     );
   };
 }

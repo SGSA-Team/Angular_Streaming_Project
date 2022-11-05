@@ -44,6 +44,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginationComponent } from './catalogs/components/pagination/pagination.component';
+import { ModalComponent } from './catalogs/components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -54,10 +55,12 @@ import { PaginationComponent } from './catalogs/components/pagination/pagination
     PagenotfoundComponent,
     CatalogsComponent,
     DialogInfoComponent,
+    ModalComponent,
     NavbarComponent,
     LinksListComponent,
     GlobalSearchBarComponent,
     PaginationComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
