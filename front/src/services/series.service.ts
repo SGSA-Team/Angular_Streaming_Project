@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { filter, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   ApiCategories,
+  ApiCredit,
   ApiList,
   ApiMovie,
+  ApiPeople,
   ApiSerie,
   ApiSeries,
   ApiVideos,
@@ -36,6 +38,19 @@ export class SeriesService {
 
   getVideos = (id: string) => {
     return this.http.get(`${this.apiBaseUrl}/tv/${id}/videos`);
+  };
+
+  getPeoples = (id: string) => {
+    return this.http.get<ApiCredit>(`${this.apiBaseUrl}/tv/${id}/credits`).pipe(
+      map((peoples) => {
+        console.log(peoples);
+        return peoples.cast
+          .filter((people: ApiPeople) => {
+            return people.known_for_department == 'Acting';
+          })
+          .slice(0, 20);
+      })
+    );
   };
 
   getLatestSeries = (
@@ -80,13 +95,10 @@ export class SeriesService {
     );
   };
 
-  getVideo  = (id: number): Observable<ApiVideos> => {
-    return this.http.get<ApiVideos>(
-      `${
-        this.apiBaseUrl
-      }/tv/${id}/videos`);
-  }
-  
+  getVideo = (id: number): Observable<ApiVideos> => {
+    return this.http.get<ApiVideos>(`${this.apiBaseUrl}/tv/${id}/videos`);
+  };
+
   getSeriesBySearchQuery = (query: string): Observable<ApiSeries> => {
     return this.http.get<ApiSeries>(
       `${this.apiBaseUrl}/search/tv?query=${query}`
