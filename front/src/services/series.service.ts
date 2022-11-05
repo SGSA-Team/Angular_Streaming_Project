@@ -76,7 +76,12 @@ export class SeriesService {
     return this.http.get<ApiVideos>(
       `${
         this.apiBaseUrl
-      }/tv/${id}/videos`
+      }/tv/${id}/videos`);
+  }
+  
+  getSeriesBySearchQuery = (query: string): Observable<ApiSeries> => {
+    return this.http.get<ApiSeries>(
+      `${this.apiBaseUrl}/search/tv?query=${query}`
     );
   };
 }
