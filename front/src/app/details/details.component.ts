@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { DateHelper } from '../utils/utils';
-import { ModalComponent } from '../components/modal/modal.component';
+import { DateHelper } from 'src/app/utils/utils';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 @Component({
   selector: 'app-details',
