@@ -66,7 +66,7 @@ export class DetailsComponent implements OnInit {
           this.video = videos.results.find((v: any) => {
             return v.site === 'YouTube' && v?.key;
           });
-          this.note = Math.round(media.vote_average / 2);
+          this.note = Math.ceil(media.vote_average / 2);
           this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
         }
       );
