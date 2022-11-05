@@ -21,16 +21,18 @@
         </div>
         <div *ngIf="data && data.length > 0" class="search-data-results">
             <div *ngFor="let data of displayedData">
-                <div class="search-data-results__cards">
-                    <div class="search-data-results__img-container">
-                        <img class="search-data-results__img"
-                            [src]="data.img ? getCardImageBg(data.img) : defaultCardImage">
+                <a [routerLink]="'detail/' + data.type + '/' + data.id">
+                    <div class="search-data-results__cards">
+                        <div class="search-data-results__img-container">
+                            <img class="search-data-results__img"
+                                [src]="data.img ? getCardImageBg(data.img) : defaultCardImage">
+                        </div>
+                        <div class="search-data-results__description">
+                            <h6 class="search-data-results__title">{{data.title}}</h6>
+                            <button class="search-data-results__type">{{data.displayedType}}</button>
+                        </div>
                     </div>
-                    <div class="search-data-results__description">
-                        <h6 class="search-data-results__title">{{data.title}}</h6>
-                        <button class="search-data-results__type">{{data.type}}</button>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
