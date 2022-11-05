@@ -1,61 +1,220 @@
-<p>details works!</p>
-<p>details works!</p>
+<div *ngIf="media">
+  <section id="header">
+    <main id="main-content">
+      <div class="demo-wrap">
+        <img
+          class="demo-bg"
+          src="{{ posterPath + media.poster_path }}"
+          alt=""
+        />
+      </div>
+      <div class="container mx-auto my-0">
+        <div class="bg-content p-6 relative">
+          <p class="text-xl mb-3 uppercase font-bold flex items-center gap-2.5">
+            <img
+              src="https://empire-streaming.co/build/images/Logo-E.ad4141e1.png"
+              alt=""
+              width="30"
+              height="30"
+            />
+            {{ mediaType }}
+          </p>
+          <h1 class="text-5xl font-bold mb-2">
+            {{ media.original_name || media.title }}
+          </h1>
+          <div class="flex gap-3">
+            <div class="flex items-start mb-5">
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7 text-yellow-400"
+                fill="#e50a13"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>First star</title>
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7 text-yellow-400"
+                fill="#e50a13"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Second star</title>
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7 text-yellow-400"
+                fill="#e50a13"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Third star</title>
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7 text-yellow-400"
+                fill="#e50a13"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Fourth star</title>
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <svg
+                aria-hidden="true"
+                class="w-7 h-7 text-gray-300 dark:text-gray-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Fifth star</title>
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+            </div>
+            <p class="ml-2 text-lg font-medium text-white">
+              {{ (media.first_air_date || media.release_date).split("-")[0] }}
+            </p>
+          </div>
 
+          <div class="mb-5">
+            <span
+              class="
+                p-2
+                font-medium
+                bg-white
+                text-black
+                uppercase
+                mr-2
+                text-xs
+                rounded-md
+              "
+              *ngFor="let genre of media.genres"
+            >
+              {{ genre.name }}
+            </span>
+          </div>
+          <p class="text-white">{{ media.overview }}</p>
+          <p
+            class="text-red-600 mt-8 underline cursor-pointer"
+            (click)="openMoreDetails(media)"
+          >
+            En savoir plus
+          </p>
+          <div class="flex mt-5">
+            <button
+              type="button"
+              class="
+                focus:outline-none
+                text-white
+                bg-red-700
+                hover:bg-red-800
+                focus:ring-4 focus:ring-red-300
+                font-medium
+                rounded-lg
+                text-sm
+                px-5
+                py-2.5
+                mr-2
+                mb-2
+                dark:bg-red-600/75
+                dark:hover:bg-red-700
+                dark:focus:ring-red-900
+                uppercase
+                text-xs
+              "
+            >
+              <div class="flex items-center gap-3 text-xs font-normal">
+                <mat-icon> add_circle_outline </mat-icon>
+                <span> Ajouter à la liste </span>
+              </div>
+            </button>
+            <button
+              type="button"
+              class="
+                text-white
+                bg-gray-800/75
+                hover:bg-gray-900
+                focus:outline-none
+                focus:ring-4 focus:ring-gray-300
+                font-medium
+                rounded-lg
+                text-sm
+                px-5
+                py-2.5
+                mr-2
+                mb-2
+                dark:bg-gray-800
+                dark:hover:bg-gray-700
+                dark:focus:ring-gray-700
+                dark:border-gray-700
+              "
+            >
+              <div class="flex items-center gap-3 text-xs font-normal">
+                <mat-icon> share </mat-icon>
+                <span>Partager </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+  <section id="content">
+    <main class="text-white mx-auto my-0 container p-6">
+      <div class="">
+        <div class="movie relative">
+          <article class="flex flex-col">
+            <div class="bande-annonce">
+              <iframe
+                *ngIf="video && video.key; else videoNotFound"
+                id="player"
+                type="text/html"
+                width="100%"
+                height="100%"
+                [src]="currentVideoUrl | safe: 'resourceUrl'"
+                frameborder="0"
+              ></iframe>
+              <div class="flex gap-0.5"></div>
+            </div>
+            <div
+              class="
+                flex
+                pl-3
+                flex-col
+                info-ba
+                h-28
+                border-l-4 border-l-red-600
+              "
+            >
+              <h1 class="m-0 text-xl uppercase font-extrabold">
+                {{ media.original_name || media.title }}
+              </h1>
+              <p>Ajouté il y a 1 an</p>
+              <span class="w-fit inline-flex px-2 py-1 bg-red-600 rounded-lg">
+                {{ (media.first_air_date || media.release_date).split("-")[0] }}
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
 
-
-
-    <div class="block-banner ">
-        <div class="p-r h-100 w-100 ">
-        
-        <section class="w-100 h-100 d-f ai-c ai-md-fe wrapper">
-        <article class="d-f fd-r ai-c  z-2 w-50 w-md-100 mb-md-3">
-        <article class="w-100 pr-2 d-md-f fd-md-c jc-md-fe pb-md-5 pr-md-0">
-        
-        <div class="c-w d-f fd-r ai-c ff-fb fs-20 w-s-n ta-md-c d-md-n mb-2">
-        <a class="d-f ai-c jc-c td-n  fd-c" href="/">
-        <div class="logo icon-before icon-logo icon-sm">
-        </div>
-        </a>
-        <span class="ff-fb tt-u fs-20 c-w ml-1">film</span>
-        </div>
-        
-        <h1 class=" fs-40  c-w ff-bb tt-u mb-0 ta-md-c fs-md-30 mb-2">Rush</h1>
-        
-        <div class="d-f fd-r ai-c fd-md-c  jc-md-c mb-3 mt-1 mb-md-1">
-        <div class="d-f fd-r ai-c" id="target_note" data-note="4"><span class="icon icon-s icon-before icon-star mr-1"></span><span class="icon icon-s icon-before icon-star mr-1"></span><span class="icon icon-s icon-before icon-star mr-1"></span><span class="icon icon-s icon-before icon-star mr-1"></span><span class="icon icon-s icon-before icon-star-empty mr-1"></span></div>
-        <span class="c-w ff-cond ml-2 ml-md-0 mt-md-1">2013</span>
-        </div>
-        
-        <ul class="d-f f-w ls-n mb-2 jc-md-c ">
-        <li class="mr-1 py-1 px-1 bc-w tt-u c-b br-l fs-11 mb-md-1">Action</li>
-        <li class="mr-1 py-1 px-1 bc-w tt-u c-b br-l fs-11 mb-md-1">Drame</li>
-        </ul>
-        
-        <p class="description t-o-e cg-15 fs-18 d-md-n ">Après avoir été l’un des meilleurs pilotes de chasse de la Marine américaine pendant plus de trente ans, Pete “Maverick" Mitchell continue à repousser ses limites en tant que pilote d'essai. Il refuse de monter en grade, car cela l’obligerait à renoncer à voler. Il est chargé de former un détachement de jeunes diplômés de l’école Top Gun pour une mission spéciale qu’aucun pilote n'aurait jamais imaginée. Lors de cette mission, Maverick rencontre le lieutenant Bradley “Rooster” Bradshaw, le fils de son défunt ami, le navigateur Nick “Goose” Bradshaw. Face à un avenir incertain, hanté par ses fantômes, Maverick va devoir affronter ses pires cauchemars au cours d’une mission qui exigera les plus grands sacrifices.</p>
-        <div class="d-f fd-c fd-md-r jc-md-c">
-        <div class="d-md-n z-2 mb-3 mb-md-0 mr-md-1">
-        <button data-label="film" data-urlpath="" data-id="1977" data-description="Après avoir été l’un des meilleurs pilotes de chasse de la Marine américaine pendant plus de trente ans, Pete “Maverick&quot; Mitchell continue à repousser ses limites en tant que pilote d'essai. Il refuse de monter en grade, car cela l’obligerait à renoncer à voler. Il est chargé de former un détachement de jeunes diplômés de l’école Top Gun pour une mission spéciale qu’aucun pilote n'aurait jamais imaginée. Lors de cette mission, Maverick rencontre le lieutenant Bradley “Rooster” Bradshaw, le fils de son défunt ami, le navigateur Nick “Goose” Bradshaw. Face à un avenir incertain, hanté par ses fantômes, Maverick va devoir affronter ses pires cauchemars au cours d’une mission qui exigera les plus grands sacrifices." data-trailer="wFCOG9I4ZXE" role="button" aria-label="button " class="action-see-more c-e4 td-u c-p ">En savoir plus</button>
-        </div>
-        <div class="d-f fd-r  ai-c">
-        <a data-label="film" data-id="1977" class="icon-banner-add z-2 mr-md-0 ml-md-0 mt-md-0 c-p icon icon-before-s icon-add-white target-card-list icon-before-mr-s mt-1 d-f ai-c w-f fs-10 py-1 px-2 bc-e5 td-n c-w tt-u letter-s-1-4 br-xl">
-        <span>Ajouter à la liste</span>
-        </a>
-        <button data-label="film" data-urlpath="" data-id="1977" data-description="Après avoir été l’un des meilleurs pilotes de chasse de la Marine américaine pendant plus de trente ans, Pete “Maverick&quot; Mitchell continue à repousser ses limites en tant que pilote d'essai. Il refuse de monter en grade, car cela l’obligerait à renoncer à voler. Il est chargé de former un détachement de jeunes diplômés de l’école Top Gun pour une mission spéciale qu’aucun pilote n'aurait jamais imaginée. Lors de cette mission, Maverick rencontre le lieutenant Bradley “Rooster” Bradshaw, le fils de son défunt ami, le navigateur Nick “Goose” Bradshaw. Face à un avenir incertain, hanté par ses fantômes, Maverick va devoir affronter ses pires cauchemars au cours d’une mission qui exigera les plus grands sacrifices." data-trailer="wFCOG9I4ZXE" role="button" aria-label="button description mobile" class="action-see-more card-view-trailer icon-before-s icon-information z-2 d-n d-md-f ai-c jc-c mt-md-0 mr-md-2 ml-md-2"></button>
-        <div data-title="Top Gun Maverick" data-urlpath="null" class="target-share block-banner-share ml-1 p-r ml-md-0"><button role="button" aria-label="boutton partage" class="btn px-md-0 py-md-0 icon-add-whit mt-md-0 z-2 d-f a-c fs-10 jc- btn-share icon icon-before-s icon-share with-banner px-2 py-1 br-xl mt-1 icon-before-mr-s icon-before-mr-md-0 tt-u  ai-c"><span class="letter-s-1-4 ff-f d-md-n">Partager</span></button><ul class="liste-share d-f fd-c z-5"><li class="li td-n br bc-w ls-n mb-1"><a target="_blank" class="link td-n c-p fs-12 w-s-n"><i aria-hidden="true" class="fa fa-copy bc-b c-w"></i>Copier le lien</a></li><li class="li td-n br bc-w ls-n mb-1"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fempire-streaming.co%2Ffilm%2Fa772d7f0716b7016566332770119d097%2FTop-Gun-Maverick-en-streaming-hd" class="link td-n fs-12"><span class="fa fa-facebook c-w" style="background-color: rgb(59, 89, 152);"></span>Facebook</a></li><li class="li td-n br bc-w ls-n mb-1"><a target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fempire-streaming.co%2Ffilm%2Fa772d7f0716b7016566332770119d097%2FTop-Gun-Maverick-en-streaming-hd&amp;via=getboldify" class="link td-n fs-12"><span class="fa fa-twitter c-w" style="background-color: rgb(85, 172, 238);"></span>Twitter</a></li></ul></div>
-        </div>
-        </div>
-        </article>
-        
-        </article></section>
-        
-        <div class="overlay color-gradient-left p-a t-0 l-0 z-1 h-100 w-100 d-md-n"></div>
-        <div class="block-overlay-top-banner"></div>
-        <div class="block-overlay-bottom"></div>
-        
-        <picture>
-        <source media="(min-width:780px)" srcset="https://img.nrj.fr/2mvnoO17uNQ_aeV_ePnq76_8aS4=/1900x1200/medias%2F2020%2F02%2Frush-rush-films-limited-egoli-tossell-film-and-action-image-6_5e553df716011.JPG">
-        <img loading="lazy" alt="Top Gun Maverick streaming gratuit vf vostfr " class="p-a t-0 l-0 h-100 w-100 of-cover" data-src="" src="https://img.nrj.fr/2mvnoO17uNQ_aeV_ePnq76_8aS4=/1900x1200/medias%2F2020%2F02%2Frush-rush-films-limited-egoli-tossell-film-and-action-image-6_5e553df716011.JPG">
-        </picture>
-        <span class="bottom-center bounce"></span>
-        </div>
-        </div>
+<ng-template #videoNotFound
+  >Aucune bande annonce disponible pour ce média
+</ng-template>

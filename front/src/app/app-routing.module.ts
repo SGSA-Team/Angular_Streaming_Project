@@ -7,7 +7,9 @@ import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'details', component: DetailsComponent },
+
+  { path: 'detail/serie/:id', pathMatch: 'full', component: DetailsComponent },
+  { path: 'detail/movie/:id', pathMatch: 'full', component: DetailsComponent },
   { path: 'catalogs/movies', pathMatch: 'full', component: CatalogsComponent },
   {
     path: 'catalogs/movies/:id',

@@ -19,7 +19,7 @@ export class MovieService {
   public apiBaseUrl: string = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
-  getMoviesFromId = (id: string): Observable<ApiMovie> => {
+  getMovieFromId = (id: string): Observable<ApiMovie> => {
     return this.http.get<ApiMovie>(`${this.apiBaseUrl}/movie/${id}`);
   };
 
@@ -35,6 +35,10 @@ export class MovieService {
           return movies.results.slice(0, 10);
         })
       );
+  };
+
+  getVideos = (id: string) => {
+    return this.http.get(`${this.apiBaseUrl}/movie/${id}/videos`);
   };
 
   getMoviesCategories(): Observable<ApiCategories> {
