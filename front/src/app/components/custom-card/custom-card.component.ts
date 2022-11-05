@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { getLanguageFile } from 'src/app/utils/languages/langues';
 import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
-import { ModalComponent } from '../modal/modal.component';
+import { DEFAULT_CARD_IMG, getCardImageBg, getRatingFormat, openInfo } from "src/app/utils/utils";
 
 @Component({
   selector: 'app-custom-card',
@@ -10,40 +10,23 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./custom-card.component.scss']
 })
 export class CustomCardComponent{
-
   @Input() img: string=""
-  defaultCardImage: string='https://mergejil.mn/mergejilmn/no-image.jpeg'
+  defaultCardImage: string= DEFAULT_CARD_IMG;
   @Input() type: string =""
   @Input()
   element!: ApiMovie | ApiSerie;
   @Input() displayeType: string=""
   @Input() title: string=""
   @Input() release_date: string =""
+  getCardImageBg = getCardImageBg;
+  dialog: MatDialog;
+  openInfo = openInfo;
+  getRatingFormat = getRatingFormat;
   translation: TranslationLanguage | null = null;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialogRef: MatDialog) {
+      this.dialog = dialogRef;
       this.translation = getLanguageFile();
    }
 
-  getRatingFormat(rating: number){
-    return Math.round(rating)
-  }
-
-  openInfo = (movie: ApiMovie | ApiSerie, type:string) => {
-    this.dialog.open(ModalComponent, {
-      minWidth: '50vw',
-      maxWidth: '50vw',
-      minHeight: '75vh',
-      maxHeight: '75vh',
-      data: {
-        data: movie,
-        type: type,
-        link: `/detail/${this.type}/${this.element.id}`
-      }
-    });
-  };
-
-  getCardImageBg(path: string){
-    return 'https://image.tmdb.org/t/p/original/'+path;
-  }
 }

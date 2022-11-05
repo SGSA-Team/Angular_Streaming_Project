@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute } from '@angular/router';
-import { filter, forkJoin, Observable, Subscriber } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { DateHelper } from 'src/app/utils/utils';
+import { DateHelper,DIALOGS_SIZES } from 'src/app/utils/utils';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { getLanguageFile } from '../utils/languages/langues';
 
@@ -16,7 +15,7 @@ import { getLanguageFile } from '../utils/languages/langues';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
   tooltipMessage: string = 'Copier le lien';
   posterPath: string = environment.apiImageUrl;
   currentVideoUrl: string = '';
@@ -104,16 +103,11 @@ export class DetailsComponent implements OnInit {
 
   openMoreDetails = (media: ApiMovie | ApiSerie) => {
     this.dialog.open(ModalComponent, {
-      minWidth: '50vw',
-      maxWidth: '50vw',
-      minHeight: '75vh',
-      maxHeight: '75vh',
+      ...DIALOGS_SIZES,
       data: {
         data: media,
         type: this.mediaType,
       },
     });
   };
-
-  ngOnInit(): void {}
 }

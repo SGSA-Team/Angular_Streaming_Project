@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ApiMovie, ApiMovies, ApiSerie, ApiSeries, TranslationLanguage } from 'src/interfaces/interface';
+import {  ApiMovies, ApiSeries, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { getLanguageFile } from '../utils/languages/langues';
-
+import { TYPES } from '../utils/utils';
 interface CatalogsFilters {
     dateCreatdAt: boolean,
     popularity:boolean,
@@ -26,7 +26,7 @@ interface fetchDataInterface{
   templateUrl: './catalogs.component.html',
   styleUrls: ['./catalogs.component.scss']
 })
-export class CatalogsComponent implements OnInit {
+export class CatalogsComponent{
 
   filterSelected:CatalogsFilters={
     popularity:true,
@@ -40,7 +40,7 @@ export class CatalogsComponent implements OnInit {
     movies :{
       isSelected: false,
       title: "",
-      type: "movie",
+      type: TYPES.movie,
       filters: {
         popularity: (page:number=1, genreId:number=0) => this.movieService.getPopularMovies("desc", page, genreId),
         note: ( page:number=1, genreId:number=0) => this.movieService.getRatedMovies("desc", page, genreId),
@@ -50,7 +50,7 @@ export class CatalogsComponent implements OnInit {
     series:{
       isSelected: false,
       title: "",
-      type: "serie",
+      type: TYPES.serie,
       filters: {
         popularity: (page:number=1, genreId:number=0) =>  this.seriesService.getPopularSeries("desc", page, genreId),
         note: (page:number=1, genreId:number=0) =>  this.seriesService.getRatedSeries("desc", page, genreId),
@@ -131,12 +131,6 @@ export class CatalogsComponent implements OnInit {
     }
   }
 
-  async ngOnInit(): Promise<void> {
-    //Allow to update page everytime params change but set href to "/" for navbar links 
-    //this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    //No call required here because it's not dynamic
-  }
-
   async updateFilter(filter:string){
     const newFiltersOptions =  Object
     .keys(this.filterSelected) 
@@ -171,25 +165,8 @@ export class CatalogsComponent implements OnInit {
     return page;
   }
 
-  getCardImageBg(path: string){
-    return 'https://image.tmdb.org/t/p/original/'+path;
-  }
-
   getRatingFormat(rating: number){
     return Math.round(rating)
   }
-
-  openInfo = (movie: ApiMovie | ApiSerie, type:string) => {
-    this.dialog.open(ModalComponent, {
-      minWidth: '50vw',
-      maxWidth: '50vw',
-      minHeight: '75vh',
-      maxHeight: '75vh',
-      data: {
-        data: movie,
-        type: type
-      }
-    });
-  };
 }
 

@@ -15,9 +15,9 @@
         </button>
         <div *ngIf="data && data.length > 0" class="search-data-types">
             <button class="search-data-types__btn" [ngClass]="{'search-data-types__btn--active': moviesFilter}"
-                (click)="filterResults('movies')">{{translation.navbar.options.movies}}</button>
+                (click)="filterResults(this.TYPES.movie)">{{translation.navbar.options.movies}}</button>
             <button class="search-data-types__btn" [ngClass]="{'search-data-types__btn--active': seriesFilter}"
-                (click)="filterResults('series')">{{translation.navbar.options.series}}</button>
+                (click)="filterResults(this.TYPES.serie)">{{translation.navbar.options.series}}</button>
         </div>
         <div *ngIf="data && data.length > 0" class="search-data-results">
             <div *ngFor="let data of displayedData">
