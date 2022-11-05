@@ -9,6 +9,7 @@ interface Result{
   title: string;
   img: string;
   type:string;
+  displayedType:string;
 }
 
 @Component({
@@ -48,13 +49,15 @@ export class GlobalSearchBarComponent implements OnInit {
           id: el.id,
           title: el.title,
           img: el.poster_path,
-          type: "Film"
+          displayedType: "Film",
+          type: "movie"
         })
         this.displayedData.push({
           id: el.id,
           title: el.title,
           img: el.poster_path,
-          type: "Film"
+          displayedType: "Film",
+          type: "movie"
         })
         this.loadingData = false; 
       })
@@ -67,13 +70,15 @@ export class GlobalSearchBarComponent implements OnInit {
           id: el.id,
           title: el.name,
           img: el.backdrop_path,
-          type: "Série"
+          displayedType: "Série",
+          type: "serie"
         })
         this.displayedData.push({
           id: el.id,
           title: el.name,
           img: el.backdrop_path,
-          type: "Série"
+          displayedType: "Série",
+          type: "serie"
         })
         this.loadingData = false; 
       })
@@ -92,7 +97,7 @@ export class GlobalSearchBarComponent implements OnInit {
         if(this.moviesFilter){
           this.displayedData = this.data
         }else {
-          this.displayedData = this.data.filter(el => el.type === "Film")
+          this.displayedData = this.data.filter(el => el.type === "movie")
         }
         this.moviesFilter = !this.moviesFilter;
         break;
@@ -102,7 +107,7 @@ export class GlobalSearchBarComponent implements OnInit {
         if(this.seriesFilter){
           this.displayedData = this.data
         }else {
-          this.displayedData = this.data.filter(el => el.type === "Série")
+          this.displayedData = this.data.filter(el => el.type === "serie")
         }
         this.seriesFilter = !this.seriesFilter;
         break;
