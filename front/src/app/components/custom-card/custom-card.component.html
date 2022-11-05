@@ -1,0 +1,34 @@
+<div *ngIf="element" class="custom-videos-card">
+    <div class="custom-videos-card__image"
+        style="background-image: url('{{img ? getCardImageBg(img) : defaultCardImage}}')">
+    </div>
+    <div class="custom-videos-card__decorations">
+        <div class="custom-videos-card__decorations-top">
+            <a style="height: 100%;" [routerLink]="'/detail/' + type + '/' + element.id">
+            </a>
+            <div class="custom-videos-card__decorations-info">
+                <span class="custom-videos-card__decorations-info-icon" (click)="openInfo(element,'movie')">
+                    <p>i</p>
+                </span>
+            </div>
+        </div>
+        <a [routerLink]="'/detail/' + type + '/' + element.id">
+            <div class="custom-videos-card__decorations-bottom">
+                <div class="flex gap-1">
+                    <span class="custom-videos-card__decorations-type">{{displayeType}}</span>
+                    <span class="custom-videos-card__decorations-year">{{release_date.split("-")[0]}}</span>
+                </div>
+                <span class="custom-videos-card__decorations-title">{{title}}</span>
+                <span class="custom-videos-card__decorations-rating">
+                    <span class="flex items-center">{{getRatingFormat(element.vote_average)}}</span>
+                    <span class="material-icons text-red-600 text-lg">star</span>
+                </span>
+                <span class="custom-videos-card__decorations-link">
+                    <span
+                        class="custom-videos-card__decorations-link-icon material-icons text-red-600 text-2xl">play_circle_outline</span>
+                    <span class="custom-videos-card__decorations-link-title">Regarder</span>
+                </span>
+            </div>
+        </a>
+    </div>
+</div>

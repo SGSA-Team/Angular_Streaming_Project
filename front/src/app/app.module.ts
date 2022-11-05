@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { HomeComponent, DialogInfoComponent } from './home/home/home.component';
+import { HomeComponent } from './home/home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
@@ -43,12 +43,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { PaginationComponent } from './catalogs/components/pagination/pagination.component';
-import { ModalComponent } from './catalogs/components/modal/modal.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { SafePipe } from './pipe/safe.pipe';
+import { CustomCardComponent } from './components/custom-card/custom-card.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,6 @@ import { SafePipe } from './pipe/safe.pipe';
     HomeComponent,
     PagenotfoundComponent,
     CatalogsComponent,
-    DialogInfoComponent,
     ModalComponent,
     NavbarComponent,
     LinksListComponent,
@@ -66,6 +66,7 @@ import { SafePipe } from './pipe/safe.pipe';
     PaginationComponent,
     DetailsComponent,
     SafePipe,
+    CustomCardComponent,
   ],
   imports: [
     FormsModule,
