@@ -13,7 +13,8 @@ export class CustomCardComponent{
   @Input() img: string=""
   defaultCardImage: string='https://mergejil.mn/mergejilmn/no-image.jpeg'
   @Input() type: string =""
-  @Input() element: ApiMovie | ApiSerie | null = null;
+  @Input()
+  element!: ApiMovie | ApiSerie;
   @Input() displayeType: string=""
   @Input() title: string=""
   @Input() release_date: string =""
@@ -33,7 +34,8 @@ export class CustomCardComponent{
       maxHeight: '75vh',
       data: {
         data: movie,
-        type: type
+        type: type,
+        link: `/detail/${this.type}/${this.element.id}`
       }
     });
   };

@@ -5,11 +5,7 @@
   </article>
   <div *ngIf="currentMovie && dialogRef" class="dialog-content">
     <h1 class="dialog-content__link">
-      <a
-        (click)="dialogRef.close()"
-        routerLink="{{ 'detail/' + currentMovie.id }}"
-        >VOIR</a
-      >
+      <a (click)="dialogRef.close()" [routerLink]="detailPageLink">VOIR</a>
     </h1>
     <h2 class="dialog-content__title">Description</h2>
     <h5 class="dialog-content__description">{{ currentMovie.overview }}</h5>
