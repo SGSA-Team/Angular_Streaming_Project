@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import {faMagnifyingGlass, faXmark} from "@fortawesome/free-solid-svg-icons"
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
@@ -29,7 +29,7 @@ export class GlobalSearchBarComponent implements OnInit {
   defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
   loadingData = false;
 
-  constructor(private movieService:MovieService, private seriesService:SeriesService) { }
+  constructor(private eRef: ElementRef, private movieService:MovieService, private seriesService:SeriesService) { }
 
   ngOnInit(): void {
   }
@@ -123,5 +123,12 @@ export class GlobalSearchBarComponent implements OnInit {
 
   resetValue(){
     this.value= ""
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event:Event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.focusOnSearch = false;
+    }
   }
 }

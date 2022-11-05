@@ -4,7 +4,8 @@
     </button>
     <input type="text" class="input-search" [ngClass]="{'animate-input': focusOnSearch}" [(ngModel)]="value"
         (input)="trackInputChange()" placeholder="Rechercher un film ou une série">
-    <button class="input-delete" [ngClass]="{'input-delete-show': value.length > 0}" (click)="resetValue()">
+    <button class="input-delete" [ngClass]="{'input-delete-show': focusOnSearch && value.length > 0}"
+        (click)="resetValue()">
         <fa-icon [icon]="deleteIcon" style="font-size: 20px"></fa-icon>
     </button>
     <div *ngIf="focusOnSearch && value && value.length > 0" class="search-data-container">
