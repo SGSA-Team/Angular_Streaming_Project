@@ -88,11 +88,17 @@ export class DetailsComponent implements OnInit {
   };
 
   copiedTooltip = () => {
+    const shareData: ShareData = {
+      title: 'SDStreaming',
+      text: 'Regarde ce film il est super !',
+      url: document.URL,
+    };
     this.tooltipMessage = 'Copié !';
     setTimeout(() => {
       this.tooltipMessage = 'Copier le lien';
     }, 3000);
     navigator.clipboard.writeText(document.URL);
+    navigator.share(shareData);
   };
 
   openMoreDetails = (media: ApiMovie | ApiSerie) => {
