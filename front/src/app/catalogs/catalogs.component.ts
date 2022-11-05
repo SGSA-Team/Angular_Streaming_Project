@@ -39,6 +39,7 @@ export class CatalogsComponent implements OnInit {
     movies :{
       isSelected: false,
       title: "Films",
+      type: "movie",
       filters: {
         popularity: (page:number=1, genreId:number=0) => this.movieService.getPopularMovies("desc", page, genreId),
         note: ( page:number=1, genreId:number=0) => this.movieService.getRatedMovies("desc", page, genreId),
@@ -48,6 +49,7 @@ export class CatalogsComponent implements OnInit {
     series:{
       isSelected: false,
       title: "Series",
+      type: "serie",
       filters: {
         popularity: (page:number=1, genreId:number=0) =>  this.seriesService.getPopularSeries("desc", page, genreId),
         note: (page:number=1, genreId:number=0) =>  this.seriesService.getRatedSeries("desc", page, genreId),
@@ -56,6 +58,7 @@ export class CatalogsComponent implements OnInit {
     }
   }
   title=""
+  type=""
   filterOn:string = "popularity" as string
   currentPage:number = 1;
   totalPages:number = 1;
@@ -85,6 +88,7 @@ export class CatalogsComponent implements OnInit {
           Object.entries(this.options).find(([key, value]) => {
             if (value.isSelected) {
               this.title = value.title;
+              this.type = value.type;
               return true;
             }
             return false;
