@@ -74,7 +74,7 @@ background-color:transparent;
     display: none;
 }
 
-.input-search:focus ~ .input-delete {
+.input-delete-show {
     display: block;
     position: absolute;
     right: 50px;

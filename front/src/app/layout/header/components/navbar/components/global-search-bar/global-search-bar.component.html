@@ -3,8 +3,11 @@
         <fa-icon [icon]="searchIcon" style="font-size: 24px"></fa-icon>
     </button>
     <input type="text" class="input-search" [ngClass]="{'animate-input': focusOnSearch}" [(ngModel)]="value"
-        placeholder="Rechercher un film ou une série">
-    <fa-icon class="input-delete" [icon]="deleteIcon" style="font-size: 20px" (click)="resetValue()"></fa-icon>
+        (input)="trackInputChange()" placeholder="Rechercher un film ou une série">
+    <button class="input-delete" [ngClass]="{'input-delete-show': focusOnSearch && value.length > 0}"
+        (click)="resetValue()">
+        <fa-icon [icon]="deleteIcon" style="font-size: 20px"></fa-icon>
+    </button>
     <div *ngIf="focusOnSearch && value && value.length > 0" class="search-data-container">
         <button style="height: 40px;" (click)="searchData()"
             class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">
