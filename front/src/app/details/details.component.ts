@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
+import { DateHelper } from '../helpers/dateHelper';
 import { DialogInfoComponent } from '../home/home/home.component';
 
 @Component({
@@ -29,6 +30,8 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog
   ) {
+    console.log(DateHelper.diffDateToNow(new Date('1 January 2000')));
+
     let observer: Observable<ApiMovie | ApiSerie>;
     let videoObservser: Observable<any>;
     this.route.url.subscribe((url) => {
@@ -62,6 +65,10 @@ export class DetailsComponent implements OnInit {
         this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
       });
     });
+  }
+
+  getAddedDate(date: string) {
+    return DateHelper.diffDateToNow(new Date(date));
   }
 
   noteStars = () => {

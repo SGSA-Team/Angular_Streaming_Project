@@ -162,7 +162,11 @@
               <h1 class="m-0 text-xl uppercase font-extrabold">
                 {{ media.original_name || media.title }}
               </h1>
-              <p>Ajouté il y a 1 an</p>
+              <p>
+                Sortie il y a
+                {{ getAddedDate(media.first_air_date || media.release_date) }}
+                an(s)
+              </p>
               <span class="w-fit inline-flex px-2 py-1 bg-red-600 rounded-lg">
                 {{ (media.first_air_date || media.release_date).split("-")[0] }}
               </span>
