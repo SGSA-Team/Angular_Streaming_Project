@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute } from '@angular/router';
 import { filter, forkJoin, Observable, Subscriber } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,11 +15,13 @@ import { DialogInfoComponent } from '../home/home/home.component';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
+  tooltipMessage: string = 'Copier le lien';
   posterPath: string = environment.apiImageUrl;
   currentVideoUrl: string = '';
   media?: ApiMovie | ApiSerie;
   mediaType: string = '';
   video: any;
+  note: number = 0;
 
   constructor(
     private serieService: SeriesService,
@@ -51,12 +54,33 @@ export class DetailsComponent implements OnInit {
         console.log(media);
         this.media = media;
         this.video = videos.results.find((v: any) => {
-          return v.site === 'YouTube';
+          return v.site === 'YouTube' && v?.key;
         });
-        this.currentVideoUrl = `http://www.youtube.com/embed/${this.video.key}`;
+        this.note = Math.round(media.vote_average / 2);
+        console.log(this.note);
+
+        this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
       });
     });
   }
+
+  noteStars = () => {
+    let tabStar: { full: boolean }[] = [];
+    let noteStar: number = this.note;
+    for (let index = 0; index < 5; index++) {
+      noteStar--;
+      tabStar.push({ full: noteStar >= 0 });
+    }
+    return tabStar;
+  };
+
+  copiedTooltip = () => {
+    this.tooltipMessage = 'Copié !';
+    setTimeout(() => {
+      this.tooltipMessage = 'Copier le lien';
+    }, 3000);
+    navigator.clipboard.writeText(document.URL);
+  };
 
   openMoreDetails = (media: ApiMovie | ApiSerie) => {
     this.dialog.open(DialogInfoComponent, {

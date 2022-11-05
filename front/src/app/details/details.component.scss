@@ -1,7 +1,7 @@
 section {
     transition: all 0.2s ease-in-out;
     overflow: hidden;
-    height: 80vh;
+    height: 100vh;
     background-color: #0e0e0e;
   }
   
@@ -133,7 +133,9 @@ section {
     position: relative;
     transform: translate(-50%, 0);
     left: 50%;
-
-
   }
   
+
+  .tooltip-copy {
+    background: #b71c1c!important;
+  }
