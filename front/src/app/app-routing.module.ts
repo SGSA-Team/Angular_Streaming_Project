@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: 'catalogs/series/:id',
     pathMatch: 'full',
-    component: PagenotfoundComponent,
+    component: CatalogsComponent,
   },
   { path: '**', redirectTo: '', component: PagenotfoundComponent },
 ];

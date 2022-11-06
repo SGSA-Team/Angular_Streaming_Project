@@ -127,6 +127,13 @@ export class GlobalSearchBarComponent {
     }
   }
 
+  clickOnCard(){
+    this.value= ""
+    this.data = [];
+    this.displayedData = [];
+    this.focusOnSearch = false;
+  }
+
   resetValue(){
     this.value= ""
   }
