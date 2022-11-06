@@ -1,27 +1,70 @@
-# Front
+# Installation du projet en local
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
+Ici, vous retrouverez la description complète pour installer et initialiser l’application Angular-Streaming en local sur votre machine. Pour
+cela, il faut suivre toutes les étapes décrites ci-dessous :
 
-## Development server
+## 1  Installation de NodeJS
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+NodeJS est requis avec la version 16 pour l’installation de notre application
+Pour l’installer veuillez vous rendre sur l’url suivant : https://nodejs.org/en/download/ et choisir la version 16
+Vous pouvez également vous assurer de la bonne version de Node.js en tapant cette commande dans votre terminal :
+```
+npm -v
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 2  Installation d'Angular
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Pour installer Angular, rien de plus simple, il faut ouvrir le terminal de votre ordinateur et taper les commandes suivantes :
+```
+npm install -g @angular/cli
+```
+Pour vous assurer de la bonne version, utilisez la commande suivante :
+```
+ng --version
+```
 
-## Running unit tests
+## 3  Copie du repository GIT
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Pour pouvoir télécharger le repository Git du projet, il existe différentes façons :
 
-## Running end-to-end tests
+Voici l’url du repo ---> https://github.com/SGSA-Team/Angular_Streaming_Project
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Taper la commande suivi de l’url du repo (GIT est requis sur votre terminal)
+```
+git clone https://github.com/SGSA-Team/Angular_Streaming_Project.git
+```
+
+## 4  Lancement du projet
+
+
+Ouvrir un éditeur de code (par ex : Visual Studio Code)
+
+Ouvrir le dossier en local à l’aide du bouton “Ouvrir le dossier…“
+
+Taper cette commande ⬇
+```
+cd front
+```
+Ouvrir le terminal de l'éditeur de code
+
+Taper la commande suivante ⬇
+```
+npm install
+```
+
+
+Enfin, la dernière commande est la suivante, elle permettra le lancement du projet, le navigateur internet s’ouvrira avec la page du site
+
+```
+npm start
+```
+
+
+
+
+
+## 5  Le projet est installé, félicitations 
