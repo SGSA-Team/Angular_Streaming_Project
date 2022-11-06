@@ -57,13 +57,18 @@ export class SeriesService {
     page: number = 1,
     genreId?: number
   ): Observable<ApiSeries> => {
-    return this.http.get<ApiSeries>(
-      `${
-        this.apiBaseUrl
-      }/discover/tv?sort_by=first_air_date.${type}&page=${page}&${
-        genreId !== 0 && `with_genres=${genreId}&`
-      }include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0&vote_average.gte=2`
-    );
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv`, {
+      params: {
+        sort_by: `first_air_date.${type}`,
+        page: page,
+        include_null_first_air_dates: false,
+        with_watch_monetization_types: 'flatrate',
+        with_status: 0,
+        with_type: 0,
+        'vote_average.gte': 2,
+        ...(genreId !== 0 && { with_genres: genreId }),
+      },
+    });
   };
 
   getPopularSeries = (
@@ -71,11 +76,17 @@ export class SeriesService {
     page: number = 1,
     genreId: number = 0
   ): Observable<ApiSeries> => {
-    return this.http.get<ApiSeries>(
-      `${this.apiBaseUrl}/discover/tv?sort_by=popularity.${type}&page=${page}&${
-        genreId !== 0 && `with_genres=${genreId}&`
-      }include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`
-    );
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv?`, {
+      params: {
+        sort_by: `popularity.${type}`,
+        page: page,
+        include_null_first_air_dates: false,
+        with_watch_monetization_types: 'flatrate',
+        with_status: 0,
+        with_type: 0,
+        ...(genreId !== 0 && { with_genres: genreId }),
+      },
+    });
   };
 
   getRatedSeries = (
@@ -83,13 +94,17 @@ export class SeriesService {
     page: number = 1,
     genreId: number = 0
   ): Observable<ApiSeries> => {
-    return this.http.get<ApiSeries>(
-      `${
-        this.apiBaseUrl
-      }/discover/tv?sort_by=vote_average.${type}&page=${page}&${
-        genreId !== 0 && `with_genres=${genreId}&`
-      }include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`
-    );
+    return this.http.get<ApiSeries>(`${this.apiBaseUrl}/discover/tv?`, {
+      params: {
+        sort_by: `vote_average.${type}`,
+        page: page,
+        ...(genreId !== 0 && { with_genres: genreId }),
+        include_null_first_air_dates: false,
+        with_watch_monetization_types: 'flatrate',
+        with_status: 0,
+        with_type: 0,
+      },
+    });
   };
 
   getVideo = (id: number): Observable<ApiVideos> => {
