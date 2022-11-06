@@ -73,7 +73,6 @@ export class DetailsComponent {
       }
       forkJoin([observer, videoObservser, peopleObsever]).subscribe(
         ([media, videos, peoples]) => {
-          console.log(media, peoples);
           this.media = media;
           this.peoples = peoples;
           this.video = videos.results.find((v: any) => {
@@ -100,7 +99,6 @@ export class DetailsComponent {
     return tabStar;
   };
 
-  //TRANSLATE
   copiedTooltip = () => {
     const shareData: ShareData = {
       title: 'SDStreaming',

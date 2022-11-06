@@ -66,13 +66,19 @@ export class MovieService {
   ): Observable<ApiMovies> => {
     const newDate = new Date();
 
-    return this.http.get<ApiMovies>(
-      `${
-        this.apiBaseUrl
-      }/discover/movie?sort_by=release_date.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${
-        genreId !== 0 && `with_genres=${genreId}&`
-      }&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate&vote_average.gte=2`
-    );
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie`, {
+      params: {
+        sort_by: `release_date.${type}`,
+        page: page,
+        'release_date.lte': `${newDate.getFullYear()}-12-31`,
+        ...(genreId !== 0 && { with_genres: genreId }),
+        with_original_language: 'en',
+        include_adult: false,
+        include_video: false,
+        with_watch_monetization_types: 'flatrate',
+        'vote_average.gte': 2,
+      },
+    });
   };
 
   getPopularMovies = (
@@ -81,13 +87,18 @@ export class MovieService {
     genreId: number = 0
   ): Observable<ApiMovies> => {
     const newDate = new Date();
-    return this.http.get<ApiMovies>(
-      `${
-        this.apiBaseUrl
-      }/discover/movie?sort_by=popularity.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${
-        genreId !== 0 && `with_genres=${genreId}&`
-      }&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`
-    );
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie?`, {
+      params: {
+        sort_by: `popularity.${type}`,
+        page: page,
+        'release_date.lte': `${newDate.getFullYear()}-12-31`,
+        ...(genreId !== 0 && { with_genres: genreId }),
+        with_original_language: 'en',
+        include_adult: false,
+        include_video: false,
+        with_watch_monetization_types: 'flatrate',
+      },
+    });
   };
 
   getRatedMovies = (
@@ -96,13 +107,18 @@ export class MovieService {
     genreId: number = 0
   ): Observable<ApiMovies> => {
     const newDate = new Date();
-    return this.http.get<ApiMovies>(
-      `${
-        this.apiBaseUrl
-      }/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${
-        genreId !== 0 && `with_genres=${genreId}&`
-      }&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`
-    );
+    return this.http.get<ApiMovies>(`${this.apiBaseUrl}/discover/movie`, {
+      params: {
+        sort_by: `vote_count.${type}`,
+        page: page,
+        'release_date.lte': `${newDate.getFullYear()}-12-31`,
+        ...(genreId !== 0 && { with_genres: genreId }),
+        with_original_language: 'en',
+        include_adult: false,
+        include_video: false,
+        with_watch_monetization_types: 'flatrate',
+      },
+    });
   };
 
   getPeoples = (id: string) => {

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import {
-  MatDialog,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { forkJoin } from 'rxjs';
 import { getLanguageFile } from 'src/app/utils/languages/langues';
 import { openInfo, TYPES } from 'src/app/utils/utils';
 import { environment } from 'src/environments/environment';
-import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
+import {
+  ApiMovie,
+  ApiSerie,
+  TranslationLanguage,
+} from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 @Component({
@@ -14,7 +16,7 @@ import { SeriesService } from 'src/services/series.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent{
+export class HomeComponent {
   nowPlayingMovies: ApiMovie[] | null = null;
   mostViewedMovies: ApiMovie[] | null = null;
   latestMovies: ApiMovie[] | null = null;
@@ -24,7 +26,7 @@ export class HomeComponent{
   translation: TranslationLanguage | null = null;
   dialog: MatDialog;
   openInfo = openInfo;
-  TYPES= TYPES;
+  TYPES = TYPES;
 
   constructor(
     private movieService: MovieService,
