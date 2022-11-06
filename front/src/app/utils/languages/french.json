@@ -49,7 +49,10 @@
         "headliners": "Têtes d'affiche",
         "release": "Sortie il y a",
         "year_ago": "an(s)",
-        "noTrailer": "Aucune bande annonce disponible pour ce média"
+        "noTrailer": "Aucune bande annonce disponible pour ce média",
+        "copyLink" : "Copier le lien",
+        "copiedLink" : "Copié !",
+        "externalShareMessage" : "Regarde ce film il est super !"
     },
     "footer": {
         "copyright": "Tous droits réservés.",

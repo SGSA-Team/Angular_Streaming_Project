@@ -49,7 +49,10 @@
         "headliners": "Cabezas de cartel",
         "release": "Publicado hace",
         "year_ago": "año(s)",
-        "noTrailer": "No hay tráiler disponible para este medio"
+        "noTrailer": "No hay tráiler disponible para este medio",
+        "copyLink" : "Copiar link",
+        "copiedLink" : "Copiar !",
+        "externalShareMessage" : "Mira esta pelicula es genial !"
     },
     "footer": {
         "copyright": "Todos los derechos reservados.",

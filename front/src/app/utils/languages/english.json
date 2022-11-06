@@ -49,7 +49,10 @@
         "headliners": "Headliners",
         "release": "Released",
         "year_ago": "year(s) ago",
-        "noTrailer": "No trailer available for this media"
+        "noTrailer": "No trailer available for this media",
+        "copyLink" : "Copy link",
+        "copiedLink" : "Copied !",
+        "externalShareMessage" : "Watch this movie it's great !"
     },
     "footer": {
         "copyright": "All rights reserved.",

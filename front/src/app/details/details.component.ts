@@ -3,10 +3,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
+import {
+  ApiMovie,
+  ApiSerie,
+  TranslationLanguage,
+} from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { DateHelper, openInfo, TYPES, YOUTUBE_EMBED_SRC} from 'src/app/utils/utils';
+import {
+  DateHelper,
+  openInfo,
+  TYPES,
+  YOUTUBE_EMBED_SRC,
+} from 'src/app/utils/utils';
 import { getLanguageFile } from '../utils/languages/langues';
 
 @Component({
@@ -16,7 +25,7 @@ import { getLanguageFile } from '../utils/languages/langues';
 })
 export class DetailsComponent {
   //TRANSLATE
-  tooltipMessage: string = 'Copier le lien';
+  tooltipMessage: string = '';
   posterPath: string = environment.apiImageUrl;
   currentVideoUrl: string = '';
   media?: ApiMovie | ApiSerie;
@@ -27,7 +36,7 @@ export class DetailsComponent {
   note: number = 0;
   translation: TranslationLanguage | null = null;
   dialog: MatDialog;
-  openInfo = openInfo; 
+  openInfo = openInfo;
 
   constructor(
     private serieService: SeriesService,
@@ -36,6 +45,7 @@ export class DetailsComponent {
     private dialogRef: MatDialog
   ) {
     this.translation = getLanguageFile();
+    this.tooltipMessage = this.translation?.detail.copyLink as string;
     this.dialog = dialogRef;
     let observer: Observable<ApiMovie | ApiSerie>;
     let videoObservser: Observable<any>;
@@ -94,15 +104,14 @@ export class DetailsComponent {
   copiedTooltip = () => {
     const shareData: ShareData = {
       title: 'SDStreaming',
-      text: 'Regarde ce film il est super !',
+      text: this.translation?.detail.externalShareMessage,
       url: document.URL,
     };
-    this.tooltipMessage = 'Copié !';
+    this.tooltipMessage = this.translation?.detail.copiedLink as string;
     setTimeout(() => {
-      this.tooltipMessage = 'Copier le lien';
+      this.tooltipMessage = this.tooltipMessage;
     }, 3000);
     navigator.clipboard.writeText(document.URL);
     navigator.share(shareData);
   };
-
 }

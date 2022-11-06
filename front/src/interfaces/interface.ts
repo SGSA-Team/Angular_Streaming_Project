@@ -151,71 +151,74 @@ export interface ApiCredit {
 
 export interface TranslationLanguage {
   global: {
-    movies: string,
-  movie: string,
-  series: string,
-  serie: string
-  },
+    movies: string;
+    movie: string;
+    series: string;
+    serie: string;
+  };
   navbar: {
     options: {
-      movies: string,
-      series: string
-  },
-  search:{
+      movies: string;
+      series: string;
+    };
+    search: {
       input: {
-      placeHolder: string
-      },
-      buttonTxt: string
-  }
-  },
+        placeHolder: string;
+      };
+      buttonTxt: string;
+    };
+  };
   home: {
-    title: string,
-    description: string,
-    playingNow: string,
-    trendingOnWeek: string,
-    recentAddOn: string,
-    newEpisode: string,
-  },
-  catalogs:{
-        filters: {
-            popular: string,
-            vote: string,
-            release_date: string
-        }
-  },
-  customCard:{
-    watch: string,
-  },
+    title: string;
+    description: string;
+    playingNow: string;
+    trendingOnWeek: string;
+    recentAddOn: string;
+    newEpisode: string;
+  };
+  catalogs: {
+    filters: {
+      popular: string;
+      vote: string;
+      release_date: string;
+    };
+  };
+  customCard: {
+    watch: string;
+  };
   pagination: {
-      page: string,
-      outOf: string
-  },
-  modal:{
-      see: string,
-      description: string
-  },
-  detail:{
-      seeMore: string,
-      share: string,
-      headliners: string,
-      release: string,
-      year_ago: string,
-      noTrailer:string,
-  },
+    page: string;
+    outOf: string;
+  };
+  modal: {
+    see: string;
+    description: string;
+  };
+  detail: {
+    seeMore: string;
+    share: string;
+    headliners: string;
+    release: string;
+    year_ago: string;
+    noTrailer: string;
+    copyLink: string;
+    copiedLink: string;
+    externalShareMessage: string;
+  };
   footer: {
-      copyright: string,
-      follow: string,
-      legal: string,
-      dataManagement: string,
-      cpuRight: string,
-      langue: string
-  },
-  language_selection:{
-      title: string,
-      options: {
-          french: string,
-          english:string,
-          spanish: string
-      }
-  }
+    copyright: string;
+    follow: string;
+    legal: string;
+    dataManagement: string;
+    cpuRight: string;
+    langue: string;
+  };
+  language_selection: {
+    title: string;
+    options: {
+      french: string;
+      english: string;
+      spanish: string;
+    };
+  };
 }
