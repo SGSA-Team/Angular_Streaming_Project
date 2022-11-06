@@ -67,4 +67,18 @@ npm start
 
 
 
-## 5  Le projet est installé, félicitations 
+## 5  Liens Gestions de Projet 
+
+Maquettes : 
+https://projetimplicaction.atlassian.net/wiki/spaces/~5f8edddb0e068b00766577f6/pages/1867779/Maquette
+
+Board Jira :
+https://projetimplicaction.atlassian.net/jira/software/projects/SDS/boards/2
+
+Tableau de Complexité avec la définition de notre MVP:
+https://projetimplicaction.atlassian.net/wiki/spaces/~5f8edddb0e068b00766577f6/pages/524289/Attente+produit+-+Notation+Valeur+Client+Complexit+Technique
+
+Membres :
+Amine DJENNADI, HASSEN Samir, NOUKPOAPE Giovanni, TIOUASSIOUINE Sofiane
+
+
