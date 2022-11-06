@@ -1,0 +1,73 @@
+{
+    "global":{
+        "movies": "Films",
+        "movie": "Film",
+        "series": "Séries",
+        "serie": "Serie"
+    },
+    "navbar": {
+        "options": {
+            "movies": "Films",
+            "series": "Séries"
+        },
+        "search":{
+            "input": {
+            "placeHolder": "Rechercher un film ou une série"
+            },
+            "buttonTxt":"Rechercher"
+        }
+    },
+    "home": {
+        "title": "Films et séries en illimités sur SDStraming",
+        "description": "Streamer gratuitement où vous voulez",
+        "playingNow": "A l'affiche",
+        "trendingOnWeek": "Les plus populaire de la semaine",
+        "recentAddOn": "Ajout récent",
+        "newEpisode": "nouvel episode"
+    },
+    "catalogs":{
+        "filters": {
+            "popular": "Par popularité",
+            "vote": "Par notes",
+            "release_date": "Par date d'ajout"
+        }
+    },
+    "customCard":{
+        "watch": "Regarder"
+    },
+    "pagination": {
+        "page": "Page",
+        "outOf": "sur"
+    },
+    "modal":{
+        "see": "Voir",
+        "description": "Description"
+    },
+    "detail":{
+        "seeMore": "En savoir plus",
+        "share": "Partager",
+        "headliners": "Têtes d'affiche",
+        "release": "Sortie il y a",
+        "year_ago": "an(s)",
+        "noTrailer": "Aucune bande annonce disponible pour ce média",
+        "copyLink" : "Copier le lien",
+        "copiedLink" : "Copié !",
+        "externalShareMessage" : "Regarde ce film il est super !"
+    },
+    "footer": {
+        "copyright": "Tous droits réservés.",
+        "follow": "Nous suivre",
+        "legal": "legal",
+        "dataManagement": "Gestion des données",
+        "cpuRight": "Droit & CGU",
+        "langue": "Langue"
+    },
+    "language_selection":{
+        "title": "Selectionner un language",
+        "options": {
+            "french": "Français",
+            "english": "Anglais",
+            "spanish": "Espagnole"
+        }
+    }
+}

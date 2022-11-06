@@ -1,0 +1,15 @@
+<nav id="pagination-container" class="pagination-container">
+    <div *ngIf="translation" class="pagination">
+        <button class="pagination__first" (click)="inputChange({number: 1})">
+            <mat-icon>first_page</mat-icon>
+        </button>
+        <div class="pagination__current">
+            <span>{{translation.pagination.page}}</span>
+            <input type="number" value="{{currentPage}}" (change)="inputChange({event:$event})" />
+            <span>{{translation.pagination.outOf}} {{totalPages}}</span>
+        </div>
+        <button class="pagination__last" (click)="inputChange({number: totalPages})">
+            <mat-icon>last_page</mat-icon>
+        </button>
+    </div>
+</nav>

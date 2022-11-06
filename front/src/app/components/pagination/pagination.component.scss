@@ -1,0 +1,41 @@
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+    margin: 10px 0;
+}
+
+.pagination{
+    width: 100%;
+    color: white;
+    display: grid;
+    grid-template-columns: min-content 2fr min-content;
+    grid-template-rows: 1fr;
+
+    &__first, &__last{
+        border: 1px solid white;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__current{
+        display: flex;
+        gap:5px;
+        align-items: center;
+        margin: 0 5px;
+    }
+    &__current > input {
+        width: 60px;
+        background-color: transparent;
+        border: 1px solid white;
+        margin: 0 5px;
+        text-align: center; 
+    }
+    &__current > span {
+        white-space: nowrap;
+    }
+}

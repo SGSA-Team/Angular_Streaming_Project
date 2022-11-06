@@ -1,0 +1,13 @@
+<div class="dialog">
+  <article *ngIf="ytb_key && ytb_link">
+    <iframe width="100%" height="300px" [src]="ytb_link | safe: 'resourceUrl'">
+    </iframe>
+  </article>
+  <div *ngIf="translation && currentMovie && dialogRef" class="dialog-content">
+    <h1 class="dialog-content__link">
+      <a (click)="dialogRef.close()" [routerLink]="detailPageLink">{{translation.modal.see}}</a>
+    </h1>
+    <h2 class="dialog-content__title">{{translation.modal.description}}</h2>
+    <h5 class="dialog-content__description">{{ currentMovie.overview }}</h5>
+  </div>
+</div>

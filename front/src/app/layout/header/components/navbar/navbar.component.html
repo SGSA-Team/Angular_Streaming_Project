@@ -1,0 +1,43 @@
+<nav class="navbar">
+    <div class="navbar__container">
+        <!--Options Lists-->
+        <app-links-list [(clickOnMovies)]="clickOnMovies" [(clickOnSeries)]="clickOnSeries"></app-links-list>
+        <!--LOGO-->
+        <a class="flex justify-center align-center" [routerLink]="['']" (click)="closeCategories('close')">
+            <div class="navbar-logo">
+                <img class="navbar-logo__img" src="https://empire-streaming.co/build/images/Logo-E.ad4141e1.png" />
+                <span>STREAMING</span>
+            </div>
+        </a>
+        <!--Search Bar-->
+        <div class="flex justify-end align-center">
+            <app-global-search-bar></app-global-search-bar>
+        </div>
+    </div>
+    <!--Movies Categories Box -->
+    <div *ngIf="clickOnMovies && moviesGenres" class="navbar-categories">
+        <ng-container *ngIf="moviesGenres && moviesGenres.length > 0">
+            <div *ngFor="let genre of moviesGenres">
+                <a [routerLink]="['catalogs/movies',genre.name ]" [queryParams]="{id: genre.id, name:genre.name}"
+                    (click)="closeCategories(TYPES.movies)">
+                    <span class="navbar-categories__genre">
+                        {{genre.name}}
+                    </span>
+                </a>
+            </div>
+        </ng-container>
+    </div>
+    <!--Series Categories Box -->
+    <div *ngIf="clickOnSeries && seriesGenres" class="navbar-categories">
+        <ng-container *ngIf="seriesGenres && seriesGenres.length > 0">
+            <div *ngFor="let genre of seriesGenres">
+                <a [routerLink]="'catalogs/series'+'/'+genre.name" [queryParams]="{id: genre.id, name:genre.name}"
+                    (click)="closeCategories(TYPES.series)">
+                    <span class="navbar-categories__genre">
+                        {{genre.name}}
+                    </span>
+                </a>
+            </div>
+        </ng-container>
+    </div>
+</nav>
