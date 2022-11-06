@@ -19,7 +19,7 @@
         <ng-container *ngIf="moviesGenres && moviesGenres.length > 0">
             <div *ngFor="let genre of moviesGenres">
                 <a [routerLink]="['catalogs/movies',genre.name ]" [queryParams]="{id: genre.id, name:genre.name}"
-                    (click)="closeCategories('movies')">
+                    (click)="closeCategories(TYPES.movies)">
                     <span class="navbar-categories__genre">
                         {{genre.name}}
                     </span>
@@ -32,7 +32,7 @@
         <ng-container *ngIf="seriesGenres && seriesGenres.length > 0">
             <div *ngFor="let genre of seriesGenres">
                 <a [routerLink]="'catalogs/series'+'/'+genre.name" [queryParams]="{id: genre.id, name:genre.name}"
-                    (click)="closeCategories('series')">
+                    (click)="closeCategories(TYPES.series)">
                     <span class="navbar-categories__genre">
                         {{genre.name}}
                     </span>

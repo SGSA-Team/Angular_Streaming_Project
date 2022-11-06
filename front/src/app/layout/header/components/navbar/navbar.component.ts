@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { TYPES } from 'src/app/utils/utils';
 import { Genre } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
@@ -12,9 +13,8 @@ import { LinksListComponent } from './components/links-list/links-list.component
 export class NavbarComponent implements OnInit {
   @ViewChild(LinksListComponent)
   private linkList: LinksListComponent = new LinksListComponent();
-
-  options = ['movies', 'series'];
-
+  TYPES = TYPES;
+  options = [TYPES.movies, TYPES.series];
   clickOnMovies = false;
   clickOnSeries = false;
 

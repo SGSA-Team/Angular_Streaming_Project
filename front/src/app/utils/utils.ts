@@ -7,7 +7,9 @@ export const TMDB_IMG_SRC_PATH:string = 'https://image.tmdb.org/t/p/original/';
 export const DEFAULT_CARD_IMG = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
 export const TYPES = {
   movie: "movie",
-  serie: "serie"
+  movies: "movies",
+  serie: "serie",
+  series: "series"
 }
 export const DIALOGS_SIZES ={
   minWidth: '50vw',
@@ -15,6 +17,14 @@ export const DIALOGS_SIZES ={
   minHeight: '75vh',
   maxHeight: '75vh',
 }
+
+export const CATALOGS_FILTERS_KEYS={
+  popularity: "popularity",
+  note: "note",
+  dateCreatdAt: "dateCreatdAt",
+}
+
+export const YOUTUBE_EMBED_SRC = 'https://www.youtube.com/embed/'
 
 
 export class DateHelper {
@@ -40,4 +50,8 @@ export const openInfo = (dialogRef:MatDialog, element: ApiMovie | ApiSerie, type
 
 export const getRatingFormat = (rating: number) => {
   return Math.round(rating)
+}
+
+export const getYoutubeLink= (key:string) => {
+  return `https://www.youtube.com/embed/${key}?playlist=${key}&loop=1`;
 }

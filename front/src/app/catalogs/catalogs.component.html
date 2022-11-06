@@ -7,12 +7,13 @@
             <span class="catalogs-header__category" *ngIf="isGenre && genre && genre.name">{{genre.name}}</span>
         </div>
         <ul class="catalogs-header__filters">
-            <li (click)="updateFilter('popularity')"
+            <li (click)="updateFilter(CATALOGS_FILTERS_KEYS.popularity)"
                 [ngClass]="{'catalogs-header__filters-selected': filterSelected.popularity}">
                 {{translation.catalogs.filters.popular}}</li>
-            <li (click)="updateFilter('note')" [ngClass]="{'catalogs-header__filters-selected': filterSelected.note}">
+            <li (click)="updateFilter(CATALOGS_FILTERS_KEYS.note)"
+                [ngClass]="{'catalogs-header__filters-selected': filterSelected.note}">
                 {{translation.catalogs.filters.vote}}</li>
-            <li (click)="updateFilter('dateCreatdAt')"
+            <li (click)="updateFilter(CATALOGS_FILTERS_KEYS.dateCreatdAt)"
                 [ngClass]="{'catalogs-header__filters-selected': filterSelected.dateCreatdAt}">
                 {{translation.catalogs.filters.release_date}}</li>
         </ul>

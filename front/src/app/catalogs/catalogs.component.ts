@@ -5,7 +5,7 @@ import {  ApiMovies, ApiSeries, TranslationLanguage } from 'src/interfaces/inter
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 import { getLanguageFile } from '../utils/languages/langues';
-import { DEFAULT_CARD_IMG, getRatingFormat, TYPES } from 'src/app//utils/utils';
+import { DEFAULT_CARD_IMG, getRatingFormat, TYPES, CATALOGS_FILTERS_KEYS} from 'src/app//utils/utils';
 interface CatalogsFilters {
     dateCreatdAt: boolean,
     popularity:boolean,
@@ -58,7 +58,7 @@ export class CatalogsComponent{
   }
   title=""
   type=""
-  filterOn:string = "popularity" as string
+  filterOn:string = CATALOGS_FILTERS_KEYS.popularity as string
   currentPage:number = 1;
   totalPages:number = 1;
   genre:GenreI | undefined;
@@ -66,6 +66,7 @@ export class CatalogsComponent{
   defaultCardImage = DEFAULT_CARD_IMG;
   getRatingFormat= getRatingFormat; 
   translation: TranslationLanguage | null = null;
+  CATALOGS_FILTERS_KEYS = CATALOGS_FILTERS_KEYS;
 
   constructor(
     private route: ActivatedRoute,private router: Router,
@@ -80,15 +81,15 @@ export class CatalogsComponent{
           movies: {
             ...this.options.movies,
             title: getLanguageFile().global.movies,
-            isSelected: event.url.split("/").includes("movies"),
+            isSelected: event.url.split("/").includes(TYPES.movies),
           },
           series: {
             ...this.options.series,
             title: getLanguageFile().global.series,
-            isSelected: event.url.split("/").includes("series"),
+            isSelected: event.url.split("/").includes(TYPES.series),
           }
         }
-        Object.entries(this.options).find(([key, value]) => {
+        Object.entries(this.options).find(([_, value]) => {
           if (value.isSelected) {
             this.title = value.title;
             this.type = value.type;

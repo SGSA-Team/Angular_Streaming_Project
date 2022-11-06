@@ -6,8 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { DateHelper,DIALOGS_SIZES } from 'src/app/utils/utils';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { DateHelper, openInfo, TYPES, YOUTUBE_EMBED_SRC} from 'src/app/utils/utils';
 import { getLanguageFile } from '../utils/languages/langues';
 
 @Component({
@@ -16,6 +15,7 @@ import { getLanguageFile } from '../utils/languages/langues';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent {
+  //TRANSLATE
   tooltipMessage: string = 'Copier le lien';
   posterPath: string = environment.apiImageUrl;
   currentVideoUrl: string = '';
@@ -26,14 +26,17 @@ export class DetailsComponent {
   video: any;
   note: number = 0;
   translation: TranslationLanguage | null = null;
+  dialog: MatDialog;
+  openInfo = openInfo; 
 
   constructor(
     private serieService: SeriesService,
     private movieService: MovieService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialogRef: MatDialog
   ) {
     this.translation = getLanguageFile();
+    this.dialog = dialogRef;
     let observer: Observable<ApiMovie | ApiSerie>;
     let videoObservser: Observable<any>;
     let peopleObsever: Observable<any>;
@@ -42,20 +45,20 @@ export class DetailsComponent {
       const id = url[2].path;
       this.mediaType = url[1].path;
       switch (this.mediaType) {
-        case 'serie': {
+        case TYPES.serie: {
           observer = this.serieService.getSerieFromId(id);
           videoObservser = this.serieService.getVideos(id);
           peopleObsever = this.serieService.getPeoples(id);
           break;
         }
-        case 'movie': {
+        case TYPES.movie: {
           peopleObsever = this.movieService.getPeoples(id);
           videoObservser = this.movieService.getVideos(id);
           observer = this.movieService.getMovieFromId(id);
           break;
         }
         default: {
-          new Error('pas bon');
+          new Error('wrong type !');
         }
       }
       forkJoin([observer, videoObservser, peopleObsever]).subscribe(
@@ -67,7 +70,7 @@ export class DetailsComponent {
             return v.site === 'YouTube' && v?.key;
           });
           this.note = Math.ceil(media.vote_average / 2);
-          this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
+          this.currentVideoUrl = `${YOUTUBE_EMBED_SRC}${this.video?.key}`;
         }
       );
     });
@@ -87,6 +90,7 @@ export class DetailsComponent {
     return tabStar;
   };
 
+  //TRANSLATE
   copiedTooltip = () => {
     const shareData: ShareData = {
       title: 'SDStreaming',
@@ -101,13 +105,4 @@ export class DetailsComponent {
     navigator.share(shareData);
   };
 
-  openMoreDetails = (media: ApiMovie | ApiSerie) => {
-    this.dialog.open(ModalComponent, {
-      ...DIALOGS_SIZES,
-      data: {
-        data: media,
-        type: this.mediaType,
-      },
-    });
-  };
 }
