@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
+import { getLanguageFile } from 'src/app/utils/languages/langues';
+import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -18,9 +19,11 @@ export class CustomCardComponent{
   @Input() displayeType: string=""
   @Input() title: string=""
   @Input() release_date: string =""
+  translation: TranslationLanguage | null = null;
 
-
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {
+      this.translation = getLanguageFile();
+   }
 
   getRatingFormat(rating: number){
     return Math.round(rating)

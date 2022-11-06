@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ApiMovie, ApiMovies, ApiSerie, ApiSeries } from 'src/interfaces/interface';
+import { ApiMovie, ApiMovies, ApiSerie, ApiSeries, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { getLanguageFile } from '../utils/languages/langues';
 
 interface CatalogsFilters {
     dateCreatdAt: boolean,
@@ -38,7 +39,7 @@ export class CatalogsComponent implements OnInit {
   options = {
     movies :{
       isSelected: false,
-      title: "Films",
+      title: "",
       type: "movie",
       filters: {
         popularity: (page:number=1, genreId:number=0) => this.movieService.getPopularMovies("desc", page, genreId),
@@ -48,7 +49,7 @@ export class CatalogsComponent implements OnInit {
     },
     series:{
       isSelected: false,
-      title: "Series",
+      title: "",
       type: "serie",
       filters: {
         popularity: (page:number=1, genreId:number=0) =>  this.seriesService.getPopularSeries("desc", page, genreId),
@@ -65,11 +66,14 @@ export class CatalogsComponent implements OnInit {
   genre:GenreI | undefined;
   isGenre=false;
   defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
+  translation: TranslationLanguage | null = null;
 
   constructor(
     private route: ActivatedRoute,private router: Router,
     private movieService:MovieService, private seriesService:SeriesService,
     private dialog: MatDialog) { 
+        this.translation = getLanguageFile();
+
         this.router.events.pipe(
           filter((event:any) => event instanceof NavigationEnd)
         ).subscribe((event: any) => {
@@ -78,10 +82,12 @@ export class CatalogsComponent implements OnInit {
             ...this.options,
             movies: {
               ...this.options.movies,
+              title: getLanguageFile().global.movies,
               isSelected: event.url.split("/").includes("movies"),
             },
             series: {
               ...this.options.series,
+              title: getLanguageFile().global.series,
               isSelected: event.url.split("/").includes("series"),
             }
           }

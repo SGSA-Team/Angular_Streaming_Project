@@ -1,0 +1,70 @@
+{
+    "global":{
+        "movies": "Películas",
+        "movie": "Película",
+        "series": "Serie",
+        "serie": "Serie"
+    },
+    "navbar": {
+        "options": {
+            "movies": "Películas",
+            "series": "Película"
+        },
+        "search":{
+            "input": {
+            "placeHolder": "Buscar una película o una serie"
+            },
+            "buttonTxt":"Consulte"
+        }
+    },
+    "home": {
+        "title": "Películas y series ilimitadas en SDStreaming",
+        "description": "Transmite gratis donde quieras",
+        "playingNow": "En exhibición",
+        "trendingOnWeek": "Lo más popular de la semana",
+        "recentAddOn": "Reciente adición",
+        "newEpisode": "nuevo episodio"
+    },
+    "catalogs":{
+        "filters": {
+            "popular": "Por popularidad",
+            "vote": "Por notas",
+            "release_date": "Por fecha añadida"
+        }
+    },
+    "customCard":{
+        "watch": "Mira"
+    },
+    "pagination": {
+        "page": "Página",
+        "outOf": "de"
+    },
+    "modal":{
+        "see": "Ver",
+        "description": "Descripción"
+    },
+    "detail":{
+        "seeMore": "Leer más",
+        "share": "Compartir",
+        "headliners": "Cabezas de cartel",
+        "release": "Publicado hace",
+        "year_ago": "año(s)",
+        "noTrailer": "No hay tráiler disponible para este medio"
+    },
+    "footer": {
+        "copyright": "Todos los derechos reservados.",
+        "follow": "Siga con nosotros",
+        "legal": "legal",
+        "dataManagement": "Gestión de datos",
+        "cpuRight": "A la derecha & CGU",
+        "langue": "Idioma"
+    },
+    "language_selection":{
+        "title": "Seleccione un idioma",
+        "options": {
+            "french": "Francés",
+            "english": "Inglés",
+            "spanish": "Español"
+        }
+    }
+}

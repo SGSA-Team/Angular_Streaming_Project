@@ -1,5 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import {faMagnifyingGlass, faXmark} from "@fortawesome/free-solid-svg-icons"
+import { getLanguageFile } from 'src/app/utils/languages/langues';
+import { TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 
@@ -17,7 +19,7 @@ interface Result{
   templateUrl: './global-search-bar.component.html',
   styleUrls: ['./global-search-bar.component.scss']
 })
-export class GlobalSearchBarComponent implements OnInit {
+export class GlobalSearchBarComponent {
   searchIcon = faMagnifyingGlass;
   deleteIcon = faXmark;
   clickedOnSearch = false;
@@ -29,10 +31,10 @@ export class GlobalSearchBarComponent implements OnInit {
   displayedData : Result[] =[]
   defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
   loadingData = false;
+  translation: TranslationLanguage | null = null;
 
-  constructor(private eRef: ElementRef, private movieService:MovieService, private seriesService:SeriesService) { }
-
-  ngOnInit(): void {
+  constructor(private eRef: ElementRef, private movieService:MovieService, private seriesService:SeriesService) { 
+    this.translation = getLanguageFile();
   }
 
   toggleSearchFocus() {

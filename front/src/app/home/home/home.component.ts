@@ -1,17 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { take, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import {
   ModalComponent,
   MediaType,
 } from 'src/app/components/modal/modal.component';
+import { getLanguageFile } from 'src/app/utils/languages/langues';
 import { environment } from 'src/environments/environment';
-import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
+import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 @Component({
@@ -25,15 +24,15 @@ export class HomeComponent implements OnInit {
   latestMovies: ApiMovie[] | null = null;
   latestSeries: ApiSerie[] | null = null;
   mostViewedSeries: ApiSerie[] | null = null;
-
   posterPath: string = environment.apiImageUrl;
+  translation: TranslationLanguage | null = null;
 
   constructor(
     private movieService: MovieService,
     private serieService: SeriesService,
-    private router: Router,
     private dialog: MatDialog
   ) {
+    this.translation = getLanguageFile();
     forkJoin([
       this.movieService.getPlayingMovies(),
       this.movieService.getPopular(),
@@ -47,8 +46,6 @@ export class HomeComponent implements OnInit {
         this.mostViewedSeries = mostSerie;
         this.latestMovies = latestMovies.results;
         this.latestSeries = latestSeries.results;
-
-        console.log(playing, this.latestMovies, latestMovies);
       }
     );
   }

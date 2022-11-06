@@ -1,19 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { getLanguageFile } from 'src/app/utils/languages/langues';
+import { TranslationLanguage } from 'src/interfaces/interface';
 @Component({
   selector: 'app-links-list',
   templateUrl: './links-list.component.html',
   styleUrls: ['./links-list.component.scss']
 })
-export class LinksListComponent implements OnInit {
+export class LinksListComponent {
 
   @Input() clickOnMovies:boolean= false;
   @Input() clickOnSeries:boolean= false;
   @Output() clickOnMoviesChange = new EventEmitter<boolean>();
   @Output() clickOnSeriesChange = new EventEmitter<boolean>();
+  translation: TranslationLanguage | null = null;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+      this.translation = getLanguageFile();
   }
 
   onClickCategory(type:string):void {

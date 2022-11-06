@@ -1,4 +1,6 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { getLanguageFile } from 'src/app/utils/languages/langues';
+import { TranslationLanguage } from 'src/interfaces/interface';
 interface PageI{
   event?: Event; 
   number?: number; 
@@ -15,7 +17,11 @@ export class PaginationComponent implements OnInit {
   @Output() currentPageChange = new EventEmitter<number>();
   @Output() totalPagesChange = new EventEmitter<number>();
   @Output("pageChange") pageChange: EventEmitter<number> = new EventEmitter<number>();
-  constructor() { }
+  translation: TranslationLanguage | null = null;
+
+  constructor() {
+    this.translation = getLanguageFile();
+   }
 
   ngOnInit(): void {
   }

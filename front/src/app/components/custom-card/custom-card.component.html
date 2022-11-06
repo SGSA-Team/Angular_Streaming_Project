@@ -23,10 +23,10 @@
                     <span class="flex items-center">{{getRatingFormat(element.vote_average)}}</span>
                     <span class="material-icons text-red-600 text-lg">star</span>
                 </span>
-                <span class="custom-videos-card__decorations-link">
+                <span *ngIf="translation" class="custom-videos-card__decorations-link">
                     <span
                         class="custom-videos-card__decorations-link-icon material-icons text-red-600 text-2xl">play_circle_outline</span>
-                    <span class="custom-videos-card__decorations-link-title">Regarder</span>
+                    <span class="custom-videos-card__decorations-link-title">{{translation.customCard.watch}}</span>
                 </span>
             </div>
         </a>
