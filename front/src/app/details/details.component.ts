@@ -109,7 +109,7 @@ export class DetailsComponent {
     };
     this.tooltipMessage = this.translation?.detail.copiedLink as string;
     setTimeout(() => {
-      this.tooltipMessage = this.tooltipMessage;
+      this.tooltipMessage = this.translation?.detail.copyLink as string;
     }, 3000);
     navigator.clipboard.writeText(document.URL);
     navigator.share(shareData);
