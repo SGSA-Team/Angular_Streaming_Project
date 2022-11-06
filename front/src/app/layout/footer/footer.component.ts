@@ -13,7 +13,6 @@ export class FooterComponent implements OnInit {
   constructor() {
     this.translation = getLanguageFile();
     this.defaultLanguage = getAppLanguage()
-    console.log(getLanguageFile())
   }
 
   ngOnInit(): void {
@@ -21,7 +20,6 @@ export class FooterComponent implements OnInit {
   }
 
   updateLanguage(event: Event){
-    console.log("event",event);
     setAppLanguage(event);
     this.translation = getLanguageFile();
     window.location.reload();
