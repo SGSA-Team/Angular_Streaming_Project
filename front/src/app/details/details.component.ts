@@ -4,11 +4,12 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute } from '@angular/router';
 import { filter, forkJoin, Observable, Subscriber } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ApiMovie, ApiSerie } from 'src/interfaces/interface';
+import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 import { DateHelper } from 'src/app/utils/utils';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { getLanguageFile } from '../utils/languages/langues';
 
 @Component({
   selector: 'app-details',
@@ -25,6 +26,7 @@ export class DetailsComponent implements OnInit {
   mediaType: string = '';
   video: any;
   note: number = 0;
+  translation: TranslationLanguage | null = null;
 
   constructor(
     private serieService: SeriesService,
@@ -32,8 +34,7 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog
   ) {
-    console.log(DateHelper.diffDateToNow(new Date('1 January 2000')));
-
+    this.translation = getLanguageFile();
     let observer: Observable<ApiMovie | ApiSerie>;
     let videoObservser: Observable<any>;
     let peopleObsever: Observable<any>;

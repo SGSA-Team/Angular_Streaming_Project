@@ -1,0 +1,70 @@
+{
+     "global":{
+        "movies": "Movies",
+        "movie": "Movie",
+        "series": "Series",
+        "serie": "Serie"
+    },
+    "navbar": {
+        "options": {
+            "movies": "Movies",
+            "series": "Series"
+        },
+        "search":{
+            "input": {
+            "placeHolder": "Search a movie or a serie"
+            },
+            "buttonTxt":"Search"
+        }
+    },
+    "home": {
+        "title": "Unlimited movies and series on SDStreaming",
+        "description": "Stream for free wherever you want",
+        "playingNow": "On display",
+        "trendingOnWeek": "Most popular of the week",
+        "recentAddOn": "Recent addition",
+        "newEpisode": "new episode"
+    },
+    "catalogs":{
+        "filters": {
+            "popular": "By popularity",
+            "vote": "By notes",
+            "release_date": "By date added"
+        }
+    },
+    "customCard":{
+        "watch": "Watch"
+    },
+    "pagination": {
+        "page": "Page",
+        "outOf": "out of"
+    },
+    "modal":{
+        "see": "See",
+        "description": "Description"
+    },
+    "detail":{
+        "seeMore": "Read more",
+        "share": "Share",
+        "headliners": "Headliners",
+        "release": "Released",
+        "year_ago": "year(s) ago",
+        "noTrailer": "No trailer available for this media"
+    },
+    "footer": {
+        "copyright": "All rights reserved.",
+        "follow": "Follow us",
+        "legal": "legal",
+        "dataManagement": "Data management",
+        "cpuRight": "Right & CGU",
+        "langue": "Langue"
+    },
+    "language_selection":{
+        "title": "Select a language",
+        "options": {
+            "french": "French",
+            "english": "English",
+            "spanish": "Spanish"
+        }
+    }
+}

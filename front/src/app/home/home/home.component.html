@@ -1,56 +1,42 @@
-<section id="header">
+<section *ngIf="translation" id="header">
   <main id="main-content">
     <div class="demo-wrap">
-      <img
-        class="demo-bg"
-        src="https://empire-streaming.co/images/medias/Aa9TLpNpBMyRkD8sPJ7ACKLjt0l.jpg"
-        alt=""
-      />
+      <img class="demo-bg" src="https://empire-streaming.co/images/medias/Aa9TLpNpBMyRkD8sPJ7ACKLjt0l.jpg" alt="" />
     </div>
     <div class="container mx-auto my-0">
       <div class="bg-content p-6 relative">
         <p class="text-neutral-400 text-lg mb-3">
-          Streamer gratuitement où vous voulez
+          {{translation.home.description}}
         </p>
         <h1 class="text-5xl font-bold mb-6">
-          Films et séries en illimités sur SDStraming
+          {{translation.home.title}}
         </h1>
       </div>
     </div>
   </main>
 </section>
-<section id="content">
+<section *ngIf="translation" id="content">
   <main class="text-white mx-auto my-0 container p-6">
     <div class="container-poster">
-      <h2 class="text-2xl uppercase font-extrabold mb-8">A l'affiche</h2>
+      <h2 class="text-2xl uppercase font-extrabold mb-8">{{translation.home.playingNow}}</h2>
       <div *ngIf="nowPlayingMovies; else skeleton" class="movie-list">
         <!-- en faire un composant -->
 
-        <article
-          *ngFor="let movie of nowPlayingMovies"
-          class="movie hover:scale-105"
-          routerLink="{{ 'detail/movie/' + movie?.id }}"
-        >
-          <img
-            src="{{ posterPath + movie.poster_path }}"
-            alt="img movie card"
-          />
+        <article *ngFor="let movie of nowPlayingMovies" class="movie hover:scale-105"
+          routerLink="{{ 'detail/movie/' + movie?.id }}">
+          <img src="{{ posterPath + movie.poster_path }}" alt="img movie card" />
         </article>
       </div>
     </div>
     <div class="container-poster">
       <h2 class="text-2xl uppercase font-extrabold mb-8">
-        Films
-        <span class="text-base text-neutral-400 tracking-wider"
-          >Les plus populaire de la semaine
+        {{translation.global.movies}}
+        <span class="text-base text-neutral-400 tracking-wider">{{translation.home.trendingOnWeek}}
         </span>
       </h2>
       <div *ngIf="mostViewedMovies; else skeleton" class="movie-list popular">
         <!-- en faire un composant -->
-        <div
-          *ngFor="let movie of mostViewedMovies; let index = index"
-          class="movie relative"
-        >
+        <div *ngFor="let movie of mostViewedMovies; let index = index" class="movie relative">
           <span class="num absolute font-semibold z-20">{{ index + 1 }} </span>
           <article class="movie popular">
             <div (click)="openInfo(movie, 'movie')" class="absolute info">
@@ -58,20 +44,13 @@
                 info
               </mat-icon>
             </div>
-            <div
-              routerLink="{{ 'detail/movie/' + movie?.id }}"
-              class="gradiant-filter peer"
-            ></div>
-            <img
-              class="peer-hover:scale-110"
-              src="{{ posterPath + movie.poster_path }}"
-              alt="img movie card"
-            />
+            <div routerLink="{{ 'detail/movie/' + movie?.id }}" class="gradiant-filter peer"></div>
+            <img class="peer-hover:scale-110" src="{{ posterPath + movie.poster_path }}" alt="img movie card" />
 
             <div class="content-movie">
               <div>
-                <span class="text-neutral-400"> Film </span
-                >{{ movie.release_date.split("-")[0] }}
+                <span class="text-neutral-400"> {{translation.global.movie}} </span>{{ movie.release_date.split("-")[0]
+                }}
               </div>
               <div>
                 <span>{{ movie.title }}</span>
@@ -87,17 +66,13 @@
     </div>
     <div class="container-poster">
       <h2 class="text-2xl uppercase font-extrabold mb-8">
-        Series
-        <span class="text-base text-neutral-400 tracking-wider"
-          >Les plus populaire de la semaine
+        {{translation.global.series}}
+        <span class="text-base text-neutral-400 tracking-wider">{{translation.home.trendingOnWeek}}
         </span>
       </h2>
       <div *ngIf="mostViewedSeries; else skeleton" class="movie-list popular">
         <!-- en faire un composant -->
-        <div
-          *ngFor="let movie of mostViewedSeries; let index = index"
-          class="movie relative"
-        >
+        <div *ngFor="let movie of mostViewedSeries; let index = index" class="movie relative">
           <span class="num absolute font-semibold z-20">{{ index + 1 }}</span>
           <article class="movie popular">
             <div (click)="openInfo(movie, 'serie')" class="absolute info">
@@ -105,20 +80,13 @@
                 info
               </mat-icon>
             </div>
-            <div
-              routerLink="{{ 'detail/serie/' + movie?.id }}"
-              class="gradiant-filter peer"
-            ></div>
-            <img
-              class="peer-hover:scale-110"
-              src="{{ posterPath + movie.poster_path }}"
-              alt="img movie card"
-            />
+            <div routerLink="{{ 'detail/serie/' + movie?.id }}" class="gradiant-filter peer"></div>
+            <img class="peer-hover:scale-110" src="{{ posterPath + movie.poster_path }}" alt="img movie card" />
 
             <div class="content-movie">
               <div>
-                <span class="text-neutral-400"> Film </span
-                >{{ movie.first_air_date.split("-")[0] }}
+                <span class="text-neutral-400"> {{translation.global.movie}} </span>{{
+                movie.first_air_date.split("-")[0] }}
               </div>
               <div>
                 <span>{{ movie.original_name }}</span>
@@ -134,37 +102,26 @@
     </div>
     <div class="container-poster">
       <h2 class="text-2xl uppercase font-extrabold mb-8">
-        Films
-        <span class="text-base text-neutral-400 tracking-wider"
-          >Ajout récents
+        {{translation.global.movies}}
+        <span class="text-base text-neutral-400 tracking-wider">{{translation.home.recentAddOn}}
         </span>
       </h2>
       <div *ngIf="latestMovies; else skeleton" class="movie-list popular">
         <!-- en faire un composant -->
-        <div
-          *ngFor="let movie of latestMovies; let index = index"
-          class="movie relative"
-        >
+        <div *ngFor="let movie of latestMovies; let index = index" class="movie relative">
           <article class="movie popular">
             <div (click)="openInfo(movie, 'movie')" class="absolute info">
               <mat-icon class="material-icons-outlined hover:text-white">
                 info
               </mat-icon>
             </div>
-            <div
-              routerLink="{{ 'detail/movie/' + movie?.id }}"
-              class="gradiant-filter peer"
-            ></div>
-            <img
-              class="peer-hover:scale-110"
-              src="{{ posterPath + movie.poster_path }}"
-              alt="img movie card"
-            />
+            <div routerLink="{{ 'detail/movie/' + movie?.id }}" class="gradiant-filter peer"></div>
+            <img class="peer-hover:scale-110" src="{{ posterPath + movie.poster_path }}" alt="img movie card" />
 
             <div class="content-movie">
               <div>
-                <span class="text-neutral-400"> Film </span
-                >{{ movie.release_date.split("-")[0] }}
+                <span class="text-neutral-400"> {{translation.global.movie}} </span>{{ movie.release_date.split("-")[0]
+                }}
               </div>
               <div>
                 <span>{{ movie.title }}</span>
@@ -180,43 +137,32 @@
     </div>
     <div class="container-poster">
       <h2 class="text-2xl uppercase font-extrabold mb-8">
-        Serie
-        <span class="text-base text-neutral-400 tracking-wider"
-          >Ajout récents
+        {{translation.global.serie}}
+        <span class="text-base text-neutral-400 tracking-wider">{{translation.home.recentAddOn}}
         </span>
       </h2>
       <div *ngIf="latestSeries; else skeleton" class="movie-list popular">
         <!-- en faire un composant -->
-        <div
-          *ngFor="let movie of latestSeries; let index = index"
-          class="movie relative"
-        >
+        <div *ngFor="let movie of latestSeries; let index = index" class="movie relative">
           <article class="movie popular new-add">
             <div (click)="openInfo(movie, 'serie')" class="absolute info">
               <mat-icon class="material-icons-outlined hover:text-white">
                 info
               </mat-icon>
             </div>
-            <div
-              routerLink="{{ 'detail/serie/' + movie?.id }}"
-              class="gradiant-filter peer"
-            ></div>
-            <img
-              *ngIf="movie.poster_path; else imgNotFound"
-              class="peer-hover:scale-110"
-              src="{{ posterPath + movie?.poster_path }}"
-              alt="img movie card"
-            />
+            <div routerLink="{{ 'detail/serie/' + movie?.id }}" class="gradiant-filter peer"></div>
+            <img *ngIf="movie.poster_path; else imgNotFound" class="peer-hover:scale-110"
+              src="{{ posterPath + movie?.poster_path }}" alt="img movie card" />
 
             <div class="content-movie">
               <div>
-                <span class="text-neutral-400"> Film </span
-                >{{ movie.first_air_date.split("-")[0] }}
+                <span class="text-neutral-400"> {{translation.global.serie}} </span>{{
+                movie.first_air_date.split("-")[0] }}
               </div>
               <div>
                 <span>{{ movie.original_name }}</span>
               </div>
-              <p class="new-epic">nouvel episode</p>
+              <p class="new-epic">{{translation.home.newEpisode}}</p>
               <div class="flex gap-0.5">
                 <span>{{ movie.vote_average.toFixed(0) }} </span>
                 <span class="material-icons text-red-600">star</span>
@@ -230,19 +176,14 @@
 </section>
 
 <ng-template #skeleton>
-  <div
-    role="status"
-    class="
+  <div role="status" class="
       space-y-8
       animate-pulse
       md:space-y-0 md:space-x-8
       md:flex
       md:items-center
-    "
-  >
-    <div
-      *ngFor="let i of [0, 1, 2, 3]"
-      class="
+    ">
+    <div *ngFor="let i of [0, 1, 2, 3]" class="
         flex
         justify-center
         items-center
@@ -251,26 +192,16 @@
         bg-gray-300
         rounded
         dark:bg-gray-700
-      "
-    >
-      <svg
-        class="w-12 h-12 text-gray-200"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 640 512"
-      >
+      ">
+      <svg class="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor"
+        viewBox="0 0 640 512">
         <path
-          d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"
-        />
+          d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
       </svg>
     </div>
   </div>
 </ng-template>
 <ng-template #imgNotFound>
-  <img
-    class="peer-hover:scale-110 object-cover h-full"
-    src=" https://mergejil.mn/mergejilmn/no-image.jpeg"
-    alt="img movie card"
-  />
+  <img class="peer-hover:scale-110 object-cover h-full" src=" https://mergejil.mn/mergejilmn/no-image.jpeg"
+    alt="img movie card" />
 </ng-template>

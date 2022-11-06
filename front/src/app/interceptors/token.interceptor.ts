@@ -8,10 +8,11 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { USER_LANG } from '../utils/utils';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  language = localStorage.getItem('lang');
+  language = localStorage.getItem(USER_LANG);
   constructor() {}
 
   intercept(

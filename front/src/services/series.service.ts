@@ -43,7 +43,6 @@ export class SeriesService {
   getPeoples = (id: string) => {
     return this.http.get<ApiCredit>(`${this.apiBaseUrl}/tv/${id}/credits`).pipe(
       map((peoples) => {
-        console.log(peoples);
         return peoples.cast
           .filter((people: ApiPeople) => {
             return people.known_for_department == 'Acting';
@@ -58,7 +57,6 @@ export class SeriesService {
     page: number = 1,
     genreId?: number
   ): Observable<ApiSeries> => {
-    console.log('genreId', genreId);
     return this.http.get<ApiSeries>(
       `${
         this.apiBaseUrl

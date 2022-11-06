@@ -1,7 +1,7 @@
-<ul class="link-list">
+<ul *ngIf="translation" class="link-list">
     <li class="flex justify-center align-center cursor-pointer gap-2">
         <a class="flex link-list__title" [routerLink]="'catalogs/movies'" (click)="onClickCategory('close')">
-            Movies
+            {{translation.navbar.options.movies}}
         </a>
         <span (click)='onClickCategory("movies")' class="arrow-icon arrow-icon--down"
             [ngClass]="clickOnMovies ? 'arrow-icon--down' : 'arrow-icon--up'">
@@ -13,7 +13,7 @@
     </li>
     <li class="flex justify-center align-center cursor-pointer gap-2">
         <a class="flex link-list__title" [routerLink]="'catalogs/series'" (click)="onClickCategory('close')">
-            Series
+            {{translation.navbar.options.series}}
         </a>
         <span (click)='onClickCategory("series")' class="arrow-icon arrow-icon--down"
             [ngClass]="clickOnSeries ? 'arrow-icon--down' : 'arrow-icon--up'">

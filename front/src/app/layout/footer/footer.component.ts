@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import {getAppLanguage, getLanguageFile, setAppLanguage, setDefaultLanguage} from 'src/app/utils/languages/langues';
+import { TranslationLanguage } from 'src/interfaces/interface';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +8,20 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  constructor() {}
-  ngOnInit(): void {}
+  translation: TranslationLanguage | null = null;
+  defaultLanguage: string | null = null
+  constructor() {
+    this.translation = getLanguageFile();
+    this.defaultLanguage = getAppLanguage()
+  }
+
+  ngOnInit(): void {
+    setDefaultLanguage()
+  }
+
+  updateLanguage(event: Event){
+    setAppLanguage(event);
+    this.translation = getLanguageFile();
+    window.location.reload();
+  }
 }

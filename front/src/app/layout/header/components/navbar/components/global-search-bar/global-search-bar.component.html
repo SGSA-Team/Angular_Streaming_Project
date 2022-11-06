@@ -1,9 +1,9 @@
-<div class="search-box">
+<div *ngIf="translation" class="search-box">
     <button class="btn-search" (click)="toggleSearchFocus()">
         <fa-icon [icon]="searchIcon" style="font-size: 24px"></fa-icon>
     </button>
     <input type="text" class="input-search" [ngClass]="{'animate-input': focusOnSearch}" [(ngModel)]="value"
-        (input)="trackInputChange()" placeholder="Rechercher un film ou une série">
+        (input)="trackInputChange()" placeholder="{{translation.navbar.search.input.placeHolder}}">
     <button class="input-delete" [ngClass]="{'input-delete-show': focusOnSearch && value.length > 0}"
         (click)="resetValue()">
         <fa-icon [icon]="deleteIcon" style="font-size: 20px"></fa-icon>
@@ -11,13 +11,13 @@
     <div *ngIf="focusOnSearch && value && value.length > 0" class="search-data-container">
         <button style="height: 40px;" (click)="searchData()"
             class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">
-            {{loadingData ? '...' : 'Rechercher'}}
+            {{loadingData ? '...' : translation.navbar.search.buttonTxt}}
         </button>
         <div *ngIf="data && data.length > 0" class="search-data-types">
             <button class="search-data-types__btn" [ngClass]="{'search-data-types__btn--active': moviesFilter}"
-                (click)="filterResults('movies')">Films</button>
+                (click)="filterResults('movies')">{{translation.navbar.options.movies}}</button>
             <button class="search-data-types__btn" [ngClass]="{'search-data-types__btn--active': seriesFilter}"
-                (click)="filterResults('series')">Séries</button>
+                (click)="filterResults('series')">{{translation.navbar.options.series}}</button>
         </div>
         <div *ngIf="data && data.length > 0" class="search-data-results">
             <div *ngFor="let data of displayedData">

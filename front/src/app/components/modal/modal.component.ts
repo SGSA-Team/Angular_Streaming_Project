@@ -1,7 +1,8 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ApiMovie, ApiSerie, ApiVideo } from 'src/interfaces/interface';
+import { getLanguageFile } from 'src/app/utils/languages/langues';
+import { ApiMovie, ApiSerie, ApiVideo, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 
@@ -15,6 +16,7 @@ export class ModalComponent {
   ytb_key: string | null = null;
   ytb_link: string | null = null;
   detailPageLink: string = ""
+  translation: TranslationLanguage | null = null;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -29,6 +31,7 @@ export class ModalComponent {
     private seriesService: SeriesService,
     public sanitizer: DomSanitizer
   ) {
+    this.translation = getLanguageFile();
     this.detailPageLink = data.link;
     this.currentMovie = data.data;
     this.fetchData(this.currentMovie.id, data.type);

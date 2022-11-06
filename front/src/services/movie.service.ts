@@ -101,7 +101,7 @@ export class MovieService {
         this.apiBaseUrl
       }/discover/movie?sort_by=vote_count.${type}&page=${page}&release_date.lte=${newDate.getFullYear()}-12-31&${
         genreId !== 0 && `with_genres=${genreId}&`
-      }language=en-US&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`
+      }&with_original_language=en&include_adult=false&include_video=false&with_watch_monetization_types=flatrate`
     );
   };
 
