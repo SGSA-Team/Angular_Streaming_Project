@@ -81,4 +81,13 @@ https://projetimplicaction.atlassian.net/wiki/spaces/~5f8edddb0e068b00766577f6/p
 Membres :
 Amine DJENNADI, HASSEN Samir, NOUKPOAPE Giovanni, TIOUASSIOUINE Sofiane
 
+## 6 Liens vers le site en ligne
+Hébergé sur Netlify
+- Prod (main) => https://sds-streaming.netlify.app/
+- Dev (develop) => https://dev-sds-streaming.netlify.app/
+
+## 7 **Contribution au PROJET** 
+
+![image](https://user-images.githubusercontent.com/59694643/200197069-d539b526-f200-4d89-88e5-e331648d6c5e.png)
+
 
