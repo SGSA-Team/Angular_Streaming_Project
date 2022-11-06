@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute } from '@angular/router';
-import { filter, forkJoin, Observable, Subscriber } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { DateHelper } from 'src/app/utils/utils';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { DateHelper, openInfo, TYPES, YOUTUBE_EMBED_SRC} from 'src/app/utils/utils';
 import { getLanguageFile } from '../utils/languages/langues';
 
 @Component({
@@ -16,7 +14,8 @@ import { getLanguageFile } from '../utils/languages/langues';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
+  //TRANSLATE
   tooltipMessage: string = 'Copier le lien';
   posterPath: string = environment.apiImageUrl;
   currentVideoUrl: string = '';
@@ -27,14 +26,17 @@ export class DetailsComponent implements OnInit {
   video: any;
   note: number = 0;
   translation: TranslationLanguage | null = null;
+  dialog: MatDialog;
+  openInfo = openInfo; 
 
   constructor(
     private serieService: SeriesService,
     private movieService: MovieService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialogRef: MatDialog
   ) {
     this.translation = getLanguageFile();
+    this.dialog = dialogRef;
     let observer: Observable<ApiMovie | ApiSerie>;
     let videoObservser: Observable<any>;
     let peopleObsever: Observable<any>;
@@ -43,20 +45,20 @@ export class DetailsComponent implements OnInit {
       const id = url[2].path;
       this.mediaType = url[1].path;
       switch (this.mediaType) {
-        case 'serie': {
+        case TYPES.serie: {
           observer = this.serieService.getSerieFromId(id);
           videoObservser = this.serieService.getVideos(id);
           peopleObsever = this.serieService.getPeoples(id);
           break;
         }
-        case 'movie': {
+        case TYPES.movie: {
           peopleObsever = this.movieService.getPeoples(id);
           videoObservser = this.movieService.getVideos(id);
           observer = this.movieService.getMovieFromId(id);
           break;
         }
         default: {
-          new Error('pas bon');
+          new Error('wrong type !');
         }
       }
       forkJoin([observer, videoObservser, peopleObsever]).subscribe(
@@ -68,7 +70,7 @@ export class DetailsComponent implements OnInit {
             return v.site === 'YouTube' && v?.key;
           });
           this.note = Math.ceil(media.vote_average / 2);
-          this.currentVideoUrl = `http://www.youtube.com/embed/${this.video?.key}`;
+          this.currentVideoUrl = `${YOUTUBE_EMBED_SRC}${this.video?.key}`;
         }
       );
     });
@@ -88,6 +90,7 @@ export class DetailsComponent implements OnInit {
     return tabStar;
   };
 
+  //TRANSLATE
   copiedTooltip = () => {
     const shareData: ShareData = {
       title: 'SDStreaming',
@@ -102,18 +105,4 @@ export class DetailsComponent implements OnInit {
     navigator.share(shareData);
   };
 
-  openMoreDetails = (media: ApiMovie | ApiSerie) => {
-    this.dialog.open(ModalComponent, {
-      minWidth: '50vw',
-      maxWidth: '50vw',
-      minHeight: '75vh',
-      maxHeight: '75vh',
-      data: {
-        data: media,
-        type: this.mediaType,
-      },
-    });
-  };
-
-  ngOnInit(): void {}
 }

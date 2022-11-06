@@ -4,14 +4,14 @@ import { getLanguageFile } from 'src/app/utils/languages/langues';
 import { TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-
+import { DEFAULT_CARD_IMG, getCardImageBg, TYPES } from "src/app/utils/utils";
 
 interface Result{
   id: number;
   title: string;
   img: string;
   type:string;
-  displayedType:string;
+  displayedType:string|undefined;
 }
 
 @Component({
@@ -29,8 +29,10 @@ export class GlobalSearchBarComponent {
   moviesFilter=false;
   seriesFilter=false;
   displayedData : Result[] =[]
-  defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
+  defaultCardImage = DEFAULT_CARD_IMG;
   loadingData = false;
+  TYPES = TYPES;
+  getCardImageBg=getCardImageBg;
   translation: TranslationLanguage | null = null;
 
   constructor(private eRef: ElementRef, private movieService:MovieService, private seriesService:SeriesService) { 
@@ -40,6 +42,7 @@ export class GlobalSearchBarComponent {
   toggleSearchFocus() {
     this.focusOnSearch = !this.focusOnSearch;
   }
+
   async searchData (){
     this.loadingData = true; 
     this.data = [];
@@ -51,15 +54,15 @@ export class GlobalSearchBarComponent {
           id: el.id,
           title: el.title,
           img: el.poster_path,
-          displayedType: "Film",
-          type: "movie"
+          displayedType: this.translation?.global.movie,
+          type: this.TYPES.movie
         })
         this.displayedData.push({
           id: el.id,
           title: el.title,
           img: el.poster_path,
-          displayedType: "Film",
-          type: "movie"
+          displayedType: this.translation?.global.movie,
+          type: this.TYPES.movie
         })
         this.loadingData = false; 
       })
@@ -72,15 +75,15 @@ export class GlobalSearchBarComponent {
           id: el.id,
           title: el.name,
           img: el.backdrop_path,
-          displayedType: "Série",
-          type: "serie"
+          displayedType: this.translation?.global.serie,
+          type: this.TYPES.serie
         })
         this.displayedData.push({
           id: el.id,
           title: el.name,
           img: el.backdrop_path,
-          displayedType: "Série",
-          type: "serie"
+          displayedType: this.translation?.global.serie,
+          type: this.TYPES.serie
         })
         this.loadingData = false; 
       })
@@ -88,13 +91,9 @@ export class GlobalSearchBarComponent {
     })
   }
 
-  getCardImageBg(path: string){
-    return 'https://image.tmdb.org/t/p/original/'+path;
-  }
-
   filterResults(filter:string){
     switch(filter){
-      case "movies": {
+      case this.TYPES.movie: {
         this.seriesFilter = false;
         if(this.moviesFilter){
           this.displayedData = this.data
@@ -104,7 +103,7 @@ export class GlobalSearchBarComponent {
         this.moviesFilter = !this.moviesFilter;
         break;
       }
-      case "series": {
+      case this.TYPES.serie: {
         this.moviesFilter = false;
         if(this.seriesFilter){
           this.displayedData = this.data
@@ -115,7 +114,7 @@ export class GlobalSearchBarComponent {
         break;
       }
       default: {
-        //
+        console.error("error while applying filter ! Unknow filter !")
         break;
       }
     }

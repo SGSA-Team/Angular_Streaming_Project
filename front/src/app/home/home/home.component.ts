@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   MatDialog,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import {
-  ModalComponent,
-  MediaType,
-} from 'src/app/components/modal/modal.component';
 import { getLanguageFile } from 'src/app/utils/languages/langues';
+import { openInfo, TYPES } from 'src/app/utils/utils';
 import { environment } from 'src/environments/environment';
 import { ApiMovie, ApiSerie, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
@@ -18,7 +14,7 @@ import { SeriesService } from 'src/services/series.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent{
   nowPlayingMovies: ApiMovie[] | null = null;
   mostViewedMovies: ApiMovie[] | null = null;
   latestMovies: ApiMovie[] | null = null;
@@ -26,13 +22,17 @@ export class HomeComponent implements OnInit {
   mostViewedSeries: ApiSerie[] | null = null;
   posterPath: string = environment.apiImageUrl;
   translation: TranslationLanguage | null = null;
+  dialog: MatDialog;
+  openInfo = openInfo;
+  TYPES= TYPES;
 
   constructor(
     private movieService: MovieService,
     private serieService: SeriesService,
-    private dialog: MatDialog
+    private dialogRef: MatDialog
   ) {
     this.translation = getLanguageFile();
+    this.dialog = dialogRef;
     forkJoin([
       this.movieService.getPlayingMovies(),
       this.movieService.getPopular(),
@@ -49,18 +49,4 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  ngOnInit(): void {}
-
-  openInfo = (movie: ApiMovie | ApiSerie, type: MediaType) => {
-    this.dialog.open(ModalComponent, {
-      minWidth: '50vw',
-      maxWidth: '50vw',
-      minHeight: '75vh',
-      maxHeight: '75vh',
-      data: {
-        data: movie,
-        type: type,
-      },
-    });
-  };
 }

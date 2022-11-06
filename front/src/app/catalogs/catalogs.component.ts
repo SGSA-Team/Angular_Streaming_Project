@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ApiMovie, ApiMovies, ApiSerie, ApiSeries, TranslationLanguage } from 'src/interfaces/interface';
+import {  ApiMovies, ApiSeries, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { getLanguageFile } from '../utils/languages/langues';
-
+import { DEFAULT_CARD_IMG, getRatingFormat, TYPES, CATALOGS_FILTERS_KEYS} from 'src/app//utils/utils';
 interface CatalogsFilters {
     dateCreatdAt: boolean,
     popularity:boolean,
@@ -26,7 +24,7 @@ interface fetchDataInterface{
   templateUrl: './catalogs.component.html',
   styleUrls: ['./catalogs.component.scss']
 })
-export class CatalogsComponent implements OnInit {
+export class CatalogsComponent{
 
   filterSelected:CatalogsFilters={
     popularity:true,
@@ -40,7 +38,7 @@ export class CatalogsComponent implements OnInit {
     movies :{
       isSelected: false,
       title: "",
-      type: "movie",
+      type: TYPES.movie,
       filters: {
         popularity: (page:number=1, genreId:number=0) => this.movieService.getPopularMovies("desc", page, genreId),
         note: ( page:number=1, genreId:number=0) => this.movieService.getRatedMovies("desc", page, genreId),
@@ -50,7 +48,7 @@ export class CatalogsComponent implements OnInit {
     series:{
       isSelected: false,
       title: "",
-      type: "serie",
+      type: TYPES.serie,
       filters: {
         popularity: (page:number=1, genreId:number=0) =>  this.seriesService.getPopularSeries("desc", page, genreId),
         note: (page:number=1, genreId:number=0) =>  this.seriesService.getRatedSeries("desc", page, genreId),
@@ -60,83 +58,84 @@ export class CatalogsComponent implements OnInit {
   }
   title=""
   type=""
-  filterOn:string = "popularity" as string
+  filterOn:string = CATALOGS_FILTERS_KEYS.popularity as string
   currentPage:number = 1;
   totalPages:number = 1;
   genre:GenreI | undefined;
   isGenre=false;
-  defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
+  defaultCardImage = DEFAULT_CARD_IMG;
+  getRatingFormat= getRatingFormat; 
   translation: TranslationLanguage | null = null;
+  CATALOGS_FILTERS_KEYS = CATALOGS_FILTERS_KEYS;
 
   constructor(
     private route: ActivatedRoute,private router: Router,
-    private movieService:MovieService, private seriesService:SeriesService,
-    private dialog: MatDialog) { 
-        this.translation = getLanguageFile();
-
-        this.router.events.pipe(
-          filter((event:any) => event instanceof NavigationEnd)
-        ).subscribe((event: any) => {
-          this.currentRoute = event.url;  
-          this.options = {
-            ...this.options,
-            movies: {
-              ...this.options.movies,
-              title: getLanguageFile().global.movies,
-              isSelected: event.url.split("/").includes("movies"),
-            },
-            series: {
-              ...this.options.series,
-              title: getLanguageFile().global.series,
-              isSelected: event.url.split("/").includes("series"),
-            }
+    private movieService:MovieService, private seriesService:SeriesService) { 
+      this.translation = getLanguageFile();
+      this.router.events.pipe(
+        filter((event:any) => event instanceof NavigationEnd)
+      ).subscribe((event: any) => {
+        this.currentRoute = event.url;  
+        this.options = {
+          ...this.options,
+          movies: {
+            ...this.options.movies,
+            title: getLanguageFile().global.movies,
+            isSelected: event.url.split("/").includes(TYPES.movies),
+          },
+          series: {
+            ...this.options.series,
+            title: getLanguageFile().global.series,
+            isSelected: event.url.split("/").includes(TYPES.series),
           }
-          Object.entries(this.options).find(([key, value]) => {
-            if (value.isSelected) {
-              this.title = value.title;
-              this.type = value.type;
-              return true;
-            }
-            return false;
-          });
-          if(this.route.snapshot.queryParamMap.get('id') && this.route.snapshot.queryParamMap.get('name')){
-              this.genre = {
-                id: parseInt(this.route.snapshot.queryParamMap.get('id') as string),
-                name: this.route.snapshot.queryParamMap.get('name')
-              } ;
-              this.isGenre = true;
+        }
+        Object.entries(this.options).find(([_, value]) => {
+          if (value.isSelected) {
+            this.title = value.title;
+            this.type = value.type;
+            return true;
           }
-           if(this.genre){
-              this.fetchData({genreId: this.genre.id});
-            }else {
-              this.fetchData();
-            }
-        })
+          return false;
+        });
+        if(this.route.snapshot.queryParamMap.get('id') && this.route.snapshot.queryParamMap.get('name')){
+            this.genre = {
+              id: parseInt(this.route.snapshot.queryParamMap.get('id') as string),
+              name: this.route.snapshot.queryParamMap.get('name')
+            } ;
+            this.isGenre = true;
+        }
+          if(this.genre){
+            this.fetchData({genreId: this.genre.id});
+          }else {
+            this.fetchData();
+          }
+      })
   }
 
   async fetchData({page=1, genreId=0}:fetchDataInterface={}){
-    if(this.options.movies.isSelected && this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters]){
-    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page,genreId).subscribe((data) => {
-      this.movies = data;
-      this.currentPage = data.page;
-      // tested on the api -> receive error over pagination 500
-      this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
-    });
-    }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
-    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page,genreId).subscribe((data) => {
-      this.series = data;
-      this.currentPage = data.page;
-      this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
-    });
-    }
+    const arr = [
+      {optionsRef: this.options.movies},
+      {optionsRef: this.options.series}
+    ]
+    arr.forEach(el => {
+      if(el.optionsRef.isSelected && el.optionsRef.filters[this.filterOn as keyof typeof el.optionsRef.filters]){
+        el.optionsRef.filters[this.filterOn as keyof typeof el.optionsRef.filters](page,genreId).subscribe((data) => {
+          if(el.optionsRef.type === TYPES.movie){
+            this.movies = data;
+          } 
+          if (el.optionsRef.type === TYPES.serie){
+            //If type === TYPES.serie then data = ApiSeries
+            //@ts-ignore
+            this.series = data;
+          }
+          this.currentPage = data.page;
+          // tested on the api -> receive error over pagination 500
+          this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
+        });
+      }
+    })
   }
-
-  async ngOnInit(): Promise<void> {
-    //Allow to update page everytime params change but set href to "/" for navbar links 
-    //this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    //No call required here because it's not dynamic
-  }
-
+  
   async updateFilter(filter:string){
     const newFiltersOptions =  Object
     .keys(this.filterSelected) 
@@ -162,7 +161,6 @@ export class CatalogsComponent implements OnInit {
   }
 
   pageChange(page:number){
-    console.log(page)
      if(this.genre && this.genre.id){
       this.fetchData({page, genreId: this.genre.id});
     }else {
@@ -170,26 +168,5 @@ export class CatalogsComponent implements OnInit {
     }
     return page;
   }
-
-  getCardImageBg(path: string){
-    return 'https://image.tmdb.org/t/p/original/'+path;
-  }
-
-  getRatingFormat(rating: number){
-    return Math.round(rating)
-  }
-
-  openInfo = (movie: ApiMovie | ApiSerie, type:string) => {
-    this.dialog.open(ModalComponent, {
-      minWidth: '50vw',
-      maxWidth: '50vw',
-      minHeight: '75vh',
-      maxHeight: '75vh',
-      data: {
-        data: movie,
-        type: type
-      }
-    });
-  };
 }
 

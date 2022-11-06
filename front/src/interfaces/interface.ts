@@ -11,6 +11,7 @@ export interface ApiMovie {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: any;
+  first_air_date: string;
   budget: number;
   genres: Genre[];
   homepage: string;
@@ -19,7 +20,6 @@ export interface ApiMovie {
   original_title: string;
   original_name: string;
   revenue: number;
-  first_air_date: string;
   release_date: string;
   title: string;
   video: string | boolean | null;

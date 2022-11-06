@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Component,Input, Output, EventEmitter } from '@angular/core';
 import { getLanguageFile } from 'src/app/utils/languages/langues';
 import { TranslationLanguage } from 'src/interfaces/interface';
 interface PageI{
@@ -10,7 +10,7 @@ interface PageI{
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
 
   @Input() currentPage: number = 1;
   @Input() totalPages: number = 10 ;
@@ -22,9 +22,6 @@ export class PaginationComponent implements OnInit {
   constructor() {
     this.translation = getLanguageFile();
    }
-
-  ngOnInit(): void {
-  }
 
   inputChange({event, number}:PageI){
     if(event){

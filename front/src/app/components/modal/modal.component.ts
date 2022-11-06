@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { getLanguageFile } from 'src/app/utils/languages/langues';
 import { ApiMovie, ApiSerie, ApiVideo, TranslationLanguage } from 'src/interfaces/interface';
+import { getYoutubeLink, TYPES } from 'src/app/utils/utils';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
 
@@ -17,6 +18,7 @@ export class ModalComponent {
   ytb_link: string | null = null;
   detailPageLink: string = ""
   translation: TranslationLanguage | null = null;
+  getYoutubeLink = getYoutubeLink;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -36,19 +38,15 @@ export class ModalComponent {
     this.currentMovie = data.data;
     this.fetchData(this.currentMovie.id, data.type);
   }
-
-  getYoutubeLink(key: string) {
-    return `https://www.youtube.com/embed/${key}?playlist=${key}&loop=1`;
-  }
-
+  
   async fetchData(id: number, type: string) {
     let ref: MovieService | SeriesService = this.movieService;
     switch (type.toLowerCase()) {
-      case 'movie': {
+      case TYPES.movie: {
         ref = this.movieService;
         break;
       }
-      case 'serie': {
+      case TYPES.serie: {
         ref = this.seriesService;
         break;
       }

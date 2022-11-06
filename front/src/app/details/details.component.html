@@ -43,7 +43,7 @@
             </span>
           </div>
           <p class="text-white">{{ media.overview }}</p>
-          <p class="text-red-600 mt-8 underline cursor-pointer" (click)="openMoreDetails(media)">
+          <p class="text-red-600 mt-8 underline cursor-pointer" (click)="openInfo(dialog, media, mediaType)">
             {{translation.detail.seeMore}}
           </p>
           <div class="flex mt-5">
