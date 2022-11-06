@@ -25,7 +25,7 @@ export class CustomCardComponent{
   translation: TranslationLanguage | null = null;
 
   constructor(private dialogRef: MatDialog) {
-      this.dialog = dialogRef;
+      this.dialog = this.dialogRef;
       this.translation = getLanguageFile();
    }
 

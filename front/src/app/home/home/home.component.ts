@@ -32,7 +32,7 @@ export class HomeComponent{
     private dialogRef: MatDialog
   ) {
     this.translation = getLanguageFile();
-    this.dialog = dialogRef;
+    this.dialog = this.dialogRef;
     forkJoin([
       this.movieService.getPlayingMovies(),
       this.movieService.getPopular(),

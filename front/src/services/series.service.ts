@@ -71,7 +71,6 @@ export class SeriesService {
     page: number = 1,
     genreId: number = 0
   ): Observable<ApiSeries> => {
-    console.log('genreId', genreId);
     return this.http.get<ApiSeries>(
       `${this.apiBaseUrl}/discover/tv?sort_by=popularity.${type}&page=${page}&${
         genreId !== 0 && `with_genres=${genreId}&`

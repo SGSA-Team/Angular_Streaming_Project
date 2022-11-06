@@ -21,7 +21,7 @@
         </div>
         <div *ngIf="data && data.length > 0" class="search-data-results">
             <div *ngFor="let data of displayedData">
-                <a [routerLink]="'detail/' + data.type + '/' + data.id">
+                <a [routerLink]="'detail/' + data.type + '/' + data.id" (click)="clickOnCard()">
                     <div class="search-data-results__cards">
                         <div class="search-data-results__img-container">
                             <img class="search-data-results__img"
