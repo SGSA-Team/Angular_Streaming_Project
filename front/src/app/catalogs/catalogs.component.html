@@ -28,7 +28,7 @@
             </div>
         </ng-container>
         <ng-container *ngIf="options.series.isSelected && series && series.results &&  series.results.length > 0">
-            <div *ngFor="let serie of series.results ">
+            <div *ngFor="let serie of series.results " class="flex justify-center">
                 <app-custom-card [img]="serie.backdrop_path" [type]="type" [release_date]="serie.first_air_date"
                     [title]="serie.name" [displayeType]="title" [element]="serie">
                 </app-custom-card>
