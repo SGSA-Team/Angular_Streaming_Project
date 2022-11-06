@@ -1,8 +1,15 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+interface EnvironmentI {
+  baseUrl: string;
+  apiImageUrl: string; 
+  apiKey: string;
+  production: boolean;
+  defaultLanguage: string;
+}
 
-export const environment = {
+export const environment:EnvironmentI = {
   baseUrl: 'https://api.themoviedb.org/3',
   apiImageUrl: 'https://image.tmdb.org/t/p/original', // original c'est le format et tu passe les jpg
   apiKey: 'd0cf98f3003cd0b22e77f20efd3b7edb',
