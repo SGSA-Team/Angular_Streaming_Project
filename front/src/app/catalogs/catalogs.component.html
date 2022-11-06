@@ -19,9 +19,9 @@
         </ul>
     </div>
     <!--Cards-->
-    <div class="catalogs-videos">
+    <div class="catalogs-videos grid xxs:grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         <ng-container *ngIf="options.movies.isSelected && movies && movies.results &&  movies.results.length > 0">
-            <div *ngFor="let movie of movies.results ">
+            <div *ngFor="let movie of movies.results " class="flex justify-center">
                 <app-custom-card [img]="movie.poster_path" [type]="type" [release_date]="movie.release_date"
                     [title]="movie.title" [displayeType]="title" [element]="movie">
                 </app-custom-card>
