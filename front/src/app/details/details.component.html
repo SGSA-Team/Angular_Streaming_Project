@@ -2,12 +2,21 @@
   <section id="header">
     <main id="main-content">
       <div class="demo-wrap">
-        <img class="demo-bg" src="{{ posterPath + media.poster_path }}" alt="" />
+        <img
+          class="demo-bg"
+          src="{{ posterPath + media.poster_path }}"
+          alt=""
+        />
       </div>
       <div class="container mx-auto my-0">
         <div class="bg-content p-6 relative">
           <p class="text-xl mb-3 uppercase font-bold flex items-center gap-2.5">
-            <img src="https://empire-streaming.co/build/images/Logo-E.ad4141e1.png" alt="" width="30" height="30" />
+            <img
+              src="https://empire-streaming.co/build/images/Logo-E.ad4141e1.png"
+              alt=""
+              width="30"
+              height="30"
+            />
             {{ mediaType }}
           </p>
           <h1 class="text-5xl font-bold mb-2">
@@ -15,12 +24,18 @@
           </h1>
           <div class="flex gap-3">
             <div class="flex items-start mb-5">
-              <svg *ngFor="let note of noteStars()" aria-hidden="true" stroke="#e50a13" class="w-7 h-7 text-transparent"
-                [attr.fill]="note.full ? '#e50a13' : 'currentColor'" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
+              <svg
+                *ngFor="let note of noteStars()"
+                aria-hidden="true"
+                stroke="#e50a13"
+                class="w-7 h-7 text-transparent"
+                [attr.fill]="note.full ? '#e50a13' : 'currentColor'"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
-                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                </path>
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
               </svg>
             </div>
             <p class="ml-2 text-lg font-medium text-white">
@@ -29,7 +44,8 @@
           </div>
 
           <div class="mb-5">
-            <span class="
+            <span
+              class="
                 p-2
                 font-medium
                 bg-white
@@ -38,16 +54,23 @@
                 mr-2
                 text-xs
                 rounded-md
-              " *ngFor="let genre of media.genres">
+              "
+              *ngFor="let genre of media.genres"
+            >
               {{ genre.name }}
             </span>
           </div>
           <p class="text-white">{{ media.overview }}</p>
-          <p class="text-red-600 mt-8 underline cursor-pointer" (click)="openInfo(dialog, media, mediaType)">
-            {{translation.detail.seeMore}}
+          <p
+            class="text-red-600 mt-8 underline cursor-pointer inline"
+            (click)="openInfo(dialog, media, mediaType)"
+          >
+            {{ translation.detail.seeMore }}
           </p>
           <div class="flex mt-5">
-            <button type="button" class="
+            <button
+              type="button"
+              class="
                 hidden
                 focus:outline-none
                 text-white
@@ -66,14 +89,21 @@
                 dark:focus:ring-red-900
                 uppercase
                 text-xs
-              ">
+              "
+            >
               <div class="flex items-center gap-3 text-xs font-normal">
                 <mat-icon> add_circle_outline </mat-icon>
                 <span> Ajouter à la liste </span>
               </div>
             </button>
-            <button #mtooltip="matTooltip" type="button" [matTooltip]="tooltipMessage" matTooltipPosition="right"
-              matTooltipClass="tooltip-copy" (click)="copiedTooltip()" class="
+            <button
+              #mtooltip="matTooltip"
+              type="button"
+              [matTooltip]="tooltipMessage"
+              matTooltipPosition="right"
+              matTooltipClass="tooltip-copy"
+              (click)="copiedTooltip()"
+              class="
                 text-white
                 bg-gray-800/75
                 hover:bg-gray-900
@@ -90,10 +120,11 @@
                 dark:hover:bg-gray-700
                 dark:focus:ring-gray-700
                 dark:border-gray-700
-              ">
+              "
+            >
               <div class="flex items-center gap-3 text-xs font-normal">
                 <mat-icon> share </mat-icon>
-                <span>{{translation.detail.share}} </span>
+                <span>{{ translation.detail.share }} </span>
               </div>
             </button>
           </div>
@@ -107,25 +138,34 @@
         <div class="movie relative">
           <article class="flex flex-col">
             <div class="bande-annonce">
-              <iframe *ngIf="video && video.key; else videoNotFound" id="player" type="text/html" width="100%"
-                height="100%" [src]="currentVideoUrl | safe: 'resourceUrl'" frameborder="0"></iframe>
+              <iframe
+                *ngIf="video && video.key; else videoNotFound"
+                id="player"
+                type="text/html"
+                width="100%"
+                height="100%"
+                [src]="currentVideoUrl | safe: 'resourceUrl'"
+                frameborder="0"
+              ></iframe>
               <div class="flex gap-0.5"></div>
             </div>
-            <div class="
+            <div
+              class="
                 flex
                 pl-3
                 flex-col
                 info-ba
                 h-28
                 border-l-4 border-l-red-600
-              ">
+              "
+            >
               <h1 class="m-0 text-xl uppercase font-extrabold">
                 {{ media.original_name || media.title }}
               </h1>
               <p>
-                {{translation.detail.release}}
+                {{ translation.detail.release }}
                 {{ getAddedDate(media.first_air_date || media.release_date) }}
-                {{translation.detail.year_ago}}
+                {{ translation.detail.year_ago }}
               </p>
               <span class="w-fit inline-flex px-2 py-1 bg-red-600 rounded-lg">
                 {{ (media.first_air_date || media.release_date).split("-")[0] }}
@@ -134,27 +174,39 @@
           </article>
         </div>
       </div>
-      <div class="mt-16">
-        <h2 class="
+      <div class="mt-16" *ngIf="peoples && peoples.length > 0">
+        <h2
+          class="
             text-3xl
             uppercase
             tracking-wider
             font-extrabold
             text-red-600
             mb-8
-          ">
-          {{translation.detail.headliners}}
+          "
+        >
+          {{ translation.detail.headliners }}
         </h2>
         <div class="people-list popular">
-          <article *ngFor="let people of peoples" class="gap-2.5 people popular flex flex-col relative">
-            <div *ngIf="people.profile_path; else imgNotFound" class="overflow-hidden">
+          <article
+            *ngFor="let people of peoples"
+            class="gap-2.5 people popular flex flex-col relative"
+          >
+            <div
+              *ngIf="people.profile_path; else imgNotFound"
+              class="overflow-hidden"
+            >
               <div class="gradiant-filter peer cursor-pointer"></div>
-              <img class="
+              <img
+                class="
                   peer-hover:scale-110
                   transition-all
                   duration-200
                   ease-in-out
-                " src="{{ apiImageUrl + people.profile_path }}" alt="img people card" />
+                "
+                src="{{ apiImageUrl + people.profile_path }}"
+                alt="img people card"
+              />
             </div>
 
             <div>{{ people.name }}</div>
@@ -166,10 +218,15 @@
 </div>
 
 <ng-template #imgNotFound>
-  <img class="peer-hover:scale-110 object-cover h-full" src="https://dummyimage.com/220x249/fafafa/000000.png&text=Image+not+found
+  <img
+    class="peer-hover:scale-110 object-cover h-full"
+    src="https://dummyimage.com/220x249/fafafa/000000.png&text=Image+not+found
 
-    " alt="img movie card" />
+    "
+    alt="img movie card"
+  />
 </ng-template>
 
-<ng-template #videoNotFound><span *ngIf="translation">{{translation.detail.noTrailer}}</span>
+<ng-template #videoNotFound
+  ><span *ngIf="translation">{{ translation.detail.noTrailer }}</span>
 </ng-template>
