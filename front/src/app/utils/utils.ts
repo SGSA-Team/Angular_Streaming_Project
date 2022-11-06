@@ -27,7 +27,6 @@ export const getCardImageBg = (path: string) => {
     return `${TMDB_IMG_SRC_PATH}${path}`;
 }
 
-
 export const openInfo = (dialogRef:MatDialog, element: ApiMovie | ApiSerie, type:string) => {
     dialogRef.open(ModalComponent, {
       ...DIALOGS_SIZES,

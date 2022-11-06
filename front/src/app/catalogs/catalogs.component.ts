@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import {  ApiMovies, ApiSeries, TranslationLanguage } from 'src/interfaces/interface';
 import { MovieService } from 'src/services/movie.service';
 import { SeriesService } from 'src/services/series.service';
-import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { getLanguageFile } from '../utils/languages/langues';
-import { TYPES } from '../utils/utils';
+import { DEFAULT_CARD_IMG, getRatingFormat, TYPES } from 'src/app//utils/utils';
 interface CatalogsFilters {
     dateCreatdAt: boolean,
     popularity:boolean,
@@ -65,72 +63,78 @@ export class CatalogsComponent{
   totalPages:number = 1;
   genre:GenreI | undefined;
   isGenre=false;
-  defaultCardImage = 'https://mergejil.mn/mergejilmn/no-image.jpeg'
+  defaultCardImage = DEFAULT_CARD_IMG;
+  getRatingFormat= getRatingFormat; 
   translation: TranslationLanguage | null = null;
 
   constructor(
     private route: ActivatedRoute,private router: Router,
-    private movieService:MovieService, private seriesService:SeriesService,
-    private dialog: MatDialog) { 
-        this.translation = getLanguageFile();
-
-        this.router.events.pipe(
-          filter((event:any) => event instanceof NavigationEnd)
-        ).subscribe((event: any) => {
-          this.currentRoute = event.url;  
-          this.options = {
-            ...this.options,
-            movies: {
-              ...this.options.movies,
-              title: getLanguageFile().global.movies,
-              isSelected: event.url.split("/").includes("movies"),
-            },
-            series: {
-              ...this.options.series,
-              title: getLanguageFile().global.series,
-              isSelected: event.url.split("/").includes("series"),
-            }
+    private movieService:MovieService, private seriesService:SeriesService) { 
+      this.translation = getLanguageFile();
+      this.router.events.pipe(
+        filter((event:any) => event instanceof NavigationEnd)
+      ).subscribe((event: any) => {
+        this.currentRoute = event.url;  
+        this.options = {
+          ...this.options,
+          movies: {
+            ...this.options.movies,
+            title: getLanguageFile().global.movies,
+            isSelected: event.url.split("/").includes("movies"),
+          },
+          series: {
+            ...this.options.series,
+            title: getLanguageFile().global.series,
+            isSelected: event.url.split("/").includes("series"),
           }
-          Object.entries(this.options).find(([key, value]) => {
-            if (value.isSelected) {
-              this.title = value.title;
-              this.type = value.type;
-              return true;
-            }
-            return false;
-          });
-          if(this.route.snapshot.queryParamMap.get('id') && this.route.snapshot.queryParamMap.get('name')){
-              this.genre = {
-                id: parseInt(this.route.snapshot.queryParamMap.get('id') as string),
-                name: this.route.snapshot.queryParamMap.get('name')
-              } ;
-              this.isGenre = true;
+        }
+        Object.entries(this.options).find(([key, value]) => {
+          if (value.isSelected) {
+            this.title = value.title;
+            this.type = value.type;
+            return true;
           }
-           if(this.genre){
-              this.fetchData({genreId: this.genre.id});
-            }else {
-              this.fetchData();
-            }
-        })
+          return false;
+        });
+        if(this.route.snapshot.queryParamMap.get('id') && this.route.snapshot.queryParamMap.get('name')){
+            this.genre = {
+              id: parseInt(this.route.snapshot.queryParamMap.get('id') as string),
+              name: this.route.snapshot.queryParamMap.get('name')
+            } ;
+            this.isGenre = true;
+        }
+          if(this.genre){
+            this.fetchData({genreId: this.genre.id});
+          }else {
+            this.fetchData();
+          }
+      })
   }
 
   async fetchData({page=1, genreId=0}:fetchDataInterface={}){
-    if(this.options.movies.isSelected && this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters]){
-    this.options.movies.filters[this.filterOn as keyof typeof this.options.movies.filters](page,genreId).subscribe((data) => {
-      this.movies = data;
-      this.currentPage = data.page;
-      // tested on the api -> receive error over pagination 500
-      this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
-    });
-    }else if(this.options.series.isSelected && this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters]){
-    this.options.series.filters[this.filterOn as keyof typeof this.options.series.filters](page,genreId).subscribe((data) => {
-      this.series = data;
-      this.currentPage = data.page;
-      this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
-    });
-    }
+    const arr = [
+      {optionsRef: this.options.movies},
+      {optionsRef: this.options.series}
+    ]
+    arr.forEach(el => {
+      if(el.optionsRef.isSelected && el.optionsRef.filters[this.filterOn as keyof typeof el.optionsRef.filters]){
+        el.optionsRef.filters[this.filterOn as keyof typeof el.optionsRef.filters](page,genreId).subscribe((data) => {
+          if(el.optionsRef.type === TYPES.movie){
+            this.movies = data;
+          } 
+          if (el.optionsRef.type === TYPES.serie){
+            //If type === TYPES.serie then data = ApiSeries
+            //@ts-ignore
+            this.series = data;
+          }
+          this.currentPage = data.page;
+          // tested on the api -> receive error over pagination 500
+          this.totalPages = data.total_pages > 500 ? 500 : data.total_pages - 1;
+        });
+      }
+    })
   }
-
+  
   async updateFilter(filter:string){
     const newFiltersOptions =  Object
     .keys(this.filterSelected) 
@@ -156,17 +160,12 @@ export class CatalogsComponent{
   }
 
   pageChange(page:number){
-    console.log(page)
      if(this.genre && this.genre.id){
       this.fetchData({page, genreId: this.genre.id});
     }else {
       this.fetchData({page});
     }
     return page;
-  }
-
-  getRatingFormat(rating: number){
-    return Math.round(rating)
   }
 }
 

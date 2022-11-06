@@ -19,7 +19,6 @@
     </div>
     <!--Cards-->
     <div class="catalogs-videos">
-        <!--Duplicate-->
         <ng-container *ngIf="options.movies.isSelected && movies && movies.results &&  movies.results.length > 0">
             <div *ngFor="let movie of movies.results ">
                 <app-custom-card [img]="movie.poster_path" [type]="type" [release_date]="movie.release_date"
@@ -27,7 +26,6 @@
                 </app-custom-card>
             </div>
         </ng-container>
-        <!--Duplicate-->
         <ng-container *ngIf="options.series.isSelected && series && series.results &&  series.results.length > 0">
             <div *ngFor="let serie of series.results ">
                 <app-custom-card [img]="serie.backdrop_path" [type]="type" [release_date]="serie.first_air_date"

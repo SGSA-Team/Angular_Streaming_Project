@@ -19,7 +19,6 @@ export interface ApiMovie {
   original_title: string;
   original_name: string;
   revenue: number;
-  first_air_date: string;
   release_date: string;
   title: string;
   video: string | boolean | null;
